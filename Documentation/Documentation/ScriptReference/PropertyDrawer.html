@@ -1,0 +1,164 @@
+<!-- #BeginTemplate "/Templates/manual-scriptref-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+  <!-- #TemplateBeginEditable name="doctitle" -->
+    <title>Unity Script Reference &ndash; PropertyDrawer</title>
+  <!-- #TemplateEndEditable -->
+  <link rel="stylesheet" href="../Images/docs.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="../Images/code.css" type="text/css" media="all" />
+</head>
+
+
+<body>
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Scripting"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Scripting"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Scripting"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor script">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+          <a href="index.html">Scripting Reference</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scriprefmain">
+		<span class="heading">
+			<!-- #TemplateBeginEditable name="title" -->
+				PropertyDrawer
+			<!-- #TemplateEndEditable -->	
+		</span>
+<!-- #TemplateBeginEditable name="details" -->
+	<span class="text"></span>
+<!-- #TemplateEndEditable -->	
+
+	<!-- #TemplateBeginEditable name="manual-top-nav" --><div class="left-menu-container"><ul class="left-menu"><li>
+<form class="apisearch" action="30_search.html" method="GET">
+	<input type="search" name="q" placeholder="Search" autosave="Unity Reference" results="5" class="sbox" id="q" />
+				
+	<script type="text/javascript" language="JavaScript">
+	<!--
+	function detect() {
+		// simplify things
+		var agent 	= navigator.userAgent.toLowerCase();
+		
+		// detect platform
+		this.isMac		= (agent.indexOf('mac') != -1);
+		this.isWin		= (agent.indexOf('win') != -1);
+		this.isWin2k	= (this.isWin && (
+				agent.indexOf('nt 5') != -1));
+		this.isWinSP2	= (this.isWin && (
+				agent.indexOf('xp') != -1 || 
+				agent.indexOf('sv1') != -1));
+		this.isOther	= (
+				agent.indexOf('unix') != -1 || 
+				agent.indexOf('sunos') != -1 || 
+				agent.indexOf('bsd') != -1 ||
+				agent.indexOf('x11') != -1 || 
+				agent.indexOf('linux') != -1);
+		
+		// detect browser
+		this.isSafari	= (agent.indexOf('safari') != -1);
+		this.isSafari2 = (this.isSafari && (parseFloat(agent.substring(agent.indexOf("applewebkit/")+"applewebkit/".length,agent.length).substring(0,agent.substring(agent.indexOf("applewebkit/")+"applewebkit/".length,agent.length).indexOf(' '))) >=  300));
+		this.isOpera	= (agent.indexOf('opera') != -1);
+		this.isNN		= (agent.indexOf('netscape') != -1);
+		this.isIE		= (agent.indexOf('msie') != -1);
+	}
+	var browser = new detect();
+	var str = "Search";
+	var q=document.getElementById('q');
+	if (!browser.isSafari2) {q.value=str;q.onfocus=function(){q.value="";q.style.color="#000";};}
+	//-->
+	</script>
+</form>
+</li><li><span class="left-menu-heading">Menu</span></li><li><a title="Scripting overview" class="left-menu-item" href="index.html">Overview</a></li><li><a title="List of scripting classes" class="left-menu-item" href="20_class_hierarchy.html">Runtime Classes</a></li><li><a title="List of attributes" class="left-menu-item left-menu-indent" href="20_class_hierarchy.Attributes.html">Attributes</a></li><li><a title="List of enumerations" class="left-menu-item left-menu-indent" href="20_class_hierarchy.Enumerations.html">Enumerations</a></li><li><a title="Classes for extending Unity editor" class="left-menu-item" href="20_class_hierarchy.Editor_Classes.html">Editor Classes</a></li><li><a title="List of editor attributes" class="left-menu-item left-menu-indent" href="20_class_hierarchy.Editor_Attributes.html">Attributes</a></li><li><a title="List of editor enumerations" class="left-menu-item left-menu-indent" href="20_class_hierarchy.Editor_Enumerations.html">Enumerations</a></li><li><a title="Scripting change history" class="left-menu-item" href="40_history.html">History</a></li><li><a title="Alphabetical index" class="left-menu-item" href="10_reference.html">Index</a></li><li><span class="left-menu-seperator"></span></li><li><a title="Classes for extending Unity Editor" class="left-menu-heading" href="20_class_hierarchy.Editor_Classes.html">Editor Classes</a></li><li><a class="left-menu-item" href="AnimationClipCurveData.html">AnimationClipCurveData</a></li><li><a class="left-menu-item" href="AnimationUtility.html">AnimationUtility</a></li><li><a class="left-menu-item" href="ArrayUtility.html">ArrayUtility</a></li><li><a class="left-menu-item" href="AssetDatabase.html">AssetDatabase</a></li><li><a class="left-menu-item" href="AssetImporter.html">AssetImporter</a></li><li><a class="left-menu-item" href="AssetModificationProcessor.html">AssetModificationProcessor</a></li><li><a class="left-menu-item" href="AssetPostprocessor.html">AssetPostprocessor</a></li><li><a class="left-menu-item" href="AssetPreview.html">AssetPreview</a></li><li><a class="left-menu-item" href="AssetStore.html">AssetStore</a></li><li><a class="left-menu-item" href="AssetStoreToolUtils.html">AssetStoreToolUtils</a></li><li><a class="left-menu-item" href="AudioImporter.html">AudioImporter</a></li><li><a class="left-menu-item" href="BuildPipeline.html">BuildPipeline</a></li><li><a class="left-menu-item" href="DragAndDrop.html">DragAndDrop</a></li><li><a class="left-menu-item" href="Editor.html">Editor</a></li><li><a class="left-menu-item" href="EditorApplication.html">EditorApplication</a></li><li><a class="left-menu-item" href="EditorBuildSettings.html">EditorBuildSettings</a></li><li><a class="left-menu-item" href="EditorGUI.html">EditorGUI</a></li><li><a class="left-menu-item" href="EditorGUILayout.html">EditorGUILayout</a></li><li><a class="left-menu-item" href="EditorGUIUtility.html">EditorGUIUtility</a></li><li><a class="left-menu-item" href="EditorPrefs.html">EditorPrefs</a></li><li><a class="left-menu-item" href="EditorStyles.html">EditorStyles</a></li><li><a class="left-menu-item" href="EditorUserBuildSettings.html">EditorUserBuildSettings</a></li><li><a class="left-menu-item" href="EditorUtility.html">EditorUtility</a></li><li><a class="left-menu-item" href="EditorWindow.html">EditorWindow</a></li><li><a class="left-menu-item" href="FileUtil.html">FileUtil</a></li><li><a class="left-menu-item" href="GameObjectUtility.html">GameObjectUtility</a></li><li><a class="left-menu-item" href="GenericMenu.html">GenericMenu</a></li><li><a class="left-menu-item" href="HandleUtility.html">HandleUtility</a></li><li><a class="left-menu-item" href="Handles.html">Handles</a></li><li><a class="left-menu-item" href="Help.html">Help</a></li><li><a class="left-menu-item" href="LODUtility.html">LODUtility</a></li><li><a class="left-menu-item" href="LightmapEditorSettings.html">LightmapEditorSettings</a></li><li><a class="left-menu-item" href="Lightmapping.html">Lightmapping</a></li><li><a class="left-menu-item" href="MenuCommand.html">MenuCommand</a></li><li><a class="left-menu-item" href="MeshUtility.html">MeshUtility</a></li><li><a class="left-menu-item" href="ModelImporter.html">ModelImporter</a></li><li><a class="left-menu-item" href="ModelImporterClipAnimation.html">ModelImporterClipAnimation</a></li><li><a class="left-menu-item" href="MonoImporter.html">MonoImporter</a></li><li><a class="left-menu-item" href="MonoScript.html">MonoScript</a></li><li><a class="left-menu-item" href="MovieImporter.html">MovieImporter</a></li><li><a class="left-menu-item" href="NavMeshBuilder.html">NavMeshBuilder</a></li><li><a class="left-menu-item" href="ObjectNames.html">ObjectNames</a></li><li><a class="left-menu-item" href="PlayerSettings.html">PlayerSettings</a></li><li><a class="left-menu-item" href="PlayerSettings.Android.html">PlayerSettings.Android</a></li><li><a class="left-menu-item" href="PlayerSettings.Wii.html">PlayerSettings.Wii</a></li><li><a class="left-menu-item" href="PlayerSettings.iOS.html">PlayerSettings.iOS</a></li><li><a class="left-menu-item" href="PostProcessBuildAttribute.html">PostProcessBuildAttribute</a></li><li><a class="left-menu-item" href="PostProcessSceneAttribute.html">PostProcessSceneAttribute</a></li><li><a class="left-menu-item" href="PrefabUtility.html">PrefabUtility</a></li><li><a class="left-menu-item" href="ProceduralTexture.html">ProceduralTexture</a></li><li><span class="left-menu-item left-menu-current">PropertyDrawer</span></li><li><a class="left-menu-item" href="PropertyModification.html">PropertyModification</a></li><li><a class="left-menu-item" href="ScriptableWizard.html">ScriptableWizard</a></li><li><a class="left-menu-item" href="Selection.html">Selection</a></li><li><a class="left-menu-item" href="SerializedObject.html">SerializedObject</a></li><li><a class="left-menu-item" href="SerializedProperty.html">SerializedProperty</a></li><li><a class="left-menu-item" href="StaticOcclusionCulling.html">StaticOcclusionCulling</a></li><li><a class="left-menu-item" href="StaticOcclusionCullingVisualization.html">StaticOcclusionCullingVisualization</a></li><li><a class="left-menu-item" href="SubstanceArchive.html">SubstanceArchive</a></li><li><a class="left-menu-item" href="SubstanceImporter.html">SubstanceImporter</a></li><li><a class="left-menu-item" href="TextureImporter.html">TextureImporter</a></li><li><a class="left-menu-item" href="TextureImporterSettings.html">TextureImporterSettings</a></li><li><a class="left-menu-item" href="Tools.html">Tools</a></li><li><a class="left-menu-item" href="TrueTypeFontImporter.html">TrueTypeFontImporter</a></li><li><a class="left-menu-item" href="Undo.html">Undo</a></li><li><a class="left-menu-item" href="UnwrapParam.html">UnwrapParam</a></li><li><a class="left-menu-item" href="Unwrapping.html">Unwrapping</a></li></ul></div>
+	<!-- #TemplateEndEditable -->
+			<!-- #TemplateBeginEditable name="body" -->
+		   <p class="first"> Base class to derive custom property drawers from. Use this to create custom drawers for your own <a href="Serializable.html" class="classlink">Serializable</a> classes or for script variables with custom <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a>s.</p>
+   <p class="details"> 	<p class='editorclass'><span class='note'>Note:</span> This is an editor class. To use it you have to place your script in <tt>Assets/Editor</tt> inside your project folder. Editor classes are in the UnityEditor namespace so for C# scripts you need to add "<tt>using UnityEditor;</tt>" at the beginning of the script.</p></p>
+   <p class="basic"> 
+PropertyDrawers have two uses:<br/>
+ - Customize the GUI of every instance of a <a href="Serializable.html" class="classlink">Serializable</a> class.<br/>
+ - Customize the GUI of script members with custom <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a>s.
+</p><p class="basic">
+If you have a custom <a href="Serializable.html" class="classlink">Serializable</a> class, you can use a PropertyDrawer to control how it looks in the Inspector.
+Consider the Serializable class Ingredient in the script below:</p><pre class="code"><span class="hl-comment">// Recipe.js</span><span class="hl-comment"><br/></span><span class="hl-comment">// This is not an editor script</span><span class="hl-comment"><br/></span><br/>enum IngredientUnit { Spoon, Cup, Bowl, Piece }<br/><br/><span class="hl-comment">// Custom serializable class</span><span class="hl-comment"><br/></span><span class="hl-keyword">class</span> Ingredient <span class="hl-keyword">extends</span> System.<a href="Object.html" class="classlink">Object</a> {<br/>    <span class="hl-keyword">var</span> name : <span class="hl-datatype"><a href="String.html" class="classlink">String</a></span>;<br/>    <span class="hl-keyword">var</span> amount : <span class="hl-datatype">int</span> = 1;<br/>    <span class="hl-keyword">var</span> unit : IngredientUnit;<br/>}<br/><br/><span class="hl-keyword">var</span> potionResult : Ingredient;<br/><span class="hl-keyword">var</span> potionIngredients : Ingredient[];<br/><br/><span class="hl-keyword">function</span> <span class="hl-operator">Update</span> () {<br/>    <span class="hl-comment">// Update logic here...</span><span class="hl-comment"><br/></span>}<br/></pre><p class="basic">
+Using a custom PropertyDrawer, every appearance of the Ingredient class in the Inspector can be changed.
+Compare the look of the Ingredient properties in the Inspector without and with a custom PropertyDrawer:
+</p><p class="basic">
+<img class='refimg' src='ScriptRefImages/CustomPropertyDrawer_Class.png'/><br/>
+<em>Class in the Inspector without and with custom PropertyDrawer.</em>
+</p><p class="basic">
+You can attach the PropertyDrawer to a Serializable class by using the <a href="CustomPropertyDrawer.html" class="classlink">CustomPropertyDrawer</a> attribute and pass in the type of the Serializable class that it's a drawer for.</p><pre class="code"><span class="hl-comment">// IngredientDrawer.js</span><span class="hl-comment"><br/></span>@<a href="CustomPropertyDrawer.html" class="classlink">CustomPropertyDrawer</a> (Ingredient)<br/><span class="hl-keyword">class</span> IngredientDrawer <span class="hl-keyword">extends</span> PropertyDrawer {<br/>    <br/>    <span class="hl-comment">// Draw the property inside the given rect</span><span class="hl-comment"><br/></span>    <span class="hl-keyword">function</span> <span class="hl-operator">OnGUI</span> (position : <a href="Rect.html" class="classlink">Rect</a>, property : <a href="SerializedProperty.html" class="classlink">SerializedProperty</a>, label : <a href="GUIContent.html" class="classlink">GUIContent</a>) {<br/>        <span class="hl-comment">// Using BeginProperty / EndProperty on the parent property means that</span><span class="hl-comment"><br/></span>        <span class="hl-comment">// prefab override logic works on the entire property.</span><span class="hl-comment"><br/></span>        <a href="EditorGUI.BeginProperty.html?from=PropertyDrawer" class="itemlink">EditorGUI.BeginProperty</a> (position, label, property);<br/>        <br/>        <span class="hl-comment">// Draw label</span><span class="hl-comment"><br/></span>        position = <a href="EditorGUI.PrefixLabel.html?from=PropertyDrawer" class="itemlink">EditorGUI.PrefixLabel</a> (position, <a href="GUIUtility.GetControlID.html?from=PropertyDrawer" class="itemlink">GUIUtility.GetControlID</a> (<a href="FocusType.Passive.html?from=PropertyDrawer" class="itemlink">FocusType.Passive</a>), label);<br/>        <br/>        <span class="hl-comment">// Don't make child fields be indented</span><span class="hl-comment"><br/></span>        <span class="hl-keyword">var</span> indent = <a href="EditorGUI-indentLevel.html?from=PropertyDrawer" class="itemlink">EditorGUI.indentLevel</a>;<br/>        <a href="EditorGUI-indentLevel.html?from=PropertyDrawer" class="itemlink">EditorGUI.indentLevel</a> = 0;<br/>        <br/>        <span class="hl-comment">// Calculate rects</span><span class="hl-comment"><br/></span>        <span class="hl-keyword">var</span> amountRect = <span class="hl-keyword">new</span> <a href="Rect.html" class="classlink">Rect</a> (position.x, position.y, 30, position.height);<br/>        <span class="hl-keyword">var</span> unitRect = <span class="hl-keyword">new</span> <a href="Rect.html" class="classlink">Rect</a> (position.x+35, position.y, 50, position.height);<br/>        <span class="hl-keyword">var</span> nameRect = <span class="hl-keyword">new</span> <a href="Rect.html" class="classlink">Rect</a> (position.x+90, position.y, position.width-90, position.height);<br/>        <br/>        <span class="hl-comment">// Draw fields - passs <a href="GUIContent-none.html?from=PropertyDrawer" class="itemlink">GUIContent.none</a> to each so they are drawn without labels</span><span class="hl-comment"><br/></span>        <a href="EditorGUI.PropertyField.html?from=PropertyDrawer" class="itemlink">EditorGUI.PropertyField</a> (amountRect, property.FindPropertyRelative (<span class="hl-string">"amount"</span>), <a href="GUIContent-none.html?from=PropertyDrawer" class="itemlink">GUIContent.none</a>);<br/>        <a href="EditorGUI.PropertyField.html?from=PropertyDrawer" class="itemlink">EditorGUI.PropertyField</a> (unitRect, property.FindPropertyRelative (<span class="hl-string">"unit"</span>), <a href="GUIContent-none.html?from=PropertyDrawer" class="itemlink">GUIContent.none</a>);<br/>        <a href="EditorGUI.PropertyField.html?from=PropertyDrawer" class="itemlink">EditorGUI.PropertyField</a> (nameRect, property.FindPropertyRelative (<span class="hl-string">"name"</span>), <a href="GUIContent-none.html?from=PropertyDrawer" class="itemlink">GUIContent.none</a>);<br/>        <br/>        <span class="hl-comment">// Set indent back to what it was</span><span class="hl-comment"><br/></span>        <a href="EditorGUI-indentLevel.html?from=PropertyDrawer" class="itemlink">EditorGUI.indentLevel</a> = indent;<br/>        <br/>        <a href="EditorGUI.EndProperty.html?from=PropertyDrawer" class="itemlink">EditorGUI.EndProperty</a> ();<br/>    }<br/>}<br/></pre><p class="basic">
+The other use of PropertyDrawer is to alter the appearance of members in a script that have custom <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a>s.
+Say you want to limit floats or integers in your script to a certain range and show them as sliders in the Inspector.
+Using the built-in <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a> called <a href="RangeAttribute.html" class="classlink">RangeAttribute</a> you can do just that:</p><pre class="code"><span class="hl-comment">// Show this float in the Inspector as a slider between 0 and 10</span><span class="hl-comment"><br/></span>@<a href="Range.html" class="classlink">Range</a> (0.0, 10.0)<br/><span class="hl-keyword">var</span> myFloat = 0.0;<br/></pre><p class="basic">
+You can make your own <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a> as well. We'll use the code for the <a href="RangeAttribute.html" class="classlink">RangeAttribute</a> as an example.
+The attribute must extend the PropertyAttribute class. If you want, your property can take parameters and store them as public member variables.</p><pre class="code"><span class="hl-comment">// This is not an editor script. The property attribute class should be placed in a regular script file.</span><span class="hl-comment"><br/></span><span class="hl-keyword">class</span> <a href="RangeAttribute.html" class="classlink">RangeAttribute</a> <span class="hl-keyword">extends</span> <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a> {<br/>    <span class="hl-keyword">var</span> min : <span class="hl-datatype">float</span>;<br/>    <span class="hl-keyword">var</span> max : <span class="hl-datatype">float</span>;<br/>    <br/>    <span class="hl-keyword">function</span> <a href="RangeAttribute.html" class="classlink">RangeAttribute</a> (min : <span class="hl-datatype">float</span>, max : <span class="hl-datatype">float</span>) {<br/>        this.min = min;<br/>        this.max = max;<br/>    }<br/>}<br/></pre><p class="basic">
+Now that you have the attribute, you need to make a PropertyDrawer that draws properties that have that attribute.
+The drawer must extend the PropertyDrawer class, and it must have a <a href="CustomPropertyDrawer.html" class="classlink">CustomPropertyDrawer</a> attribute to tell it which attribute it's a drawer for.</p><pre class="code"><span class="hl-comment">// The property drawer class should be placed in an editor script, inside a folder called <a href="Editor.html" class="classlink">Editor</a>.</span><span class="hl-comment"><br/></span><br/><span class="hl-comment">// Tell the RangeDrawer that it is a drawer for properties with the <a href="RangeAttribute.html" class="classlink">RangeAttribute</a>.</span><span class="hl-comment"><br/></span>@<a href="CustomPropertyDrawer.html" class="classlink">CustomPropertyDrawer</a> (<a href="RangeAttribute.html" class="classlink">RangeAttribute</a>)<br/><span class="hl-keyword">class</span> RangeDrawer <span class="hl-keyword">extends</span> PropertyDrawer {<br/>    <br/>    <span class="hl-comment">// Draw the property inside the given rect</span><span class="hl-comment"><br/></span>    <span class="hl-keyword">function</span> <span class="hl-operator">OnGUI</span> (position : <a href="Rect.html" class="classlink">Rect</a>, property : <a href="SerializedProperty.html" class="classlink">SerializedProperty</a>, label : <a href="GUIContent.html" class="classlink">GUIContent</a>) {<br/>        <br/>        <span class="hl-comment">// First get the attribute since it contains the range for the slider</span><span class="hl-comment"><br/></span>        <span class="hl-keyword">var</span> range : <a href="RangeAttribute.html" class="classlink">RangeAttribute</a> = attribute as <a href="RangeAttribute.html" class="classlink">RangeAttribute</a>;<br/>        <br/>        <span class="hl-comment">// Now draw the property as a Slider or an IntSlider based on whether it's a float or integer.</span><span class="hl-comment"><br/></span>        <span class="hl-keyword">if</span> (property.propertyType == <a href="SerializedPropertyType.html" class="classlink">SerializedPropertyType</a>.<span class="hl-datatype">Float</span>)<br/>            <a href="EditorGUI.Slider.html?from=PropertyDrawer" class="itemlink">EditorGUI.Slider</a> (position, property, range.min, range.max, label);<br/>        <span class="hl-keyword">else</span> <span class="hl-keyword">if</span> (property.propertyType == <a href="SerializedPropertyType.Integer.html?from=PropertyDrawer" class="itemlink">SerializedPropertyType.Integer</a>)<br/>            <a href="EditorGUI.IntSlider.html?from=PropertyDrawer" class="itemlink">EditorGUI.IntSlider</a> (position, property, range.min, range.max, label);<br/>        <span class="hl-keyword">else</span><br/>            <a href="EditorGUI.LabelField.html?from=PropertyDrawer" class="itemlink">EditorGUI.LabelField</a> (position, label.text, <span class="hl-string">"Use <a href="Range.html" class="classlink">Range</a> with float or int."</span>);<br/>    }<br/>}<br/></pre><p class="basic">
+Note that the PropertyDrawers are designed to work with <a href="EditorGUIUtility.LookLikeInspector.html?from=PropertyDrawer" class="itemlink">LookLikeInspector</a> indentation by default.
+For now, if you want to use <a href="EditorGUIUtility.LookLikeControls.html?from=PropertyDrawer" class="itemlink">LookLikeControls</a>, please shave off 4 pixels from both left and right side of the provided position:</p><pre class="code">[<a href="CustomPropertyDrawer.html" class="classlink">CustomPropertyDrawer</a> (typeof (MyClass))]<br/><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> MyDrawer : PropertyDrawer {<br/>    <span class="hl-keyword">public</span> override <span class="hl-keyword">void</span> <span class="hl-operator">OnGUI</span> (<a href="Rect.html" class="classlink">Rect</a> position, <a href="SerializedProperty.html" class="classlink">SerializedProperty</a> prop, <a href="GUIContent.html" class="classlink">GUIContent</a> label) {<br/>        <a href="EditorGUIUtility.LookLikeControls.html?from=PropertyDrawer" class="itemlink">EditorGUIUtility.LookLikeControls</a> ();<br/>        position.xMin += 4;<br/>        position.xMax -= 4;<br/>        <br/>        <span class="hl-comment">// Actual drawing code goes here...</span><span class="hl-comment"><br/></span>    }<br/>}<br/></pre><p class="basic">
+<span class="note">See Also:</span> <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a> class, <a href="CustomPropertyDrawer.html" class="classlink">CustomPropertyDrawer</a> class.</p>
+   <a name="Variables0"></a>
+   <div class="script-section-softheading">Variables</div>
+
+			<table class="class-member-list">
+				<tr><td class="class-member-list-name"><a href="PropertyDrawer-attribute.html">attribute</a></td><td>
+			   <p class="class-member-description"> The <a href="PropertyAttribute.html" class="classlink">PropertyAttribute</a> for the property. Not applicable for custom class drawers. <span class="note">(Read Only)</span></p>
+</td></tr>
+			</table>   <a name="Functions0"></a>
+   <div class="script-section-softheading">Functions</div>
+
+			<table class="class-member-list">
+				<tr><td class="class-member-list-name"><a href="PropertyDrawer.OnGUI.html">OnGUI</a></td><td>
+			   <p class="class-member-description"> Override this method to make your own GUI for the property.</p>
+</td></tr>
+			
+				<tr><td class="class-member-list-name"><a href="PropertyDrawer.GetPropertyHeight.html">GetPropertyHeight</a></td><td>
+			   <p class="class-member-description"> Override this method to specify how tall the GUI for this field is in pixels.</p>
+</td></tr>
+			</table>
+			<!-- #TemplateEndEditable -->
+		
+			<!-- #TemplateEndEditable -->
+		
+			<!-- #TemplateEndEditable -->
+		
+			<!-- #TemplateEndEditable -->	
+			
+	</div><!-- #TemplateEndEditable -->
+	<script type="text/javascript" src="../Images/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="../Images/code.js"> </script>
+</body>
+</html><!-- #EndTemplate -->
+
