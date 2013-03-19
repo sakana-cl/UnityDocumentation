@@ -1,0 +1,435 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Surface Shaders with DX11 Tessellation</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Components"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Components"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Components"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Components/index.html">Reference Manual</a><span>&gt;</span><a href="../Components/SL-Reference.html">Shader Reference</a><span>&gt;</span><a href="../Components/SL-SurfaceShaders.html">Writing Surface Shaders</a><span>&gt;</span><a href="../Components/SL-SurfaceShaderTessellation.html">Surface Shaders with DX11 Tessellation</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/SL-SurfaceShaderLightingExamples.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/SL-ShaderPrograms.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Surface Shaders with DX11 Tessellation</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p><a href="../Components/SL-SurfaceShaders.html">Surface Shaders</a> have some support for DirectX 11 GPU Tessellation. Idea is:
+</p><ul><li>Tessellation is indicated by <code>tessellate:FunctionName</code> modifier. That function computes triangle edge and inside tessellation factors.
+</li><li>When tessellation is used, "vertex modifier" (<code>vertex:FunctionName</code>) is invoked <em>after</em> tessellation, for each generated vertex in the domain shader. Here you'd typically to displacement mapping.
+</li><li>Surface shaders can optionally compute <a class='urllink' href='https://www.google.lt/search?q=phong+tessellation' rel='nofollow'>phong tessellation</a> to smooth model surface even without any displacement mapping.
+</li></ul><p class='vspace'>Current limitations of tessellation support:
+</p><ul><li>Only triangle domain - no quads, no isoline tessellation.
+</li><li>When tessellation is used, shader is automatically compiled into Shader Model 5.0 target, which means it will only work on DX11.
+</li></ul><div class='vspace'></div><h2>No GPU tessellation, displacement in the vertex modifier</h2>
+<p>Let's start with a surface shader that does some displacement mapping <em>without</em> using tessellation. It just moves vertices along their normals based on amount coming from a displacement map:
+</p>
+<div class='vspace'></div><pre>    Shader "Tessellation Sample" {
+        Properties {
+            _MainTex ("Base (RGB)", 2D) = "white" {}
+            _DispTex ("Disp Texture", 2D) = "gray" {}
+            _NormalMap ("Normalmap", 2D) = "bump" {}
+            _Displacement ("Displacement", Range(0, 1.0)) = 0.3
+            _Color ("Color", color) = (1,1,1,0)
+            _SpecColor ("Spec color", color) = (0.5,0.5,0.5,0.5)
+        }
+        SubShader {
+            Tags { "RenderType"="Opaque" }
+            LOD 300
+
+            CGPROGRAM
+            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp nolightmap
+            #pragma target 5.0
+
+            struct appdata {
+                float4 vertex : POSITION;
+                float4 tangent : TANGENT;
+                float3 normal : NORMAL;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            sampler2D _DispTex;
+            float _Displacement;
+
+            <b>void disp (inout appdata v)</b>
+            {
+                float d = tex2Dlod(_DispTex, float4(v.texcoord.xy,0,0)).r * _Displacement;
+                <b>v.vertex.xyz += v.normal * d;</b>
+            }
+
+            struct Input {
+                float2 uv_MainTex;
+            };
+
+            sampler2D _MainTex;
+            sampler2D _NormalMap;
+            fixed4 _Color;
+
+            void surf (Input IN, inout SurfaceOutput o) {
+                half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+                o.Albedo = c.rgb;
+                o.Specular = 0.2;
+                o.Gloss = 1.0;
+                o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
+            }
+            ENDCG
+        }
+        FallBack "Diffuse"
+    }
+</pre><p class='vspace'>The above shader is fairly standard, points of intetest:
+</p><ul><li>Vertex modifier <code>disp</code> samples the displacement map and moves vertices along their normals.
+</li><li>It uses custom "vertex data input" structure (<code>appdata</code>) instead of default <code>appdata_full</code>. This is not needed yet, but it's more efficient for tessellation to use as small structure as possible.
+</li><li>Since our vertex data does not have 2nd UV coordinate, we add <code>nolightmap</code> directive to exclude lightmaps.
+</li></ul><p class='vspace'>Here's how some simple objects would look like with this shader:
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SurfaceShaderTessellation-0.jpg' /></div>
+<div class='vspace'></div><h2>Fixed amount of tessellation</h2>
+<p>Let's add fixed amount of tessellation, i.e. the same tessellation level for the whole mesh. This approach is suitable if your model's faces are roughly the same size on screen. Some script could then change the tessellation level from code, based on distance to the camera.
+</p>
+<div class='vspace'></div><pre>    Shader "Tessellation Sample" {
+        Properties {
+            <strong>_Tess ("Tessellation", Range(1,32)) = 4</strong>
+            _MainTex ("Base (RGB)", 2D) = "white" {}
+            _DispTex ("Disp Texture", 2D) = "gray" {}
+            _NormalMap ("Normalmap", 2D) = "bump" {}
+            _Displacement ("Displacement", Range(0, 1.0)) = 0.3
+            _Color ("Color", color) = (1,1,1,0)
+            _SpecColor ("Spec color", color) = (0.5,0.5,0.5,0.5)
+        }
+        SubShader {
+            Tags { "RenderType"="Opaque" }
+            LOD 300
+
+            CGPROGRAM
+            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp <b>tessellate:tessFixed</b> nolightmap
+            #pragma target 5.0
+
+            struct appdata {
+                float4 vertex : POSITION;
+                float4 tangent : TANGENT;
+                float3 normal : NORMAL;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            <b>float _Tess;</b>
+
+            <b>float4 tessFixed()</b>
+            {
+                <b>return _Tess;</b>
+            }
+
+            sampler2D _DispTex;
+            float _Displacement;
+
+            void disp (inout appdata v)
+            {
+                float d = tex2Dlod(_DispTex, float4(v.texcoord.xy,0,0)).r * _Displacement;
+                v.vertex.xyz += v.normal * d;
+            }
+
+            struct Input {
+                float2 uv_MainTex;
+            };
+
+            sampler2D _MainTex;
+            sampler2D _NormalMap;
+            fixed4 _Color;
+
+            void surf (Input IN, inout SurfaceOutput o) {
+                half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+                o.Albedo = c.rgb;
+                o.Specular = 0.2;
+                o.Gloss = 1.0;
+                o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
+            }
+            ENDCG
+        }
+        FallBack "Diffuse"
+    }
+</pre><p class='vspace'>The tessellation function, <code>tessFixed</code> in our shader, returns four tessellation factors as a single float4 value: tree factors for each edge of the triangle, and one factor for the inside of the triangle. Here, we just return a constant value that is set in material properties.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SurfaceShaderTessellation-1.jpg' /></div>
+<div class='vspace'></div><h2>Distance-based tessellation</h2>
+<p>We can also change tessellation level based on distance from the camera. For example, we could define two distance values; distance at which tessellation is at maximum (say, 10 meters), and distance towards which tessellation level gradually decreases (say, 20 meters).
+</p>
+<div class='vspace'></div><pre>    Shader "Tessellation Sample" {
+        Properties {
+            _Tess ("Tessellation", Range(1,32)) = 4
+            _MainTex ("Base (RGB)", 2D) = "white" {}
+            _DispTex ("Disp Texture", 2D) = "gray" {}
+            _NormalMap ("Normalmap", 2D) = "bump" {}
+            _Displacement ("Displacement", Range(0, 1.0)) = 0.3
+            _Color ("Color", color) = (1,1,1,0)
+            _SpecColor ("Spec color", color) = (0.5,0.5,0.5,0.5)
+        }
+        SubShader {
+            Tags { "RenderType"="Opaque" }
+            LOD 300
+
+            CGPROGRAM
+            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp <b>tessellate:tessDistance</b> nolightmap
+            #pragma target 5.0
+            <b>#include "Tessellation.cginc"</b>
+
+            struct appdata {
+                float4 vertex : POSITION;
+                float4 tangent : TANGENT;
+                float3 normal : NORMAL;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            float _Tess;
+
+            <b>float4 tessDistance (appdata v0, appdata v1, appdata v2) {</b>
+                <b>float minDist = 10.0;</b>
+                <b>float maxDist = 25.0;</b>
+                <b>return UnityDistanceBasedTess(v0.vertex, v1.vertex, v2.vertex, minDist, maxDist, _Tess);</b>
+            }
+
+            sampler2D _DispTex;
+            float _Displacement;
+
+            void disp (inout appdata v)
+            {
+                float d = tex2Dlod(_DispTex, float4(v.texcoord.xy,0,0)).r * _Displacement;
+                v.vertex.xyz += v.normal * d;
+            }
+
+            struct Input {
+                float2 uv_MainTex;
+            };
+
+            sampler2D _MainTex;
+            sampler2D _NormalMap;
+            fixed4 _Color;
+
+            void surf (Input IN, inout SurfaceOutput o) {
+                half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+                o.Albedo = c.rgb;
+                o.Specular = 0.2;
+                o.Gloss = 1.0;
+                o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
+            }
+            ENDCG
+        }
+        FallBack "Diffuse"
+    }
+</pre><p class='vspace'>Here the tessellation function takes three parameters; the vertex data of three triangle corners before tessellation. This is needed to compute tessellation levels, which depend on vertex positions now. We include a built-in helper file <code>Tessellation.cginc</code> and call <code>UnityDistanceBasedTess</code> function from it to do all the work. That function computes distance of each vertex to the camera and derives final tessellation factors.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SurfaceShaderTessellation-2.jpg' /></div>
+<div class='vspace'></div><h2>Edge length based tessellation</h2>
+<p>Purely distance based tessellation is good only when triangle sizes are quite similar. In the image above, you can see that objects that have small triangles are tessellated too much, while objects that have large triangles aren't tessellated enough.
+</p>
+<p class='vspace'>Instead, tessellation levels could be computed based on triangle edge length on the screen - the longer the edge, the larger tessellation factor should be applied.
+</p>
+<div class='vspace'></div><pre>    Shader "Tessellation Sample" {
+        Properties {
+            <strong>_EdgeLength ("Edge length", Range(2,50)) = 15</strong>
+            _MainTex ("Base (RGB)", 2D) = "white" {}
+            _DispTex ("Disp Texture", 2D) = "gray" {}
+            _NormalMap ("Normalmap", 2D) = "bump" {}
+            _Displacement ("Displacement", Range(0, 1.0)) = 0.3
+            _Color ("Color", color) = (1,1,1,0)
+            _SpecColor ("Spec color", color) = (0.5,0.5,0.5,0.5)
+        }
+        SubShader {
+            Tags { "RenderType"="Opaque" }
+            LOD 300
+
+            CGPROGRAM
+            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp <b>tessellate:tessEdge</b> nolightmap
+            #pragma target 5.0
+            #include "Tessellation.cginc"
+
+            struct appdata {
+                float4 vertex : POSITION;
+                float4 tangent : TANGENT;
+                float3 normal : NORMAL;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            <b>float _EdgeLength;</b>
+
+            <b>float4 tessEdge (appdata v0, appdata v1, appdata v2)</b>
+            {
+                <b>return UnityEdgeLengthBasedTess (v0.vertex, v1.vertex, v2.vertex, _EdgeLength);</b>
+            }
+
+            sampler2D _DispTex;
+            float _Displacement;
+
+            void disp (inout appdata v)
+            {
+                float d = tex2Dlod(_DispTex, float4(v.texcoord.xy,0,0)).r * _Displacement;
+                v.vertex.xyz += v.normal * d;
+            }
+
+            struct Input {
+                float2 uv_MainTex;
+            };
+
+            sampler2D _MainTex;
+            sampler2D _NormalMap;
+            fixed4 _Color;
+
+            void surf (Input IN, inout SurfaceOutput o) {
+                half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+                o.Albedo = c.rgb;
+                o.Specular = 0.2;
+                o.Gloss = 1.0;
+                o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
+            }
+            ENDCG
+        }
+        FallBack "Diffuse"
+    }
+</pre><p class='vspace'>Here again, we just call <code>UnityEdgeLengthBasedTess</code> function from <code>Tessellation.cginc</code> to do all the actual work.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SurfaceShaderTessellation-3.jpg' /></div>
+<p class='vspace'>For performance reasons, it's advisable to call <code>UnityEdgeLengthBasedTessCull</code> function instead, which will do patch frustum culling. This makes the shader a bit more expensive, but saves a lot of GPU work for parts of meshes that are outside of camera's view.
+</p>
+<div class='vspace'></div><h2>Phong Tessellation</h2>
+<p class='vspace'><a class='urllink' href='https://www.google.lt/search?q=phong+tessellation' rel='nofollow'>Phong Tessellation</a> modifies positions of the subdivided faces so that the resulting surface follows the mesh normals a bit. It's quite an effective way of making low-poly meshes become more smooth.
+</p>
+<p class='vspace'>Unity's surface shaders can compute Phong tessellation automatically using <code>tessphong:VariableName</code> compilation directive. Here's an example shader:
+</p>
+<div class='vspace'></div><pre>    Shader "Phong Tessellation" {
+        Properties {
+            _EdgeLength ("Edge length", Range(2,50)) = 5
+            <strong>_Phong ("Phong Strengh", Range(0,1)) = 0.5</strong>
+            _MainTex ("Base (RGB)", 2D) = "white" {}
+            _Color ("Color", color) = (1,1,1,0)
+        }
+        SubShader {
+            Tags { "RenderType"="Opaque" }
+            LOD 300
+
+            CGPROGRAM
+            #pragma surface surf Lambert vertex:dispNone tessellate:tessEdge <b>tessphong:_Phong</b> nolightmap
+            #include "Tessellation.cginc"
+
+            struct appdata {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            void dispNone (inout appdata v) { }
+
+            <b>float _Phong;</b>
+            float _EdgeLength;
+
+            float4 tessEdge (appdata v0, appdata v1, appdata v2)
+            {
+                return UnityEdgeLengthBasedTess (v0.vertex, v1.vertex, v2.vertex, _EdgeLength);
+            }
+
+            struct Input {
+                float2 uv_MainTex;
+            };
+
+            fixed4 _Color;
+            sampler2D _MainTex;
+
+            void surf (Input IN, inout SurfaceOutput o) {
+                half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+                o.Albedo = c.rgb;
+                o.Alpha = c.a;
+            }
+
+            ENDCG
+        }
+        FallBack "Diffuse"
+    }
+</pre><p class='vspace'>Here's a comparison between regular shader (top row) and one that uses Phong tessellation (bottom row). You can see that even without any displacement mapping,
+the surface becomes more round.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SurfaceShaderTessellation-4.jpg' /></div>
+<p><small>Page last updated: 2012-09-18</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/SL-SurfaceShaderLightingExamples.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/SL-ShaderPrograms.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

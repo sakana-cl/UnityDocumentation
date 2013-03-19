@@ -1,0 +1,156 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Depth of Field</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Components"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Components"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Components"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Components/index.html">Reference Manual</a><span>&gt;</span><a href="../Components/Components.html">Components</a><span>&gt;</span><a href="../Components/comp-ImageEffects.html">Image Effect Scripts</a><span>&gt;</span><a href="../Components/script-DepthOfFieldScatter.html">Depth of Field</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/script-CameraMotionBlur.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/script-NoiseAndGrain.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Depth of Field</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p><span class='doc-keyword'>Depth of Field</span> is a common postprocessing effect that simulates the properties of a camera lens. This version is a more modern and sophisticated version of the old <a href="../Components/script-DepthOfField34.html">Depth of Field 3.4 effect</a> that works especially well with <a href="../Manual/HDR.html">HDR</a> rendering and a <a href="../Manual/DirectX11.html">DirectX 11</a> compatible graphics device.
+</p>
+<p class='vspace'>In real life, a camera can only focus sharply on an object at a specific distance; objects nearer or farther from the camera will be somewhat out of focus. The blurring not only gives a visual cue about an object's distance but also introduces <span class='doc-prop'>Bokeh</span> which is the term for pleasing visual artifacts that appear around bright areas of the image as they fall out of focus. Common <span class='doc-prop'>Bokeh</span> shapes are discs, hexagons and other shapes of higher level dihedral groups.
+</p>
+<p class='vspace'>While the regular version only supports disc shapes (generated via circular texture sampling), the <a href="../Manual/DirectX11.html">DirectX 11</a> version is able to splat any shape as defined by the <span class='doc-prop'>Bokeh Texture</span>.
+</p>
+<p class='vspace'>An example of Depth of Field effect can be seen in the following image, displaying the results of a focused foreground and a defocused background..
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/script-DepthOfFieldScatter-0.jpg' /><br /><em>The <a href="../Manual/DirectX11.html">DirectX11</a> version of this effect can create nicely defined bokeh shapes at a very reasonable cost.</em></div>
+<p class='vspace'>As with the other <a href="../Components/comp-ImageEffects.html">image effects</a>, this effect is only available in Unity Pro and you must have the <a href="../Manual/HOWTO-InstallStandardAssets.html">Pro Standard Assets</a> installed before it becomes available.
+</p>
+<div class='vspace'></div><h2>Properties</h2>
+<table width='100%'><tr class='tableheader'><td  class='prop'></td><td class='function'></td></tr>
+<tr ><td  align='left' colspan='2'><span class='doc-prop'>Focal Settings</span></td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Visualize</span></td><td  align='left'>Overlay color indicating camera focus.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Focal distance</span></td><td  align='left'>The distance to the focal plane from the camera position in world space.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Focal Size</span></td><td  align='left'>Increase the total focal area.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Focus on Transform</span></td><td >Determine the focal distance using a target object in the scene.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Aperture</span></td><td  align='center'>The camera's aperture defining the transition between focused and defocused areas. It is good practice to keep this value as high as possible, as otherwise sampling artifacts might occur, especially when the <span class='doc-prop'>Max Blur Distance</span> is big. Bigger Aperture values will automatically downsample the image to produce a better defocus.</td></tr>
+</table>
+<div class='vspace'></div><table width='100%'><tr ><td  align='left' colspan='2'><span class='doc-prop'></span></td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Defocus Type</span></td><td >Algorithm used to produce defocused areas. <span class='doc-prop'>DX11</span> is effectively a bokeh splatting technique while <span class='doc-prop'>DiscBlur</span> indicates a more traditional (scatter as gather) based blur.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Sample Count</span></td><td  align='left'>Amount of filter taps. Greatly affects performance.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Max Blur Distance</span></td><td  align='left'>Max distance for filter taps. Affects texture cache and can cause undersampling artifacts if value is too big. A value smaller than 4.0 should produce decent results.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>High Resolution</span></td><td  align='left'>Perform defocus operations in full resolution. Affects performance but might help reduce unwanted artifacts and produce more defined bokeh shapes.</td></tr>
+</table>
+<div class='vspace'></div><table width='100%'><tr ><td  align='left' colspan='2'><span class='doc-prop'></span></td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Near Blur</span></td><td  align='left'>Foreground areas will overlap at a performance cost.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Overlap Size</span></td><td  align='left'>Increase foreground overlap dilation if needed.</td></tr>
+</table>
+<div class='vspace'></div><table width='100%'><tr ><td  align='left' colspan='2'><span class='doc-prop'>DX11 Bokeh Settings</span></td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Bokeh Texture</span></td><td >Texture defining bokeh shape.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Bokeh Scale</span></td><td >Size of bokeh texture.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Bokeh Intensity</span></td><td >Blend strength of bokeh shapes.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Min Luminance</span></td><td >Only pixels brighter than this value will cast bokeh shapes. Affects performance as it limits overdraw to a more reasonable amount.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Spawn Heuristic</span></td><td >Bokeh shapes will only be cast if pixel in questions passes a frequency check. A threshhold around 0.1 seems like a good tradeoff between performance and quality.</td></tr>
+</table>
+<div class='vspace'></div><h2>Comparison between DirectX11 and DiscBlur settings</h2>
+<div><img class='figure' src='../Images/manual/script-DepthOfFieldScatter-1.jpg' /><br /><em>Smooth transitions are possible with the high resolution DX11 version (albeit at a high performance cost).</em></div>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/script-DepthOfFieldScatter-2.jpg' /><br /><em>Due to the nature of the standard DiscBlur texture sampling approach, the maximum blur radius is limited before sampling artifacts become appearant. Also, only spherical Bokeh shapes are possible.</em></div>
+<div class='vspace'></div><h2>About DirectX 11 Bokeh Splatting</h2>
+<p>This powerful technique enables proper Scattering, however due to high demands on fillrate, it should be used with care. The parameters <span class='doc-prop'>Spawn Heuristic</span> and <span class='doc-prop'>Min Luminance</span> control when and where Bokeh Sprites will be placed. If pixels don't pass a luminance and frequency check, a simple Box Blur will be used instead. It's however hard to notice as it uses the same kernel width as the Bokeh sprites. 
+</p>
+<p class='vspace'>The following pictures show that the road, that is neither bright nor bears great frequency changes can just be blurred with a simple box filter without ruining the overall <span class='doc-prop'>Bokeh</span> experience.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/script-DepthOfFieldScatter-3.jpg' /><br /><em>Example with small <span class='doc-prop'>Max Blur Distance</span></em></div>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/script-DepthOfFieldScatter-4.jpg' /><br /><em>Example with big <span class='doc-prop'>Max Blur Distance</span></em></div>
+<div class='vspace'></div><h2>Hardware support</h2>
+<p>This effect requires a graphics card with pixel shaders (3.0) or OpenGL ES 2.0. Additionally, depth texture support is required. PC: NVIDIA cards since 2004 (GeForce 6), AMD cards since 2005 (Radeon X1300), Intel cards since 2006 (GMA X3000); Mobile: OpenGL ES 2.0 with depth texture support; Consoles: Xbox 360, PS3.
+</p>
+<p class='vspace'>All image effects automatically disable themselves when they can not run on end-users graphics card.
+</p>
+<p><small>Page last updated: 2012-09-26</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/script-CameraMotionBlur.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/script-NoiseAndGrain.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

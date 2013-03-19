@@ -1,0 +1,273 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - ShaderLab syntax: Texture Combiners</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Components"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Components"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Components"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Components/index.html">Reference Manual</a><span>&gt;</span><a href="../Components/SL-Reference.html">Shader Reference</a><span>&gt;</span><a href="../Components/SL-Shader.html">ShaderLab syntax: Shader</a><span>&gt;</span><a href="../Components/SL-SubShader.html">ShaderLab syntax: SubShader</a><span>&gt;</span><a href="../Components/SL-Pass.html">ShaderLab syntax: Pass</a><span>&gt;</span><a href="../Components/SL-SetTexture.html">ShaderLab syntax: Texture Combiners</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/SL-CullAndDepth.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/SL-Fog.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>ShaderLab syntax: Texture Combiners</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>After the basic vertex lighting has been calculated, textures are applied. In ShaderLab this is done using <b>SetTexture</b> command.
+</p>
+<p class='vspace'><em>SetTexture commands have no effect when <a href="../Components/SL-ShaderPrograms.html">fragment programs</a> are used; as in that case pixel operations are completely described in the shader.</em>
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SetTexture-0.jpg' /></div>
+<p class='vspace'>Texturing is the place to do old-style combiner effects. You can have multiple SetTexture commands inside a pass - all textures are applied in sequence, like layers in a painting program. SetTexture commands must be placed at the end of a <a href="../Components/SL-Pass.html">Pass</a>.
+</p>
+<div class='vspace'></div><h2>Syntax</h2>
+<dl><dt><b>SetTexture</b> <em>[TexturePropertyName]</em> <b>{</b> <em>Texture Block</em> <b>}</b></dt><dd> Assigns a texture. <em>TextureName</em> must be defined as a texture property. How to apply the texture is defined inside the <em>TextureBlock</em>.
+</dd></dl><p class='vspace'>The texture block controls how the texture is applied. Inside the texture block can be up to three commands: <code>combine</code>, <code>matrix</code> and <code>constantColor</code>.
+</p>
+<div class='vspace'></div><h2>Texture block <code>combine</code> command</h2>
+<dl><dt><code>combine</code> <em>src1</em> * <em>src2</em></dt><dd> Multiplies src1 and src2 together. The result will be darker than either input.
+</dd><dt><code>combine</code> <em>src1</em> + <em>src2</em></dt><dd> Adds  src1 and src2 together. The result will be lighter than either input.
+</dd><dt><code>combine</code> <em>src1</em> - <em>src2</em></dt><dd>  Subtracts src2 from src1.
+</dd><dt><code>combine</code> <em>src1</em> +- <em>src2</em></dt><dd> Adds src1 to src2, then subtracts 0.5 (a signed add).
+</dd><dt><code>combine</code> <em>src1</em> <code>lerp</code> (<em>src2</em>) <em>src3</em></dt><dd> Interpolates between src3 and src1, using the alpha of src2. Note that the interpolation is opposite direction: src1 is used when alpha is one, and src3 is used when alpha is zero.
+</dd><dt><code>combine</code> <em>src1</em> * <em>src2</em> + <em>src3</em></dt><dd> Multiplies src1 with the alpha component of src2, then adds src3.
+</dd><dt><code>combine</code> <em>src1</em> * <em>src2</em> +- <em>src3</em></dt><dd> Multiplies src1 with the alpha component of src2, then does a signed add with src3.
+</dd><dt><code>combine</code> <em>src1</em> * <em>src2</em> - <em>src3</em></dt><dd>  Multiplies src1 with the alpha component of src2, then subtracts src3.
+</dd></dl><p class='vspace'>All the <b>src</b> properties can be either one of <em>previous</em>, <em>constant</em>, <em>primary</em> or <em>texture</em>.  
+</p><ul><li><b>Previous</b> is the the result of the previous SetTexture.
+</li><li><b>Primary</b> is the color from the <a href="../Components/SL-Material.html">lighting calculation</a> or the vertex color if it is <a href="../Components/SL-BindChannels.html">bound</a>.
+</li><li><b>Texture</b> is the color of the texture specified by <em>[_TextureName]</em> in the SetTexture (see above).
+</li><li><b>Constant</b> is the color specified in <b>ConstantColor</b>.
+</li></ul><div class='vspace'></div><div class='property-Modifiers'>Modifiers:</div>
+<ul><li>The formulas specified above can optionally be followed by the keywords <b>Double</b> or <b>Quad</b> to make the resulting color 2x or 4x as bright.
+</li><li>All the <b>src</b> properties, except <code>lerp</code> argument, can optionally be preceded by <b>one -</b> to make the resulting color negated.
+</li><li>All the <b>src</b> properties can be followed by <b>alpha</b> to take only the alpha channel.
+</li></ul><div class='vspace'></div><h2>Texture block <code>constantColor</code> command</h2>
+<dl><dt><b>ConstantColor</b> <em>color</em></dt><dd> Defines a constant color that can be used in the combine command.
+</dd></dl><div class='vspace'></div><h2>Texture block <code>matrix</code> command</h2>
+<dl><dt><b>matrix</b> <em>[MatrixPropertyName]</em></dt><dd> Transforms texture coordinates used in this command with the given matrix.
+</dd></dl><div class='vspace'></div><h1>Details</h1>
+<p>Before <a href="../Components/SL-ShaderPrograms.html">fragment programs</a> existed, older graphics cards used a layered approach to textures. The textures are applied one after each other, modifying the color that will be written to the screen. For each texture, the texture is typically combined with the result of the previous operation.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SL-SetTexture-1.jpg' /></div>
+<p class='vspace'>Note that on "true fixed function" devices (OpenGL, OpenGL ES 1.1, Wii) the value of each SetTexture stage is clamped to 0..1 range. Everywhere else (Direct3D, OpenGL ES 2.0) the range may or may not be higher. This might affect SetTexture stages that can produce values higher than 1.0.
+</p>
+<div class='vspace'></div><h2>Separate Alpha &amp; Color computation</h2>
+<p>By default, the combiner formula is used for calculating both the RGB and alpha component of the color. Optionally, you can specify a separate formula for the alpha calculation. This looks like this:
+</p>
+<p class='vspace'><code class='escaped'>SetTexture [_MainTex] { combine previous * texture, previous + texture } </code>
+</p>
+<p class='vspace'>Here, we multiply the RGB colors and add the alpha.
+</p>
+<div class='vspace'></div><h2>Specular highlights</h2>
+<p>By default the <b>primary</b> color is the sum of the diffuse, ambient and specular colors (as defined in the <a href="../Components/SL-Material.html">Lighting calculation</a>). If you specify <b>SeparateSpecular On</b> in the pass options, the specular color will be added in <em>after</em> the combiner calculation, rather than before. This is the default behavior of the built-in VertexLit shader.
+</p>
+<div class='vspace'></div><h2>Graphics hardware support</h2>
+<p>Modern graphics cards with <a href="../Components/SL-ShaderPrograms.html">fragment shader</a> support ("shader model 2.0" on desktop, OpenGL ES 2.0 on mobile) support all <span class='doc-prop'>SetTexture</span> modes and at least 4 texture stages (many of them support 8). If you're running on really old hardware (made before 2003 on PC, or before iPhone3GS on mobile), you might have as low as two texture stages. The shader author should write separate <a href="../Components/SL-SubShader.html">SubShaders</a> for the cards he or she wants to support.
+</p>
+<div class='vspace'></div><h1>Examples</h1>
+<h2>Alpha Blending Two Textures</h2>
+<p>This small examples takes two textures. First it sets the first combiner to just take the <b>_MainTex</b>, then is uses the alpha channel of <b>_BlendTex</b> to fade in the RGB colors of <b>_BlendTex</b>
+</p>
+<div class='vspace'></div><pre class='codelisting'>Shader "Examples/2 Alpha Blended Textures" {
+    Properties {
+        _MainTex ("Base (RGB)", 2D) = "white" {}
+        _BlendTex ("Alpha Blended (RGBA) ", 2D) = "white" {}
+    }
+    SubShader {
+        Pass {
+            // Apply base texture
+            SetTexture [_MainTex] {
+                combine texture
+            }
+            // Blend in the alpha texture using the lerp operator
+            SetTexture [_BlendTex] {
+                combine texture lerp (texture) previous
+            }
+        }
+    }
+} </pre>
+<div class='vspace'></div><h2>Alpha Controlled Self-illumination</h2>
+<p>This shader uses the alpha component of the <b>_MainTex</b> to decide where to apply lighting. It does this by applying the texture to two stages; In the first stage, the alpha value of the texture is used to blend between the vertex color and solid white. In the second stage, the RGB values of the texture are multiplied in.
+</p>
+<div class='vspace'></div><pre class='codelisting'>Shader "Examples/Self-Illumination" {
+    Properties {
+        _MainTex ("Base (RGB) Self-Illumination (A)", 2D) = "white" {}
+    }
+    SubShader {
+        Pass {
+            // Set up basic white vertex lighting
+            Material {
+                Diffuse (1,1,1,1)
+                Ambient (1,1,1,1)
+            }
+            Lighting On
+
+            // Use texture alpha to blend up to white (= full illumination)
+            SetTexture [_MainTex] {
+                constantColor (1,1,1,1)
+                combine constant lerp(texture) previous
+            }
+            // Multiply in texture
+            SetTexture [_MainTex] {
+                combine previous * texture
+            }
+        }
+    }
+} </pre>
+<p class='vspace'>We can do something else for free here, though; instead of blending to solid white, we can add a self-illumination color and blend to that. Note the use of <b>ConstantColor</b> to get a _SolidColor from the properties into the texture blending.
+</p>
+<div class='vspace'></div><pre class='codelisting'>Shader "Examples/Self-Illumination 2" {
+    Properties {
+        _IlluminCol ("Self-Illumination color (RGB)", Color) = (1,1,1,1)
+        _MainTex ("Base (RGB) Self-Illumination (A)", 2D) = "white" {}
+    }
+    SubShader {
+        Pass {
+            // Set up basic white vertex lighting
+            Material {
+                Diffuse (1,1,1,1)
+                Ambient (1,1,1,1)
+            }
+            Lighting On
+
+            // Use texture alpha to blend up to white (= full illumination)
+            SetTexture [_MainTex] {
+                // Pull the color property into this blender
+                constantColor [_IlluminCol]
+                // And use the texture's alpha to blend between it and
+                // vertex color
+                combine constant lerp(texture) previous
+            }
+            // Multiply in texture
+            SetTexture [_MainTex] {
+                combine previous * texture
+            }
+        }
+    }
+} </pre>
+<p class='vspace'>And finally, we take all the lighting properties of the vertexlit shader and pull that in:
+</p>
+<div class='vspace'></div><pre class='codelisting'>Shader "Examples/Self-Illumination 3" {
+    Properties {
+        _IlluminCol ("Self-Illumination color (RGB)", Color) = (1,1,1,1)
+        _Color ("Main Color", Color) = (1,1,1,0)
+        _SpecColor ("Spec Color", Color) = (1,1,1,1)
+        _Emission ("Emmisive Color", Color) = (0,0,0,0)
+        _Shininess ("Shininess", Range (0.01, 1)) = 0.7
+        _MainTex ("Base (RGB)", 2D) = "white" {}
+    }
+
+    SubShader {
+        Pass {
+            // Set up basic vertex lighting
+            Material {
+                Diffuse [_Color]
+                Ambient [_Color]
+                Shininess [_Shininess]
+                Specular [_SpecColor]
+                Emission [_Emission]
+            }
+            Lighting On
+
+            // Use texture alpha to blend up to white (= full illumination)
+            SetTexture [_MainTex] {
+                constantColor [_IlluminCol]
+                combine constant lerp(texture) previous
+            }
+            // Multiply in texture
+            SetTexture [_MainTex] {
+                combine previous * texture
+            }
+        }
+    }
+} </pre>
+<p><small>Page last updated: 2012-08-17</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/SL-CullAndDepth.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/SL-Fog.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

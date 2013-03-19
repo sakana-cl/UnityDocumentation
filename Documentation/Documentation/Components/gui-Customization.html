@@ -1,0 +1,287 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Customization</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Components"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Components"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Components"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Components/index.html">Reference Manual</a><span>&gt;</span><a href="../Components/GUIScriptingGuide.html">GUI Scripting Guide</a><span>&gt;</span><a href="../Components/gui-Customization.html">Customization</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/gui-Controls.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/gui-Layout.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Customization</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<div class='vspace'></div><h2>Customizing your GUI Controls</h2>
+<p>Functional Controls are necessary for your game, and the appearance of those controls is very important for the aesthetics of your game.  In UnityGUI, you can fine-tune the appearance of your Controls with many details.  Control appearances are dictated with <span class='doc-keyword'>GUIStyles</span>.  By default, when you create a Control without defining a GUIStyle, Unity's default GUIStyle is applied.  This style is internal in Unity and can be used in published games for quick prototyping, or if you choose not to stylize your Controls.
+</p>
+<p class='vspace'>When you have a large number of different GUIStyles to work with, you can define them all within a single <span class='doc-keyword'>GUISkin</span>.  A GUISkin is no more than a collection of GUIStyles.
+</p>
+<div class='vspace'></div><h3>How Styles change the look of your GUI Controls</h3>
+<p>GUIStyles are designed to mimic Cascading Style Sheets (CSS) for web browsers.  Many different CSS methodologies have been adapted, including differentiation of individual state properties for styling, and separation between the content and the appearance.
+</p>
+<p class='vspace'>Where the Control defines the content, the Style defines the appearance. This allows you to create combinations like a functional <span class='doc-prop'>Toggle</span> which looks like a normal <span class='doc-prop'>Button</span>.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/gui-Customization-0.jpg' /><br /><em>Two Toggle Controls styled differently</em></div>
+<div class='vspace'></div><h3>The difference between Skins and Styles</h3>
+<p>As stated earlier, GUISkins are a collection of GUIStyles.  Styles define the appearance of a GUI Control.  You do not have to use a Skin if you want to use a Style.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/gui-Customization-1.jpg' /><br /><em>A single GUIStyle shown in the Inspector</em></div>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/gui-Customization-2.jpg' /><br /><em>A single GUISkin shown in the Inspector - observe that it contains multiple GUIStyles</em> </div>
+<div class='vspace'></div><h2>Working with Styles</h2>
+<p>All GUI Control functions have an optional last parameter: the GUIStyle to use for displaying the Control.  If this is omitted, Unity's default GUIStyle will be used.  This works internally by applying the name of the control type as a string, so <span class='doc-prop'>GUI.Button()</span> uses the "button" style, <span class='doc-prop'>GUI.Toggle()</span> uses the "toggle" style, etc.  You can override the default GUIStyle for a control by specifying it as the last parameter.
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+/* Override the default Control Style with a different style in the UnityGUI default Styles */
+
+
+// JavaScript
+function OnGUI () {
+	// Make a label that uses the "box" GUIStyle.
+	GUI.Label (Rect (0,0,200,100), "Hi - I'm a label looking like a box", "box");
+
+	// Make a button that uses the "toggle" GUIStyle
+	GUI.Button (Rect (10,140,180,20), "This is a button", "toggle");
+}
+
+
+// C#
+using UnityEngine;
+using System.Collections;
+
+public class GUITest : MonoBehaviour {
+
+	void OnGUI () {
+		// Make a label that uses the "box" GUIStyle.
+		GUI.Label (new Rect (0,0,200,100), "Hi - I'm a label looking like a box", "box");
+
+		// Make a button that uses the "toggle" GUIStyle
+		GUI.Button (new Rect (10,140,180,20), "This is a button", "toggle");
+	}
+
+}
+</pre>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/gui-Customization-3.jpg' /><br /><em>The controls created by the code example above</em></div>
+<div class='vspace'></div><h3>Making a public variable GUIStyle</h3>
+<p class='vspace'>When you declare a public GUIStyle variable, all elements of the Style will show up in the <span class='doc-keyword'>Inspector</span>. You can edit all of the different values there.
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+/* Overriding the default Control Style with one you've defined yourself */
+
+
+// JavaScript
+var customButton : GUIStyle;
+
+function OnGUI () {
+	// Make a button. We pass in the GUIStyle defined above as the style to use
+	GUI.Button (Rect (10,10,150,20), "I am a Custom Button", customButton);
+}
+
+
+// C#
+using UnityEngine;
+using System.Collections;
+
+public class GUITest : MonoBehaviour {
+
+	public GUIStyle customButton;
+
+	void OnGUI () {
+		// Make a button. We pass in the GUIStyle defined above as the style to use
+		GUI.Button (new Rect (10,10,150,20), "I am a Custom Button", customButton);
+	}
+
+}
+</pre>
+<div class='vspace'></div><h3>Changing the different style elements</h3>
+<p>When you have declared a GUIStyle, you can modify that style in the Inspector.  There are a great number of States you can define, and apply to any type of Control.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/gui-Customization-4.jpg' /><br /><em>Styles are modified on a per-script, per-GameObject basis</em></div>
+<p class='vspace'>Any Control State must be assigned a <span class='doc-prop'>Background</span> Color before the specified <span class='doc-prop'>Text Color</span> will be applied.
+</p>
+<p class='vspace'>For more information about individual GUIStyles, please read the <a href="../Components/class-GUIStyle.html">GUIStyle Component Reference page</a>.
+</p>
+<div class='vspace'></div><h2>Working with Skins</h2>
+<p>For more complicated GUI systems, it makes sense to keep a collection of styles in one place.  This is what a GUISkin does.  A GUISkin contains multiple different Styles, essentially providing a complete face-lift to all GUI Controls.  
+</p>
+<div class='vspace'></div><h3>Creating a new GUISkin</h3>
+<p>To create a GUISkin, select <span class='doc-menu'>Assets-&gt;Create-&gt;GUI Skin</span> from the menu bar. This will create a GUI Skin in your Project Folder. Select it to see all GUIStyles defined by the Skin in the Inspector.
+</p>
+<div class='vspace'></div><h3>Applying the skin to a GUI</h3>
+<p>To use a skin you've created, assign it to <span class='doc-prop'>GUI.skin</span> in your <span class='doc-prop'>OnGUI()</span> function.
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+/* Make a property containing a reference to the skin you want to use */
+
+
+// JavaScript
+var mySkin : GUISkin;
+
+function OnGUI () {
+	// Assign the skin to be the one currently used.
+	GUI.skin = mySkin;
+
+	// Make a button. This will get the default "button" style from the skin assigned to mySkin.
+	GUI.Button (Rect (10,10,150,20), "Skinned Button");
+}
+
+
+// C#
+using UnityEngine;
+using System.Collections;
+
+public class GUITest : MonoBehaviour {
+
+	public GUISkin mySkin;
+
+	void OnGUI () {
+		// Assign the skin to be the one currently used.
+		GUI.skin = mySkin;
+
+		// Make a button. This will get the default "button" style from the skin assigned to mySkin.
+		GUI.Button (new Rect (10,10,150,20), "Skinned Button");
+	}
+
+}
+</pre>
+<p class='vspace'>You can switch skins as much as you like throughout a single <span class='doc-prop'>OnGUI()</span> call.
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+/* Example of switching skins in the same OnGUI() call */
+
+
+// JavaScript
+var mySkin : GUISkin;
+
+var toggle = true;
+
+function OnGUI () {
+	// Assign the skin to be the one currently used.
+	GUI.skin = mySkin;
+
+	// Make a toggle. This will get the "button" style from the skin assigned to mySkin.
+	toggle = GUI.Toggle (Rect (10,10,150,20), toggle, "Skinned Button", "button");
+
+	// Assign the currently skin to be Unity's default.
+	GUI.skin = null;
+
+	// Make a button. This will get the default "button" style from the built-in skin.
+	GUI.Button (Rect (10,35,150,20), "Built-in Button");
+}
+
+
+// C#
+using UnityEngine;
+using System.Collections;
+
+public class GUITest : MonoBehaviour {
+
+	public GUISkin mySkin;
+	private bool toggle = true;
+
+	void OnGUI () {
+		// Assign the skin to be the one currently used.
+		GUI.skin = mySkin;
+
+		// Make a toggle. This will get the "button" style from the skin assigned to mySkin.
+		toggle = GUI.Toggle (new Rect (10,10,150,20), toggle, "Skinned Button", "button");
+
+		// Assign the currently skin to be Unity's default.
+		GUI.skin = null;
+
+		// Make a button. This will get the default "button" style from the built-in skin.
+		GUI.Button (new Rect (10,35,150,20), "Built-in Button");
+	}
+
+}
+</pre>
+<p><small>Page last updated: 2012-01-17</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/gui-Controls.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/gui-Layout.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

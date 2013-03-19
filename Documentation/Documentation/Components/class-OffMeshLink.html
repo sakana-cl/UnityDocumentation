@@ -1,0 +1,131 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Off-mesh links (Pro only) </title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Components"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Components"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Components"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Components/index.html">Reference Manual</a><span>&gt;</span><a href="../Components/Components.html">Components</a><span>&gt;</span><a href="../Components/comp-AIGroup.html">Pathfinding</a><span>&gt;</span><a href="../Components/class-OffMeshLink.html">Off-mesh links (Pro only) </a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><a href='../ScriptReference/OffMeshLink.html' title='Go to OffMeshLink Scripting Doc'>Switch to Scripting</a><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/class-NavMeshAgent.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/class-NavMeshObstacle.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Off-mesh links (Pro only) </h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Note that this section is primarily about the <em>manual</em> off-mesh links, namely those that are set up by the user via the <span class='doc-prop'>OffMeshLink</span> component. For automatically generated off-mesh links, see the the <a href="../Manual/NavmeshandPathfinding.html">Navmesh intro</a>
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/class-OffMeshLink-0.jpg' /></div>
+<p class='vspace'>It is possible that the <em>navmesh static</em> geometry in the scene is disconnected, thus making it impossible for agents to get from one part of the world to the other.
+</p>
+<p class='vspace'>To remedy this, Unity has a system of <span class='doc-keyword'>Off-mesh links</span>
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/class-OffMeshLink-1.jpg' /></div>
+<p><em>The OffMeshLink component</em>
+</p>
+<p class='vspace'>An off-mesh link is a component that can be placed on any object, and it has the following properties
+</p>
+<div class='vspace'></div><table width='100%'><tr class='tableheader'><td  class='prop'></td><td class='function'></td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Start</span></td><td >The start object of the off-mesh link.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>End</span></td><td >The end object of the off-mesh link.</td></tr>
+<tr ><td ><span class='doc-prop'>Cost Override</span></td><td >If value is positive, use it when calculating path cost on processing a path request. Otherwise, we use the default cost (cost of the layer to which this game object belongs). If the Cost Override is set to the value 3.0, moving over the off-mesh link will be three times more expensive than moving the same distance on a default NavMesh area. <em>This property is runtime-editable and does not require a re-bake</em></td></tr>
+<tr ><td ><span class='doc-prop'>Bi Directional</span></td><td >If this is on, the link can be traversed both ways, if it's off, the link can only be traversed in the direction from Start to End.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Activated</span></td><td >Specifies if this link is actually used by the pathfinder. When this property is false, the off-mesh link will be disregarded. <em>This property is runtime-editable, and does not require a re-bake.</em></td></tr>
+</table>
+<div class='vspace'></div><h2>Special notes on OffMeshLink properties</h2>
+<p>The "Activated" and "Cost Override" properties can be changed at runtime and
+have immediate effect. All other properties require a Navmesh re-bake before they effect. 
+</p>
+<p class='vspace'>If the start or end transforms are unassigned when baking, or if the position of either the start or end transforms is too far away from the NavMesh to find valid positions, the off-mesh links will not be generated. In this case, an error is displayed in the Console window.
+</p>
+<p class='vspace'>(back to <a href="../Manual/NavmeshandPathfinding.html">Navigation and Pathfinding</a>)
+</p>
+<p><small>Page last updated: 2012-01-27</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Components/class-NavMeshAgent.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/class-NavMeshObstacle.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->
