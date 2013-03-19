@@ -1,0 +1,160 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Example: Supplying Data from Flash to Unity</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/flash-gettingstarted.html">Getting Started with Flash Development</a><span>&gt;</span><a href="../Manual/flashexamples-supplyingdata.html">Example: Supplying Data from Flash to Unity</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flash-adobelicense.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flashexamples-callingflashfunctions.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Example: Supplying Data from Flash to Unity</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>If you wish to supply data from Flash to Unity, it must be one of the supported types. You can also create classes to represent the data (by providing a matching C# or JavaScript implementation).
+</p>
+<p class='vspace'>First, create an AS3 implementation of your object and include the class in your project (in an folder called ActionScript):
+</p>
+<div class='vspace'></div><pre class='codelisting'>public class ExampleObject
+{
+    public var anInt : int;
+    public var someString : String;
+    public var aBool : Boolean;
+}</pre>
+<p class='vspace'>Now create a C# or JavaScript object which matches the AS3 implementation.
+</p>
+<p class='vspace'>The <a class='urllink' href='http://unity3d.com/support/documentation/ScriptReference/NotRenamedAttribute.html' rel='nofollow'>NotRenamed</a> attribute used below prevents name mangling of constructors, methods, fields and properties. 
+</p>
+<p class='vspace'>The <a class='urllink' href='http://unity3d.com/support/documentation/ScriptReference/NotConvertedAttribute.html' rel='nofollow'>NotConverted</a> attribute instructs the build pipeline not to convert a type or member to the target platform. Normally when you build to Flash, each of your C#/JavaScript scripts are converted to an ActionScript (<code>.as</code>) script. Adding the [NotConverted] attribute overrides this process, allowing you to provide your own version of the .as script, manually. The dummy C#/JavaScript which you provide allows Unity to know the signature of the class (i.e. which functions it should be allowed to call), and your .as script provides the implementations of those functions. Note that the ActionScript version will only be used when you build to Flash. In editor or when built to other platforms, Unity will use your C#/JavaScript version.
+</p>
+<div class='vspace'></div><h3>C#</h3>
+<pre class='codelisting'>[NotConverted]
+[NotRenamed]
+public class ExampleObject
+{
+    [NotRenamed]
+    public int anInt;
+
+    [NotRenamed]
+    public string someString;
+
+    [NotRenamed]
+    public bool aBool;
+}</pre>
+<div class='vspace'></div><h3>JavaScript</h3>
+<pre class='codelisting'>
+@NotConverted
+@NotRenamed
+class ExampleObject
+{
+    @NotRenamed
+    public var anInt : int;
+
+    @NotRenamed
+    public var someString : String;
+
+    @NotRenamed
+    public var aBool : boolean;
+}
+</pre>
+<p class='vspace'>Now you need a way in AS3 to retrieve your object, e.g.:
+</p>
+<div class='vspace'></div><pre class='codelisting'>public static function getExampleObject() : ExampleObject
+{
+    return new ExampleObject();
+}</pre>
+<p class='vspace'>Then you can then retrieve the object and access its data:
+</p>
+<div class='vspace'></div><pre class='codelisting'>ExampleObject exampleObj = UnityEngine.Flash.ActionScript.Expression&lt;ExampleObject&gt;("MyStaticASClass.getExampleObject()");
+Debug.Log(exampleObj.someString);</pre>
+<p><small>Page last updated: 2012-10-24</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flash-adobelicense.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flashexamples-callingflashfunctions.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

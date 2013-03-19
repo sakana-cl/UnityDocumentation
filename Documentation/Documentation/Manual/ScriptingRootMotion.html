@@ -1,0 +1,150 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Tutorial: Scripting Root Motion for "in-place" humanoid animations</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/CreatingGameplay.html">Creating Gameplay</a><span>&gt;</span><a href="../Manual/MecanimAnimationSystem.html">Mecanim Animation System</a><span>&gt;</span><a href="../Manual/Bringingcharacterstolife.html">Bringing Characters to Life</a><span>&gt;</span><a href="../Manual/Advancedtopics.html">Mecanim Advanced topics</a><span>&gt;</span><a href="../Manual/RootMotion.html">Root Motion - how it works</a><span>&gt;</span><a href="../Manual/ScriptingRootMotion.html">Tutorial: Scripting Root Motion for "in-place" humanoid animations</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/RootMotion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/Animations40.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Tutorial: Scripting Root Motion for "in-place" humanoid animations</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Sometimes your animation comes as "in-place", which means if you put it in a scene, it will not move the character that it's on. In other words, the animation does not contain "root motion". For this, we can modify root motion from script. To put everything together follow the steps below (note there are many variations of achieving the same result, this is just one recipe). 
+</p>
+<div class='vspace'></div><ul><li>Open the inspector for the FBX file that contains the in-place animation, and go to the <span class='doc-inspector'>Animation</span> tab
+</li><li>Make sure the <span class='doc-menu'>Muscle Definition</span> is set to the Avatar you intend to control (let's say this avatar is called <em>Dude</em>, and he has already been added to the <span class='doc-inspector'>Hierarchy View</span>). 
+</li><li>Select the animation clip from the available clips
+</li><li>Make sure <span class='doc-prop'>Loop Pose</span> is properly aligned (the light next to it is green), and that the checkbox for <span class='doc-prop'>Loop Pose</span> is clicked
+</li></ul><div class='vspace'></div><div><img class='figure' src='../Images/manual/ScriptingRootMotion-0.jpg' /></div>
+<div class='vspace'></div><ul><li>Preview the animation in the animation viewer to make sure the beginning and the end of the animation align smoothly, and that the character is moving "in-place"
+</li><li>On the animation clip <a href="../Manual/AnimatorCurves.html">create a curve</a> that will control the speed of the character (you can add a curve from the <span class='doc-inspector'>Animation Import inspector</span> <span class='doc-menu'>Curves-&gt; +</span>)
+</li><li>Name that curve something meaningful, like "Runspeed"
+</li></ul><div class='vspace'></div><div><img class='figure' src='../Images/manual/ScriptingRootMotion-1.jpg' /></div>
+<div class='vspace'></div><ul><li>Create a new <span class='doc-prop'>Animator Controller</span>, (let's call it <span class='doc-prop'>RootMotionController</span>)
+</li><li>Drop the desired animation clip into it, this should create a state with the name of the animation (say <span class='doc-prop'>Run</span>)
+</li><li>Add a parameter to the Controller with the same name as the curve (in this case, "Runspeed")
+</li></ul><div class='vspace'></div><div><img class='figure' src='../Images/manual/ScriptingRootMotion-2.jpg' /></div>
+<div class='vspace'></div><ul><li>Select the character <span class='doc-prop'>Dude</span> in the <span class='doc-inspector'>Hierarchy</span>, whose inspector should already have an <span class='doc-prop'>Animator</span> component. 
+</li><li>Drag <span class='doc-prop'>RootMotionController</span> onto the <span class='doc-prop'>Controller</span> property of the Animator
+</li><li>If you press play now, you should see the "Dude" running in place
+<div class='vspace'></div></li><li>Finally, to control the motion, we will need to create a script (RootMotionScript.cs), that implements the <code><a class='urllink' href='../ScriptReference/MonoBehavior.OnAnimatorMove' rel='nofollow'>OnAnimatorMove</a></code> callback. 
+</li></ul><pre class='codelisting'>
+using UnityEngine;
+using System.Collections;
+
+[RequireComponent(typeof(Animator))]
+
+public class RootMotionScript : MonoBehaviour {
+
+	void OnAnimatorMove()
+	{
+            Animator animator = GetComponent&lt;Animator&gt;(); 
+
+            if (animator)
+            {
+	       Vector3 newPosition = transform.position;
+               newPosition.z += animator.GetFloat("Runspeed") * Time.deltaTime;                                 
+	       transform.position = newPosition;
+            }
+	}
+}
+</pre>
+<ul><li>Attach RootMotionScript.cs to "Dude"
+</li><li>Note that the Animator component detects there is a script with <code><a class='urllink' href='../ScriptReference/MonoBehavior.OnAnimatorMove' rel='nofollow'>OnAnimatorMove</a></code> and <span class='doc-prop'>Apply Root Motion</span> property shows up as <em>Handled by Script</em>
+</li></ul><div><img class='figure' src='../Images/manual/ScriptingRootMotion-3.jpg' /></div>
+<ul><li>Now you should see that the character is moving at the speed specified. 
+</li></ul><p class='vspace'>(back to <a href="../Manual/MecanimAnimationSystem.html">Mecanim introduction</a>)
+</p>
+<p><small>Page last updated: 2012-11-07</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/RootMotion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/Animations40.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

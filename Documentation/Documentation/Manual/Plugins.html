@@ -1,0 +1,171 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Plugins (Pro/Mobile-Only Feature)</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/Plugins.html">Plugins (Pro/Mobile-Only Feature)</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AccessingHiddenFolders.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/PluginsForDesktop.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Plugins (Pro/Mobile-Only Feature)</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Unity has extensive support for <span class='doc-keyword'>Plugins</span>, which are libraries of native code written in C, C++, Objective-C, etc.  Plugins allow your game code (written in Javascript, C# or Boo) to call functions from these libraries.  This feature allows Unity to integrate with middleware libraries or existing C/C++ game code.
+</p>
+<p class='vspace'><b>Note:</b> On the desktop platforms, plugins are a pro-only feature. For security reasons, plugins are not usable with webplayers.
+</p>
+<p class='vspace'>In order to use a plugin you need to do two things:-
+</p>
+<div class='vspace'></div><ul><li>Write functions in a C-based language and compile them into a library.
+</li><li>Create a C# script which calls functions in the library.
+</li></ul><p class='vspace'>The plugin should provide a simple C interface which the C# script then exposes to other user scripts. It is also possible for Unity to call functions exported by the plugin when certain low-level rendering events happen (for example, when a graphics device is created), see the <a href="../Manual/NativePluginInterface.html">Native Plugin Interface</a> page for details.
+</p>
+<p class='vspace'>Here is a very simple example:
+</p>
+<div class='vspace'></div><h3>C File of a Minimal Plugin:</h3>
+<p><code class='escaped'>float FooPluginFunction () { return 5.0F; } </code>
+</p>
+<div class='vspace'></div><h3>C# Script that Uses the Plugin:</h3>
+<div class='vspace'></div><pre class='codelisting'>using UnityEngine;
+using System.Runtime.InteropServices;
+
+class SomeScript : MonoBehaviour {
+
+   #if UNITY_IPHONE || UNITY_XBOX360
+
+   // On iOS and Xbox 360 plugins are statically linked into
+   // the executable, so we have to use __Internal as the
+   // library name.
+   [DllImport ("__Internal")]
+
+   #else
+
+   // Other platforms load plugins dynamically, so pass the name
+   // of the plugin's dynamic library.
+   [DllImport ("PluginName")]
+
+   #endif
+
+   private static extern float FooPluginFunction ();
+
+   void Awake () {
+      // Calls the FooPluginFunction inside the plugin
+      // And prints 5 to the console
+      print (FooPluginFunction ());
+   }
+} </pre>
+<p class='vspace'>Note that when using Javascript you will need to use the following syntax, where DLLName is the name of the plugin you have written, or "__Internal" if you are writing statically linked native code:
+</p>
+<div class='vspace'></div><pre class='codelisting'>@DllImport (DLLName)
+static private function FooPluginFunction () : float {};</pre>
+<div class='vspace'></div><h2>Creating a Plugin</h2>
+<p>In general, plugins are built with native code compilers on the target platform. Since plugin functions use a C-based call interface, you must avoid name mangling issues when using C++ or Objective-C.
+</p>
+<p class='vspace'>For further details and examples, see the following pages:-
+</p>
+<div class='vspace'></div><div class='specific-desktop' style='display: block;' id='specific-desktop' > 
+<ul><li><a href="../Manual/PluginsForDesktop.html">Building Plugins for Desktop Platforms</a>
+</li></ul></div>
+
+<div class='specific-android' style='display: block;' id='specific-android' > 
+<ul><li><a href="../Manual/PluginsForAndroid.html">Building Plugins for Android</a>
+</li></ul></div>
+
+
+<div class='vspace'></div><h2>Further Information</h2>
+<ul><li><a href="../Manual/NativePluginInterface.html">Native Plugin Interface</a> - this is needed if you want to do rendering in your plugin.
+</li><li><a class='urllink' href='http://www.mono-project.com/Interop_with_Native_Libraries' rel='nofollow'>Mono Interop with native libraries</a>.
+</li><li><a class='urllink' href='http://msdn2.microsoft.com/en-us/library/fzhhdwae.aspx' rel='nofollow'>P-invoke documentation on MSDN</a>.
+</li></ul>
+<p><small>Page last updated: 2012-02-02</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AccessingHiddenFolders.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/PluginsForDesktop.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

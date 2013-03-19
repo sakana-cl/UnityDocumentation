@@ -1,0 +1,154 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Scene View Navigation</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/BuildingScenes.html">Building Scenes</a><span>&gt;</span><a href="../Manual/UsingTheSceneView.html">Using the Scene View</a><span>&gt;</span><a href="../Manual/SceneViewNavigation.html">Scene View Navigation</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/UsingTheSceneView.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/PositioningGameObjects.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Scene View Navigation</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>The Scene View has a set of navigation controls to help you move around quickly and efficiently.
+</p>
+<div class='vspace'></div><h2>Arrow Movement</h2>
+<p>You can use the <span class='doc-menu'>Arrow Keys</span> to move around the scene as though "walking" through it. The up and down arrows move the camera forward and backward in the direction it is facing. The left and right arrows pan the view sideways. Hold down the <span class='doc-menu'>Shift</span> key with an arrow to move faster.
+</p>
+<div class='vspace'></div><h2>Focusing</h2>
+<p>If you select a GameObject in the hierarchy, then move the mouse over the scene view and press the <span class='doc-menu'>F</span> key, the view will move so as to center on the object. This feature is referred to as <span class='doc-prop'>frame selection</span>.
+</p>
+<div class='vspace'></div><h2>Move, Orbit and Zoom</h2>
+<p>Moving, orbiting and zooming are key operations in Scene View navigation, so Unity provides several alternative ways to perform them for maximum convenience.
+</p>
+<div class='vspace'></div><h3>Using the Hand Tool</h3>
+<p>When the hand tool is selected (shortcut: <span class='doc-menu'>Q</span>), the following mouse controls are available:
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SceneViewNavigation-0.jpg' /> <span class='doc-keyword'>Move:</span> Click-drag to drag the camera around. <br /><img class='figure' src='../Images/manual/SceneViewNavigation-1.jpg' /> <span class='doc-keyword'>Orbit:</span> Hold <span class='doc-menu'>Alt</span> and click-drag to orbit the camera around the current pivot point. <br /><img class='figure' src='../Images/manual/SceneViewNavigation-2.jpg' /> <span class='doc-keyword'>Zoom:</span> Hold <span class='doc-menu'>Control</span> (<span class='doc-menu'>Command</span> on Mac) and click-drag to zoom the camera.</div>
+<p class='vspace'>Holding down <span class='doc-menu'>Shift</span> will increase the rate of movement and zooming.
+</p>
+<div class='vspace'></div><h3>Shortcuts Without Using the Hand Tool</h3>
+<p>For extra efficiency, all of these controls can also be used regardless of which transform tool is selected.
+The most convenient controls depend on which mouse or track-pad you are using:
+</p>
+<div class='vspace'></div><table width='100%'><tr ><th  align='left'>Action</th><th  align='left'>3-button mouse</th><th  align='left'>2-button mouse or track-pad</th><th  align='left'>Mac with only one mouse button or track-pad</th></tr>
+<tr ><td  align='left'><span class='doc-keyword'>Move</span></td><td  align='left'>Hold <span class='doc-menu'>Alt</span> and middle click-drag.</td><td  align='left'>Hold <span class='doc-menu'>Alt-Control</span> and click-drag.</td><td  align='left'>Hold <span class='doc-menu'>Alt-Command</span> and click-drag.</td></tr>
+<tr ><td  align='left'><span class='doc-keyword'>Orbit</span></td><td  align='left'>Hold <span class='doc-menu'>Alt</span> and click-drag.</td><td  align='left'>Hold <span class='doc-menu'>Alt</span> and click-drag.</td><td  align='left'>Hold <span class='doc-menu'>Alt</span> and click-drag.</td></tr>
+<tr ><td  align='left'><span class='doc-keyword'>Zoom</span></td><td  align='left'>Hold <span class='doc-menu'>Alt</span> and right click-drag or use scroll-wheel.</td><td  align='left'>Hold <span class='doc-menu'>Alt</span> and right click-drag.</td><td  align='left'>Hold <span class='doc-menu'>Alt-Control</span> and click-drag or use two-finger swipe.</td></tr>
+</table>
+<div class='vspace'></div><h2>Flythrough Mode </h2>
+<p>The <span class='doc-keyword'>Flythrough</span> mode lets you navigate the Scene View by flying around in first person similar to how you would navigate in many games.
+</p>
+<div class='vspace'></div><ul><li>Click and hold the right mouse button.
+</li><li>Now you can move the view around using the mouse and use the <span class='doc-menu'>WASD</span> keys to move left/right forward/backward and the <span class='doc-menu'>Q</span> and <span class='doc-menu'>E</span> keys to move up and down.
+</li><li>Holding down <span class='doc-menu'>Shift</span> will make you move faster.
+</li></ul><p class='vspace'>Flythrough mode is designed for <span class='doc-keyword'>Perspective Mode</span>. In <span class='doc-keyword'>Isometric Mode</span>, holding down the right mouse button and moving the mouse will orbit the camera instead.
+</p>
+<div class='vspace'></div><h2>Scene Gizmo</h2>
+<p>In the upper-right corner of the Scene View is the <span class='doc-keyword'>Scene Gizmo</span>.  This displays the Scene View Camera's current orientation, and allows you to quickly modify the viewing angle.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SceneViewNavigation-3.jpg' /></div>
+<p class='vspace'>You can click on any of the arms to snap the Scene View Camera to that direction.  Click the middle of the Scene Gizmo, or the text below it, to toggle between <span class='doc-keyword'>Isometric Mode</span> and <span class='doc-keyword'>Perspective Mode</span>.  You can also always shift-click the middle of the Scene Gizmo to get a "nice" perspective view with an angle that is looking at the scene from the side and slightly from above.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SceneViewNavigation-4.jpg' /><br /><em>Perspective mode.</em></div>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/SceneViewNavigation-5.jpg' /><br /><em>Isometric mode. Objects do not get smaller with distance here!</em></div>
+<div class='vspace'></div><h3>Mac Trackpad Gestures</h3>
+<p>On a Mac with a trackpad, you can drag with two fingers to zoom the view.
+</p>
+<p class='vspace'>You can also use three fingers to simulate the effect of clicking the arms of the <span class='doc-keyword'>Scene Gizmo</span>: drag up, left, right or down to snap the Scene View Camera to the corresponding direction. In OS X 10.7 "Lion" you may have to change your trackpad settings in order to enable this feature:
+</p><ul><li>Open System Preferences and then Trackpad (or type trackpad into Spotlight).
+</li><li>Click into the "More Gestures" option.
+</li><li>Click the first option labelled "Swipe between pages" and then either set it to "Swipe left or right with three fingers" or "Swipe with two or three fingers".
+</li></ul>
+<p><small>Page last updated: 2012-11-16</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/UsingTheSceneView.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/PositioningGameObjects.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

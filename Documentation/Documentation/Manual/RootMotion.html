@@ -1,0 +1,150 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Root Motion - how it works</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/CreatingGameplay.html">Creating Gameplay</a><span>&gt;</span><a href="../Manual/MecanimAnimationSystem.html">Mecanim Animation System</a><span>&gt;</span><a href="../Manual/Bringingcharacterstolife.html">Bringing Characters to Life</a><span>&gt;</span><a href="../Manual/Advancedtopics.html">Mecanim Advanced topics</a><span>&gt;</span><a href="../Manual/RootMotion.html">Root Motion - how it works</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/TargetMatching.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/ScriptingRootMotion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Root Motion - how it works</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<h2>Body Transform</h2>
+<p>The body transform must be set to be the same for all humanoid characters (from a retargeting standpoint). The body mass center should be used as the body position as this will nearly follow a straight line in most circumstances. The body orientation is an average of the lower and upper body orientation. Do not use the hips to store the world-space position and orientation of the animation as this can lead to unpredictable results.  The body orientation is at identity for the Avatar T-Pose.
+</p>
+<p class='vspace'>The body position and orientation are stored in the <span class='doc-keyword'>Animation Clip</span> (using the <a href="../Manual/MuscleDefinitions.html">Muscle definitions</a> set up in the Avatar). They are the only world-space curves stored in the <span class='doc-keyword'>Animation Clip</span>. Everything else: muscle curves and IK goals (Hands and Feet) are stored relative to the body transform. 
+</p>
+<div class='vspace'></div><h2>Root Transform</h2>
+<p>The Root Transform is a projection on the Y plane of the Body Transform and is computed at runtime. At every frame, a change in the Root Transform is computed. This change in transform is then applied to the Game Object to make it move.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/RootMotion-0.jpg' /></div>
+<div class='indent'><em>The circle below the character represents the root transform</em>
+</div><div class='vspace'></div><h2>Animation Clip Inspector</h2>
+<p>The Animation Clip Editor settings (<span class='doc-keyword'>Root Transform Rotation</span>, <span class='doc-keyword'>Root Transform Position (Y)</span> and <span class='doc-keyword'>Root Transform Position (XZ)</span>) let you control the Root Transform projection from the Body Transform. Depending on these settings some parts of the Body Transform may be transferred Root Transform. For example you can decide if you want the motion Y position to be part of the Root Motion (trajectory) or part of the pose (body transform), which is known as <span class='doc-inspector'>Baked into Pose</span>.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/RootMotion-1.jpg' /></div>
+<div class='vspace'></div><h2>Root Transform Rotation</h2>
+<p><span class='doc-inspector'>Bake into Pose:</span> The orientation will stay on the body transform (or Pose). The Root Orientation will be constant and delta Orientation will be identity. This means the the Game Object will not be rotated at all by that <span class='doc-keyword'>AnimationClip</span>.
+</p>
+<p class='vspace'>Only AnimationClips that have similar start and stop Root Orientation should use this option. You will have a Green Light in the UI telling you that an <span class='doc-keyword'>AnimationClip</span> is a good candidate. A suitable candidate would be a straight walk or a run.
+</p>
+<p class='vspace'><span class='doc-inspector'>Based Upon</span>: This let you set the orientation of the clip. Using <span class='doc-menu'>Body Orientation</span>, the clip will be oriented to follow the forward vector of body. This default setting works well for most Motion Capture (Mocap) data like walks, runs, and jumps, but it will fail with motion like strafing where the motion is perpendicular to the body's forward vector. In those cases you can manually adjust the orientation using the <span class='doc-menu'>Offset</span> setting. Finally you have <span class='doc-menu'>Original</span> that will automatically add the authored offset found in the imported clip. It is usually used with Keyframed data to respect orientation that was set by the artist.
+</p>
+<p class='vspace'><span class='doc-inspector'>Offset</span>:  used to enter the offset when that option is chosen for <span class='doc-inspector'>Based Upon</span>.
+</p>
+<div class='vspace'></div><h2>Root Transform Position (Y)</h2>
+<p>This uses the same concepts described in Root Transform Rotation.
+</p>
+<p class='vspace'><span class='doc-inspector'>Bake Into Pose</span>: The Y component of the motion will stay on the Body Transform (Pose). The Y component of the Root Transform will be constant and Delta Root Position Y will be 0. This means that this clip won’t change the Game Object Height. Again you have a Green Light telling you that a clip is a good candidate for baking Y motion into pose.
+</p>
+<p class='vspace'>Most of the <span class='doc-keyword'>AnimationClips</span> will enable this setting. Only clips that will change the <span class='doc-keyword'>GameObject</span> height should have this turned off, like jump up or down.
+</p>
+<div class='vspace'></div><div class='property-Note'>Note: the <code>Animator.gravityWeight</code> is driven by Bake Into Pose position Y. When enabled, <code>gravityWeight = 1</code>, when <code>disable = 0</code>. <span class='doc-keyword'>gravityWeight</span> is blended for clips when transitioning between states.</div>
+<p class='vspace'><span class='doc-inspector'>Based Upon:</span> In a similar way to <span class='doc-keyword'>Root Transform Rotation</span> you can choose from <span class='doc-menu'>Original</span> or <span class='doc-menu'>Mass Center (Body)</span>. There is also a <span class='doc-menu'>Feet</span> option that is very convenient for <span class='doc-keyword'>AnimationClips</span> that change height (<span class='doc-inspector'>Bake Into Pose</span> disabled). When using <span class='doc-menu'>Feet</span> the Root Transform Position Y will match the lowest foot Y for all frames. Thus the blending point always remains around the feet which prevents floating problem when blending or transitioning.
+</p>
+<p class='vspace'><span class='doc-inspector'>Offset:</span> In a similar way to <span class='doc-keyword'>Root Transform Rotation</span>, you can manually adjust the <span class='doc-keyword'>AnimationClip</span> height using the <span class='doc-keyword'>Offset</span> setting.
+</p>
+<div class='vspace'></div><h2>Root Transform Position (XZ)</h2>
+<p>Again, this uses same concepts described in <span class='doc-keyword'>Root Transform Rotation</span> and <span class='doc-keyword'>Root Motion Position (Y).</span>
+</p>
+<p class='vspace'><span class='doc-inspector'>Bake Into Pose</span> will usually be used for “Idles” where you want to force the delta Position (XZ) to be 0. It will stop the accumulation of small deltas drifting after many evaluations. It can also be used for a Keyframed clip with <span class='doc-inspector'>Based Upon</span> <span class='doc-menu'>Original</span> to force an authored position that was set by the artist.
+</p>
+<div class='vspace'></div><h2>Loop Pose</h2>
+<p>Loop Pose (like Pose Blending in Blend Trees or Transitions) happens in the referential of Root Transform. Once the Root Transform is computed, the Pose becomes relative to it. The relative Pose difference between Start and Stop frame is computed and distributed over the range of the clip from 0-100%.
+</p>
+<div class='vspace'></div><h2>Generic Root Motion and Loop Pose.</h2>
+<p>This works in essentially the same as Humanoid Root Motion, but instead of using the Body Transform to compute/project a Root Transform, the transform set in <span class='doc-keyword'>Root Node</span> is used. The Pose (all the bones which transform below the Root Motion bone) is made relative to the Root Transform.
+</p>
+<p><small>Page last updated: 2012-11-09</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/TargetMatching.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/ScriptingRootMotion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

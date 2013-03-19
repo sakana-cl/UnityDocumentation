@@ -1,0 +1,133 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Legacy animation system</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/CreatingGameplay.html">Creating Gameplay</a><span>&gt;</span><a href="../Manual/Animations40.html">Legacy animation system</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/ScriptingRootMotion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/AnimationEditorGuide40.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Legacy animation system</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Prior to the introduction of Mecanim, Unity used its own animation system and for backward compatiblity, this system is still available. The main reason for using legacy animation is to continue working with an old project without the work of updating it for Mecanim. However, it is not recommended that you use the legacy system for new projects.
+</p>
+<div class='vspace'></div><h2>Working with legacy animations</h2>
+<p>To import a legacy animation, you first need to mark it as such in the Mesh importer's Rig tab:-
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/Animations40-0.jpg' /></div>
+<p class='vspace'>The Animation tab on the importer will then look something like this:
+</p>
+<div class='vspace'></div><table width='100%'><tr ><td  align='left'><span class='doc-prop'>Import Animation</span></td><td  align='left'>Selects whether or not animation should be imported at all.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Wrap Mode</span></td><td  align='left'>The method of handling what happens when the animation comes to an end:-</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Default</span></span></td><td  align='left'>Uses whatever setting is specified in the animation clip.</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Once</span></span></td><td  align='left'>Play the clip to the end and then finish.</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Loop</span></span></td><td  align='left'>Play to the end, then immediately restart from the beginning.</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>PingPong</span></span></td><td  align='left'>Play to the end, then play from the end in reverse, and so on.</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Forever</span></span></td><td  align='left'>Play to the end, then loop the last frame indefinitely.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Anim Compression</span></td><td  align='left'>Settings to attempt to remove redundant information from clips.</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Off</span></span></td><td  align='left'>No compression.</td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Keyframe reduction</span></span></td><td >Attempt to remove keyframes where differences are too small to be seen</td></tr>
+<tr ><td ><span  style='padding-left: 1.5em;'><span class='doc-prop'>Keyframe reduction and compression</span></span></td><td  align='left'>As for <em>Keyframe reduction</em>, but clip data is also compressed.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Rotation error</span></td><td  align='left'>Minimum difference in rotation values (in degrees), below which two keyframes are counted as equal.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Position error</span></td><td  align='left'>Minimum difference in position (as a percentage of coordinate values), below which two keyframes are counted as equal.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Rotation error</span></td><td  align='left'>Minimum difference in scale (as a percentage of coordinate values), below which two keyframes are counted as equal.</td></tr>
+</table>
+<p class='vspace'>Below the properties in the inspector is a list of animation clips. When you click on a clip in the list, an additional panel will appear below it in the inspector:-
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/Animations40-1.jpg' /></div>
+<p class='vspace'>The Start and End values can be changed to allow you to use just a part of the original clip (see the page on <a href="../Manual/Splittinganimations.html">|splitting animations</a> for further details). The <em>Add Loop Frame</em> option adds an extra keyframe to the end of the animation that is exactly the same as the keyframe at the start. This enables the animation to loop smoothly even when the last frame doesn't exactly match up with the first. The <em>Wrap Mode</em> setting is identical to the master setting in the main animation properties but applies only to that specific clip.
+</p>
+<div class='vspace'></div>
+<p><small>Page last updated: 2013-01-02</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/ScriptingRootMotion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/AnimationEditorGuide40.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

@@ -1,0 +1,157 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Modifying Source Assets Through Scripting</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/ModifyingSourceAssetsThroughScripting.html">Modifying Source Assets Through Scripting</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/LoadingResourcesatRuntime.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/GeneratingMeshGeometryProcedurally.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Modifying Source Assets Through Scripting</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<h2>Automatic Instantiation</h2>
+<p>Usually when you want to make a modification to any sort of game asset, you want it to happen at runtime and you want it to be temporary.  For example, if your character picks up an invincibility power-up, you might want to change the <span class='doc-keyword'>shader</span> of the <span class='doc-keyword'>material</span> for the player character to visually demonstrate the invincible state.  This action involves modifying the material that's being used.  This modification is not permanent because we don't want the material to have a different shader when we exit <span class='doc-keyword'>Play Mode</span>.
+</p>
+<p class='vspace'>However, it is possible in Unity to write scripts that will permanently modify a source asset.  Let's use the above material example as a starting point.
+</p>
+<p class='vspace'>To temporarily change the material's shader, we change the <span class='doc-prop'>shader</span> property of the <span class='doc-prop'>material</span> component.
+</p>
+<div class='vspace'></div><pre>	private var invincibleShader = Shader.Find ("Specular");
+
+	function StartInvincibility {
+		<a class='urllink' href='../ScriptReference/Renderer.html' rel='nofollow'>renderer</a>.<a class='urllink' href='../ScriptReference/Renderer-material.html' rel='nofollow'>material</a>.shader = invincibleShader;
+	}
+</pre><p class='vspace'>When using this script and exiting Play Mode, the state of the <span class='doc-prop'><a class='urllink' href='../ScriptReference/Material.html' rel='nofollow'>material</a></span> will be reset to whatever it was before entering Play Mode initially. This happens because whenever renderer.material is accessed, the material is automatically instantiated and the instance is returned.  This instance is simultaneously and automatically applied to the renderer.  So you can make any changes that your heart desires without fear of permanence.
+</p>
+<div class='vspace'></div><h2>Direct Modification</h2>
+<h3>IMPORTANT NOTE</h3>
+<p>The method presented below will modify actual source asset files used within Unity. These modifications are not undoable. Use them with caution.
+</p>
+<p class='vspace'>Now let's say that we don't want the material to reset when we exit play mode.  For this, you can use <a class='urllink' href='../ScriptReference/Renderer-sharedMaterial.html' rel='nofollow'>renderer.sharedMaterial</a>.  The sharedMaterial property will return the actual asset used by this renderer (and maybe others).
+</p>
+<p class='vspace'>The code below will permanently change the material to use the Specular shader.  It will not reset the material to the state it was in before Play Mode.
+</p>
+<div class='vspace'></div><pre>	private var invincibleShader = Shader.Find ("Specular");
+
+	function StartInvincibility {
+		<a class='urllink' href='../ScriptReference/Renderer.html' rel='nofollow'>renderer</a>.<a class='urllink' href='../ScriptReference/Renderer-sharedMaterial.html' rel='nofollow'>sharedMaterial</a>.shader = invincibleShader;
+	}
+</pre><p class='vspace'>As you can see, making any changes to a sharedMaterial can be both useful and risky.  Any change made to a sharedMaterial will be permanent, and not undoable.
+</p>
+<div class='vspace'></div><h2>Applicable Class Members</h2>
+<p>The same formula described above can be applied to more than just materials.  The full list of assets that follow this convention is as follows:
+</p>
+<div class='vspace'></div><ul><li>Materials: renderer.material and renderer.sharedMaterial
+</li><li>Meshes: meshFilter.mesh and meshFilter.sharedMesh
+</li><li>Physic Materials: collider.material and collider.sharedMaterial
+</li></ul><div class='vspace'></div><h2>Direct Assignment</h2>
+<p>If you declare a public variable of any above class: Material, Mesh, or Physic Material, and make modifications to the asset using that variable instead of using the relevant class member, you will not receive the benefits of automatic instantiation before the modifications are applied.
+</p>
+<div class='vspace'></div><h2>Assets that are not automatically instantiated</h2>
+<a class='desktopRef' id='desktopRef' href="javascript:ShowHideDiv('desktopRef','specific-desktop','Desktop');"> <h1> <img class='figure' src='../Images/PlatformArrowDown.png' /> Desktop </h1> </a>
+<div class='specific-desktop' style='display: block;' id='specific-desktop' > 
+<p>There are two different assets that are never automatically instantiated when modifying them.
+</p>
+<div class='vspace'></div><ul><li><a class='urllink' href='../ScriptReference/Texture2D.html' rel='nofollow'>Texture2D</a>
+</li><li><a class='urllink' href='../ScriptReference/TerrainData.html' rel='nofollow'>TerrainData</a>
+</li></ul><p class='vspace'>Any modifications made to these assets through scripting are always permanent, and never undoable.  So if you're changing your terrain's heightmap through scripting, you'll need to account for instantiating and assigning values on your own.  Same goes for Textures.  If you change the pixels of a texture file, the change is permanent.
+</p></div>
+
+
+<a class='androidRef' id='androidRef' href="javascript:ShowHideDiv('androidRef','specific-android', 'Android');"><h1><img class='figure' src='../Images/PlatformArrowDown.png' /> Android</h1></a>
+<div class='specific-android' style='display: block;' id='specific-android' > 
+<p><a class='urllink' href='../ScriptReference/Texture2D.html' rel='nofollow'>Texture2D</a> assets are never automatically instantiated when modifying them. Any modifications made to these assets through scripting are always permanent, and never undoable.  So if you change the pixels of a texture file, the change is permanent.
+</p></div>
+<p><small>Page last updated: 2011-02-22</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/LoadingResourcesatRuntime.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/GeneratingMeshGeometryProcedurally.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

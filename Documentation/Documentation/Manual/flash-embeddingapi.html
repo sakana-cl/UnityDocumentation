@@ -1,0 +1,220 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Flash: Embedding Unity Generated Flash Content in Larger Flash Projects</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/flash-gettingstarted.html">Getting Started with Flash Development</a><span>&gt;</span><a href="../Manual/flash-embeddingapi.html">Flash: Embedding Unity Generated Flash Content in Larger Flash Projects</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flash-whatssupported.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flash-adobelicense.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Flash: Embedding Unity Generated Flash Content in Larger Flash Projects</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<h2>embeddingapi.swc</h2>
+<p>If you want to embed your Unity generated Flash content within a larger Flash project, you can do so using the <span class='doc-keyword'>embeddingapi.swc</span>. This SWC provides functionality to load and communicate with Unity published Flash content. In the <span class='doc-keyword'>embeddingapi.swc</span> file, you will find two classes and two interfaces. Each of these, and their available functions, are described below.
+</p>
+<p class='vspace'>When your Unity Flash project is built, a copy of the embeddingapi.swc file will be placed in the same location as your built SWF. You can then use this in your Flash projects as per other SWCs. For more details on <a class='urllink' href='http://www.adobe.com/mena_fr/devnet/flash/articles/concept_swc.html' rel='nofollow'>what SWCs are</a> and how to use them, see <a class='urllink' href='http://livedocs.adobe.com/flex/3/html/help.html?content=building_overview_5.html' rel='nofollow'>Adobe's documentation</a>.
+</p>
+<p class='vspace'><br />
+</p><h2>Stage3D Restrictions</h2>
+<p>When embedding your Unity Flash content within another Flash project, it is useful to understand the Flash display model. All Stage3D content is displayed behind the Flash Stage. This means that any Flash display list content added to the Stage will always render in front of your 3D content. For more information on this, please refer to <a class='urllink' href='http://www.adobe.com/devnet/flashplayer/articles/how-stage3d-works.html' rel='nofollow'>Adobe's "How Stage3D Works" page</a>.
+</p>
+<p class='vspace'><br />
+</p><h2>IUnityContent</h2>
+<p><span class='doc-prop'>IUnityContent</span> is implemented by Unity built Flash content. This interface is how you communicate with or modify the Untiy content.
+</p>
+<div class='vspace'></div><h3>Methods:</h3>
+<table width='100%'><tr ><td >getTextureFromNativeId(id : int) : TextureBase;</td><td >Enables retrieving of textures. A full example project using this can be found on the <a class='urllink' href='http://forum.unity3d.com/threads/128057-Flash-Simple-AS3-Bridge-Demo-Loading-textures-from-web.?p=864642&amp;viewfull=1#post864642' rel='nofollow'>forums</a>.</td></tr>
+<tr ><td >sendMessage(objectPath : String, methodName : String, value : Object = null) : Boolean;</td><td >The <span class='doc-prop'>sendMessage</span> function can be used to call a method on an object in the Unity content.</td></tr>
+<tr ><td >setContentHost(contentHost : IUnityContentHost) : void;</td><td >Sets the host (which must implement <span class='doc-prop'>IUnityContentHost</span>) for the Unity content. The host can then listen for when the Unity content has loaded/started.</td></tr>
+<tr ><td >setSize(width : int, height : int) : void;</td><td >Modifies the size of the Unity content</td></tr>
+<tr ><td >setPosition(x:int = 0, y:int = 0):void;</td><td >Enables you to reposition the Unity content within the content host.</td></tr>
+<tr ><td >startFrameLoop() : void;</td><td >Starts the Unity content.</td></tr>
+<tr ><td >stopFrameLoop() : void;</td><td >Stops the unity content.</td></tr>
+<tr ><td >forceUnload():void;</td><td >Unloads the Unity flash content.</td></tr>
+</table>
+<p class='vspace'><br />
+</p><h2>IUnityContentHost</h2>
+<p>This must be implemented by whichever class will host the Unity content.
+</p>
+<div class='vspace'></div><h3>Methods:</h3>
+<table width='100%'><tr ><td >unityInitComplete() : void;</td><td >Called when the Unity engine is done initializing and the first level is loaded.</td></tr>
+<tr ><td >unityInitStart() : void;</td><td >Called when the content is loaded and the initialization of the Unity engine is started.</td></tr>
+</table>
+<p class='vspace'><br />
+</p><h2>UnityContentLoader</h2>
+<p>The <span class='doc-prop'>UnityContentLoader</span> class can be used to load Unity published Flash content and extends the AS3 <a class='urllink' href='http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Loader.html' rel='nofollow'>Loader</a> class. As with standard AS3 Loader instances, you can add event listeners to its <span class='doc-prop'>contentLoaderInfo</span> in order to know the progress of the load and when it is complete.
+</p>
+<div class='vspace'></div><h3>Constructor:</h3>
+<pre class='codelisting'>
+UnityContentLoader(contentURL : String, contentHost : IUnityContentHost = null, params : UnityLoaderParams = null, autoLoad : Boolean = true) : void;
+</pre>
+<p class='vspace'>Creates a <span class='doc-prop'>UnityContentLoader</span> instance which you can attach event listeners to and use to load the unity content.
+</p><ul><li><span class='doc-prop'>contentURL</span>: The URL of the Unity published SWF to load.
+</li><li><span class='doc-prop'>contentHost</span>: The host for the content. This should be your own ActionScript class that implements <span class='doc-prop'>IUnityContentHost</span>.
+</li><li><span class='doc-prop'>params</span>: Supply a <span class='doc-prop'>UnityLoaderParams</span> instance if you wish to override the default load details.
+</li><li><span class='doc-prop'>autoLoad</span>: If set to true, the load will begin as soon as the <span class='doc-prop'>UnityContentLoader</span> has been created (rather than needing to call <span class='doc-prop'>loadUnity()</span> separately). If you wish to track progress of the load using events, this should be set to false. You can then call <span class='doc-prop'>loadUnity()</span> manually once the relevant event listeners have been added.
+</li></ul><div class='vspace'></div><h3>Accessible Properties:</h3>
+<table width='100%'><tr ><td >unityContent : IUnityContent;</td><td >Once the content has finished loading, you can access the Unity content to perform functionality such as <span class='doc-prop'>sendMessage()</span>.</td></tr>
+</table>
+<div class='vspace'></div><h3>Methods:</h3>
+<table width='100%'><tr ><td >loadUnity() : void;</td><td >Instructs the <span class='doc-prop'>UnityContentLoader</span> to load the Unity content from the URL supplied in the constructor.</td></tr>
+<tr ><td >forceUnload() : void;</td><td >Unloads the unity content from the host.</td></tr>
+<tr ><td >unload() : void;</td><td >Overrides the default unload() method of the AS3 <a class='urllink' href='http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Loader.html' rel='nofollow'>Loader</a> class and calls forceUnload.</td></tr>
+<tr ><td >unloadAndStop(gc:Boolean = true):void</td><td >Unloads the unity content then calls the default Loader implementation of unloadAndStop(gc).</td></tr>
+</table><p><br />
+</p>
+<div class='vspace'></div><h2>UnityLoaderParams</h2>
+<h3>Constructor:</h3>
+<p>Parameters can be supplied to the <span class='doc-prop'>UnityContentLoader</span> when created to provide additional loader configuration.
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+function UnityLoaderParams(scaleToStage : Boolean = false, width : int = 640, height : int = 480, usePreloader : Boolean = false, autoInit : Boolean = true, catchGlobalErrors : Boolean = true) : void;
+</pre>
+<div class='vspace'></div><ul><li><span class='doc-prop'>scaleToStage</span>: Whether the Unity content remains at a fixed size or whether it scales as the parent Flash window resizes.
+</li><li><span class='doc-prop'>width</span>: The width of the Unity content.
+</li><li><span class='doc-prop'>height</span>: The height of the Unity content.
+</li><li><span class='doc-prop'>usePreloader</span>: Whether or not to show the Unity preloader. 
+</li><li><span class='doc-prop'>autoInit</span>: This is not currently used.
+</li><li><span class='doc-prop'>catchGlobalErrors</span>: Whether to catch errors and display them in a red box in the top left corner of the swf.
+</li></ul><p class='vspace'><br />
+</p>
+<div class='vspace'></div><h2>Example</h2>
+<p>The following example shows how to load Unity published Flash content into a host SWF. It shows how to supply custom <span class='doc-prop'>UnityLoaderParams</span> and track progress of the file load. Once the Unity content has been added to the host, a function in the Unity content is called using the <span class='doc-prop'>sendMessage</span> function.
+</p>
+<div class='vspace'></div><br /><pre class='codelisting'>
+public class MyLoader extends Sprite implements IUnityContentHost
+{
+  private var unityContentLoader:UnityContentLoader;
+
+  public function MyLoader()
+  {
+      var params:UnityLoaderParams = new UnityLoaderParams(false,720,400,false);
+      unityContentLoader = new UnityContentLoader("UnityContent.swf", this, params, false);
+      unityContentLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onUnityContentLoaderProgress);
+      unityContentLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onUnityContentLoaderComplete);
+      unityContentLoader.loadUnity();
+  }
+
+  private function onUnityContentLoaderProgress(event:ProgressEvent):void
+  {
+      //Respond to load progress
+  }
+
+  private function onUnityContentLoaderComplete(event:Event):void
+  {
+     addChild(unityContentLoader);
+     unityContentLoader.unityContent.setContentHost(this);
+  }
+
+  //unityInitStart has to be implemented by whatever implements IUnityContenthost
+  //This is called when the content is loaded and the initialization of the unity engine is started.
+  public function unityInitStart():void
+  {
+    //Unity engine started	
+  }
+
+  //unityInitComplete has to be implemented by whatever implements IUnityContenthost
+  //This is called when the unity engine is done initializing and the first level is loaded.
+  public function unityInitComplete():void
+  {
+     unityContentLoader.unityContent.sendMessage("Main Camera","SetResponder",{responder:this});
+  }
+
+  ...
+
+}
+
+</pre>
+<p><small>Page last updated: 2012-11-06</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flash-whatssupported.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flash-adobelicense.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

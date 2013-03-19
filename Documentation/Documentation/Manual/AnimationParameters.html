@@ -1,0 +1,162 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Animation Parameters</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/CreatingGameplay.html">Creating Gameplay</a><span>&gt;</span><a href="../Manual/MecanimAnimationSystem.html">Mecanim Animation System</a><span>&gt;</span><a href="../Manual/Bringingcharacterstolife.html">Bringing Characters to Life</a><span>&gt;</span><a href="../Manual/AnimationStateMachines.html">Animation State Machines</a><span>&gt;</span><a href="../Manual/AnimationParameters.html">Animation Parameters</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AnimationTransitions.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/AnimationBlendTrees.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Animation Parameters</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Animation Parameters are variables that are defined within the animation system but can also be accessed and assigned values from scripts. For example, the value of a parameter can be updated by an <a href="../Manual/AnimatorCurves.html">animation curve</a> and then accessed from a script so that, say, the pitch of a sound effect can be varied as if it were a piece of animation. Likewise, a script can set parameter values to be picked up by Mecanim. For example, a script can set a parameter to control a <a href="../Manual/AnimationBlendTrees.html">Blend Tree</a>.
+</p>
+<p class='vspace'>Default parameter values can be set up using the Parameters widget in the bottom left corner of the Animator window. They can be of four basic types: 
+</p>
+<div class='vspace'></div><ul><li><em>Vector</em> - a point in space
+</li><li><em>Int</em> - an integer (whole number)
+</li><li><em>Float</em> - a number with a fractional part
+</li><li><em>Bool</em> - true or false value
+</li></ul><div class='vspace'></div><div><img class='figure' src='../Images/manual/AnimationParameters-0.jpg' /></div>
+<p class='vspace'>Parameters can be assigned values from a script using functions in the Animator class: <a class='urllink' href='../ScriptReference/Animator.SetVector.html' rel='nofollow'>SetVector</a>, <a class='urllink' href='../ScriptReference/Animator.SetFloat.html' rel='nofollow'>SetFloat</a>, <a class='urllink' href='../ScriptReference/Animator.SetInt.html' rel='nofollow'>SetInt</a>, and <a class='urllink' href='../ScriptReference/SetBool.html' rel='nofollow'>SetBool</a>.
+</p>
+<p class='vspace'>Here's an example of a script that modifies parameters based on user input
+</p>
+<div class='vspace'></div><pre class='codelisting'>using UnityEngine;
+using System.Collections;
+
+
+public class AvatarCtrl : MonoBehaviour {
+
+	protected Animator animator;
+
+	public float DirectionDampTime = .25f;
+
+	void Start () 
+	{
+		animator = GetComponent&lt;Animator&gt;();
+	}
+
+	void Update () 
+	{
+		if(animator)
+		{
+			//get the current state
+			AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+			//if we're in "Run" mode, respond to input for jump, and set the Jump parameter accordingly. 
+			if(stateInfo.nameHash == Animator.StringToHash("Base Layer.RunBT"))
+			{
+				if(Input.GetButton("Fire1")) 
+					animator.SetBool("Jump", true );
+			}
+			else
+			{
+				animator.SetBool("Jump", false);				
+			}
+
+			float h = Input.GetAxis("Horizontal");
+			float v = Input.GetAxis("Vertical");
+
+			//set event parameters based on user input
+			animator.SetFloat("Speed", h*h+v*v);
+			animator.SetFloat("Direction", h, DirectionDampTime, Time.deltaTime);
+		}		
+	}   		  
+}
+</pre>
+<p class='vspace'>(back to <a href="../Manual/AnimationStateMachines.html">Animation State Machines</a>)
+</p>
+<p><small>Page last updated: 2012-11-09</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AnimationTransitions.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/AnimationBlendTrees.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

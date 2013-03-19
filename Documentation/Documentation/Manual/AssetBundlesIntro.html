@@ -1,0 +1,130 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - AssetBundles (Pro only)</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/AssetBundlesIntro.html">AssetBundles (Pro only)</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AmountVectorMagnitudeInAnotherDirection.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/abfaq.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>AssetBundles (Pro only)</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>AssetBundles are files which you can export from Unity to contain assets of your choice. These files use a proprietary compressed format and can be loaded on demand by your application. This allows you to stream in content, such as models, textures, audio clips, or even entire scenes separately from the scene in which they will be used. AssetBundles have been designed to simplify downloading content to your application.
+AssetBundles can contain any kind of asset type recognized by Unity, as determined by the filename extension. If you want to include files with custom binary data, they should have the extension ".bytes". Unity will import these files as TextAssets.
+</p>
+<p class='vspace'>When working with AssetBundles, here's the typical workflow:
+</p>
+<p class='vspace'><em>During development</em>, the developer prepares AssetBundles and uploads them to a server.
+</p><div class='indent'><img class='figure' src='../Images/manual/AssetBundlesIntro-0.jpg' />
+</div><pre>                       Building and uploading asset bundles
+</pre><div class='vspace'></div><ol><li><b>Building AssetBundles</b>. Asset bundles are created in the editor from assets in your scene. The Asset Bundle building process is described in more detail in the section for <a href="../Manual/BuildingAssetBundles.html">Building AssetBundles</a>
+<div class='vspace'></div></li><li><b>Uploading AssetBundles to external storage</b>. This step does not include the Unity Editor or any other Unity channels, but we include it for completeness. You can use an <a class='urllink' href='http://en.wikipedia.org/wiki/File_Transfer_Protocol' rel='nofollow'>FTP client</a> to upload your Asset Bundles to the server of your choice. 
+</li></ol><p class='vspace'><em>At runtime</em>, on the user's machine, the application will load AssetBundles on demand and operate individual assets within each AssetBundle as needed. 
+</p><div class='indent'><img class='figure' src='../Images/manual/AssetBundlesIntro-1.jpg' />
+</div><pre>                       Downloading AssetBundles and loading assets from them
+</pre><div class='vspace'></div><ol><li><b>Downloading AssetBundles at runtime from your application</b>. This is done from script within a Unity scene, and Asset Bundles are loaded from the server on demand. More on that in <a href="../Manual/DownloadingAssetBundles.html">Downloading Asset Bundles</a>. 
+<div class='vspace'></div></li><li><b>Loading objects from AssetBundles</b>. Once the AssetBundle is downloaded, you might want to access its individual Assets from the Bundle. More on that in <a href="../Manual/LoadingAssetBundles.html">Loading Resources from AssetBundles</a>
+</li></ol><p class='vspace'>See also:
+</p><ul><li><a href="../Manual/abfaq.html">Frequently Asked Questions</a>
+</li><li><a href="../Manual/BuildingAssetBundles.html">Building AssetBundles</a>
+</li><li><a href="../Manual/DownloadingAssetBundles.html">Downloading Asset Bundles</a>
+</li><li><a href="../Manual/LoadingAssetBundles.html">Loading Asset Bundles</a>
+</li><li><a href="../Manual/keepingtrackofloadedassetbundles.html">Keeping track of loaded AssetBundles</a>
+</li><li><a href="../Manual/binarydata.html">Storing and loading binary data</a>
+</li><li><a href="../Manual/protectingcontent.html">Protecting content</a>
+</li><li><a href="../Manual/managingassetdependencies.html">Managing Asset Dependencies</a>
+</li><li><a href="../Manual/scriptsinassetbundles.html">Including scripts in AssetBundles</a>
+</li></ul>
+<p><small>Page last updated: 2012-10-10</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AmountVectorMagnitudeInAnotherDirection.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/abfaq.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

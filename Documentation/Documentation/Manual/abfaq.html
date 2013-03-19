@@ -1,0 +1,440 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - AssetBundles FAQ</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/AssetBundlesIntro.html">AssetBundles (Pro only)</a><span>&gt;</span><a href="../Manual/abfaq.html">AssetBundles FAQ</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AssetBundlesIntro.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/BuildingAssetBundles.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>AssetBundles FAQ</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<ol><li><a href='#whatare'>What are AssetBundles?</a>
+</li><li><a href='#whatfor'>What are they used for?</a>
+</li><li><a href='#howtocreate'>How do I create an AssetBundle?</a>
+</li><li><a href='#howtouse'>How do I use an AssetBundle?</a>
+</li><li><a href='#howtouseeditor'>How do I use AssetBundles in the Editor?</a>
+</li><li><a href='#howdoIcache'>How do I cache AssetBundles?</a>
+</li><li><a href='#crossplatform'>Are AssetBundles cross-platform?</a>
+</li><li><a href='#howidentified'>How are assets in AssetBundles identified</a>
+</li><li><a href='#reusebundles'>Can I reuse my AssetBundles in another game?</a>
+</li><li><a href='#futureplayer'>Will an AssetBundle built now be usable with future versions of Unity?</a>
+</li><li><a href='#futureplayer'>How can I list the objects in an AssetBundle?</a>
+</li></ol><div class='vspace'></div><hr />
+<div class='vspace'></div><ol><li value='1' ><a name='whatare' id='whatare'></a>What are AssetBundles?
+</li></ol><p class='vspace'>AssetBundles are a collection of assets, packaged for loading at runtime. With Asset Bundles, you can dynamically load and unload new content into your application. AssetBundles can be used to implement post-release DLC. 
+</p>
+<div class='vspace'></div><ol><li value='2' ><a name='whatfor' id='whatfor'></a>What are they used for?
+</li></ol><p class='vspace'>They can be used to reduce the amount of space on disk used by your game, when first deployed. It can also be used to add new content to an already published game.
+</p>
+<div class='vspace'></div><ol><li value='3' ><a name='howtocreate' id='howtocreate'></a>How do I create an AssetBundle?
+</li></ol><p class='vspace'>To create an AssetBundle you need to use the BuildPipeline editor class. All scripts using Editor classes must be placed in a folder named Editor, anywhere in the Assets folder. Here is an example of such a script in C#:
+</p>
+<div class='vspace'></div>
+<script type="text/javascript">
+	function showhide(link) {
+		var theDiv = document.getElementById(link.id+"_div");
+		if (theDiv) {
+			var curState = theDiv.style.display != 'none';
+			theDiv.style.display = (curState ? 'none' : 'block');
+			var str = (curState ? "+ Show [" : "- Hide [") + link.title + (curState ?  "] +" : "] -");
+			link.innerHTML = str;
+		}
+	}
+</script>
+<a id="Creating an AssetBundle" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Creating an AssetBundle" title="Creating an AssetBundle" onClick="return showhide(this)">+ Show [Creating an AssetBundle] +</a> <div id="Creating an AssetBundle_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<pre class='codelisting'>using UnityEngine;
+using UnityEditor;
+
+public class ExportAssetBundles {
+    [MenuItem("Assets/Build AssetBundle")]
+        static void ExportResource () {
+            string path = "Assets/myAssetBundle.unity3d";
+            Object[] selection =  Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets);
+            BuildPipeline.BuildAssetBundle(Selection.activeObject, selection, path, BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets);
+        }
+    }
+}</pre>
+<p class='vspace'>An Editor script does not need to be applied to a GameObject, it is instead used by the Editor. This previous example will create a new item in the “Assets” menu of your editor called “Build AssetBundle”.
+</p>
+<p class='vspace'>To use this example:
+</p><ul><li>Create a C# script file named ExportAssetBundles.cs, inside an folder named Editor, in the Project View.
+</li><li>Select the Asset or Assets in your project folder that you wish to make into an AssetBundle.
+</li><li>Select Build AssetBundle from the Assets menu.  Click “Save” to create the AssetBundle.
+</li><li>The first line of the ExportResource function sets the path of your AssetBundle.
+</li><li>The next line sets the selection to be made into an AssetBundle as the objects selected in the Project window.
+</li></ul><p class='vspace'>The BuildAssetBundle function is the line that creates the AssetBundle and saves it to the specified location.  The first parameter specifies the mainAsset, which is a special Asset that can be obtained directly with the mainAsset property when loading Assets from the AssetBundle. It is not mandatory to set a main Asset, if this is not going to be used you can use null for the parameter. The second parameter is the array of objects that will make up the AssetBundle. The third parameter is the location on disk that the AssetBundle will be saved to.  The final parameter are the build flags or options used when building AssetBundles. The bitwise OR ( ‘|’ ) combines the options passed to build the AssetBundles. In this example BuildAssetBundleOptions.CollectDependencies sets it to include other Assets referenced by the objects and BuildAssetBundleOptions.CompleteAssets make sure that assets are completely included.
+</p>
+<p class='vspace'>Building AssetBundles should be a pre-publish step which happens only once and with a single function call, for example, with a Menu Item that builds all the AssetBundles. As you develop your application you should write helper scripts that can build all your AssetBundles for a target platform with a single click or in batchmode without user intervention.
+</p>
+<p class='vspace'>There are also other function to create AssetBundles. You can read more about this here: <a class='urllink' href='http://docwiki.hq.unity3d.com/index.php?n=Main.BuildingAssetBundles' rel='nofollow'>http://docwiki.hq.unity3d.com/index.php?n=Main.BuildingAssetBundles</a>
+</p></div><noscript>
+<pre class='codelisting'>using UnityEngine;
+using UnityEditor;
+
+public class ExportAssetBundles {
+    [MenuItem("Assets/Build AssetBundle")]
+        static void ExportResource () {
+            string path = "Assets/myAssetBundle.unity3d";
+            Object[] selection =  Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets);
+            BuildPipeline.BuildAssetBundle(Selection.activeObject, selection, path, BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets);
+        }
+    }
+}</pre>
+<p class='vspace'>An Editor script does not need to be applied to a GameObject, it is instead used by the Editor. This previous example will create a new item in the “Assets” menu of your editor called “Build AssetBundle”.
+</p>
+<p class='vspace'>To use this example:
+</p><ul><li>Create a C# script file named ExportAssetBundles.cs, inside an folder named Editor, in the Project View.
+</li><li>Select the Asset or Assets in your project folder that you wish to make into an AssetBundle.
+</li><li>Select Build AssetBundle from the Assets menu.  Click “Save” to create the AssetBundle.
+</li><li>The first line of the ExportResource function sets the path of your AssetBundle.
+</li><li>The next line sets the selection to be made into an AssetBundle as the objects selected in the Project window.
+</li></ul><p class='vspace'>The BuildAssetBundle function is the line that creates the AssetBundle and saves it to the specified location.  The first parameter specifies the mainAsset, which is a special Asset that can be obtained directly with the mainAsset property when loading Assets from the AssetBundle. It is not mandatory to set a main Asset, if this is not going to be used you can use null for the parameter. The second parameter is the array of objects that will make up the AssetBundle. The third parameter is the location on disk that the AssetBundle will be saved to.  The final parameter are the build flags or options used when building AssetBundles. The bitwise OR ( ‘|’ ) combines the options passed to build the AssetBundles. In this example BuildAssetBundleOptions.CollectDependencies sets it to include other Assets referenced by the objects and BuildAssetBundleOptions.CompleteAssets make sure that assets are completely included.
+</p>
+<p class='vspace'>Building AssetBundles should be a pre-publish step which happens only once and with a single function call, for example, with a Menu Item that builds all the AssetBundles. As you develop your application you should write helper scripts that can build all your AssetBundles for a target platform with a single click or in batchmode without user intervention.
+</p>
+<p class='vspace'>There are also other function to create AssetBundles. You can read more about this here: <a class='urllink' href='http://docwiki.hq.unity3d.com/index.php?n=Main.BuildingAssetBundles' rel='nofollow'>http://docwiki.hq.unity3d.com/index.php?n=Main.BuildingAssetBundles</a>
+</noscript>
+</p>
+<div class='vspace'></div><ol><li value='4' ><a name='howtouse' id='howtouse'></a>How do I use an AssetBundle?
+</li></ol><p class='vspace'>There are two main steps involved when working with AssetBundles. The first step is to download the AssetBundle from a server or disk location. This is done with the WWW class. The second step is to load the Assets from the AssetBundle, to be used in the application. Here is an example C# script:
+</p>
+<div class='vspace'></div><a id="Using an AssetBundle" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Using an AssetBundle" title="Using an AssetBundle" onClick="return showhide(this)">+ Show [Using an AssetBundle] +</a> <div id="Using an AssetBundle_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<pre class='codelisting'>using UnityEngine;
+using System.Collections;
+
+public class BundleLoader : MonoBehaviour{
+    public string url;
+    public int version;
+    public IEnumerator LoadBundle(){
+        using(WWW www = WWW.LoadFromCacheOrDownload(url, version){
+            yield return www;
+            AssetBundle assetBundle = www.assetBundle;
+            GameObject gameObject = assetBundle.mainAsset as GameObject;
+            Instantiate(gameObject );
+            assetBundle.Unload(false);
+        }
+    }
+    void Start(){
+        StartCoroutine(LoadBundle());
+    }
+}</pre>
+<p class='vspace'>This script is added to a GameObject as Component. The AssetBundle is loaded in the following way:
+</p>
+<div class='vspace'></div><ul><li>The url and version values need to be set in the Inspector prior to running this script. The url is the location of the AssetBundle file, usually a server on the Internet. The version number allows the developer to associate a number to the AssetBundle when written to the cache in disk. When downloading an AssetBundle Unity will check if the file already exists in the cache. If it does, it compare the version of the stored asset with the version requested. If it is different then the AssetBundle will be redownloaded. If it’s the same, then it will load the AssetBundle from disk and avoid having to redownload the file. Please refer to the WWW.LoadFromCacheOrDownload function in the scripting reference for more information about these parameters.
+</li><li>When the Start function of this script is called, it will start loading the AssetBundle by calling the function as a Coroutine.The function will yield on the WWW object as it downloads the AssetBundle. By using this, the function will simply stop in that point until the WWW object is done downloading, but it will not block the execution of the rest of the code, it yields until it is done.
+</li><li>Once the WWW object has downloaded AssetBundle file, the .assetBundle property is used to retrieve an AssetBundle object. This object is the interface to load objects from the AssetBundle file.
+</li><li>In this example a reference to a prefab in the AssetBundle is retrieved from the AssetBundle using the .mainAsset property. This property is set when building the AssetBundle passing an Object as the first parameter.  The main asset in the AssetBundle can be used to store a TextAsset with a list of objects inside the AssetBundle and any other information about them.  
+</li></ul><p class='vspace'>Please note that for simplicity the previous example is not doing any safety checks. Please look at the code <a href="../Manual/DownloadingAssetBundles.html">here</a> for a more complete example.
+</p></div><noscript>
+<pre class='codelisting'>using UnityEngine;
+using System.Collections;
+
+public class BundleLoader : MonoBehaviour{
+    public string url;
+    public int version;
+    public IEnumerator LoadBundle(){
+        using(WWW www = WWW.LoadFromCacheOrDownload(url, version){
+            yield return www;
+            AssetBundle assetBundle = www.assetBundle;
+            GameObject gameObject = assetBundle.mainAsset as GameObject;
+            Instantiate(gameObject );
+            assetBundle.Unload(false);
+        }
+    }
+    void Start(){
+        StartCoroutine(LoadBundle());
+    }
+}</pre>
+<p class='vspace'>This script is added to a GameObject as Component. The AssetBundle is loaded in the following way:
+</p>
+<div class='vspace'></div><ul><li>The url and version values need to be set in the Inspector prior to running this script. The url is the location of the AssetBundle file, usually a server on the Internet. The version number allows the developer to associate a number to the AssetBundle when written to the cache in disk. When downloading an AssetBundle Unity will check if the file already exists in the cache. If it does, it compare the version of the stored asset with the version requested. If it is different then the AssetBundle will be redownloaded. If it’s the same, then it will load the AssetBundle from disk and avoid having to redownload the file. Please refer to the WWW.LoadFromCacheOrDownload function in the scripting reference for more information about these parameters.
+</li><li>When the Start function of this script is called, it will start loading the AssetBundle by calling the function as a Coroutine.The function will yield on the WWW object as it downloads the AssetBundle. By using this, the function will simply stop in that point until the WWW object is done downloading, but it will not block the execution of the rest of the code, it yields until it is done.
+</li><li>Once the WWW object has downloaded AssetBundle file, the .assetBundle property is used to retrieve an AssetBundle object. This object is the interface to load objects from the AssetBundle file.
+</li><li>In this example a reference to a prefab in the AssetBundle is retrieved from the AssetBundle using the .mainAsset property. This property is set when building the AssetBundle passing an Object as the first parameter.  The main asset in the AssetBundle can be used to store a TextAsset with a list of objects inside the AssetBundle and any other information about them.  
+</li></ul><p class='vspace'>Please note that for simplicity the previous example is not doing any safety checks. Please look at the code <a href="../Manual/DownloadingAssetBundles.html">here</a> for a more complete example.
+</noscript>
+</p>
+<div class='vspace'></div><ol><li value='5' ><a name='howtouseeditor' id='howtouseeditor'></a>How do I use AssetBundles in the Editor?
+</li></ol><p class='vspace'>As creating applications is an iterative process, you will very likely modify your Assets many times, which would require rebuilding the AssetBundles after every change to be able to test them. Even though it is possible to load AssetBundles in the Editor, that is not the recommended workflow. Instead, while testing in the Editor you should use the helper function Resources.LoadAssetAtPath to avoid having to use and rebuild AssetBundles. The function lets you load the Asset as if it were being loaded from an AssetBundle, but will skip the building process and your Assets are always up to date.
+</p>
+<p class='vspace'>The following is an example helper script, that you can use to load your Assets depending on if you are running in the Editor or not. Put this code in C# script named AssetBundleLoader.cs:
+</p>
+<div class='vspace'></div><a id="Using an AssetBundle in the Editor" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Using an AssetBundle in the Editor" title="Using an AssetBundle in the Editor" onClick="return showhide(this)">+ Show [Using an AssetBundle in the Editor] +</a> <div id="Using an AssetBundle in the Editor_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<pre class='codelisting'>
+using UnityEngine;
+using System.Collections;
+
+public class AssetBundleLoader {
+    public Object Obj; // The object retrieved from the AssetBundle
+
+    public IEnumerator LoadBundle&lt;T&gt; (string url, int version, string assetName, string assetPath) where T : Object {
+        Obj = null;
+#if UNITY_EDITOR
+        Obj = Resources.LoadAssetAtPath(assetPath, typeof(T));
+        if (Obj == null)
+            Debug.LogError ("Asset not found at path: " + assetPath);
+        yield break;
+#else
+
+        WWW download;
+        if ( Caching.enabled )  {       
+            while (!Caching.ready)
+                yield return null;
+           download = WWW.LoadFromCacheOrDownload( url, version );
+        }
+        else {
+            download = new WWW (url);
+        }
+
+        yield return download;
+        if ( download.error != null ) {
+            Debug.LogError( download.error );
+            download.Dispose();
+            yield break;
+        }
+
+        AssetBundle assetBundle = download.assetBundle;
+        download.Dispose();
+        download = null;
+
+        if (assetName == "" || assetName == null)
+        Obj = assetBundle.mainAsset;
+        else
+            Obj = assetBundle.Load(assetName, typeof(T));
+
+        assetBundle.Unload(false);
+#endif
+    }
+}</pre>
+<p class='vspace'>We can now use the AssetBundleLoader script to load an Asset from an AssetBundle if we are running the built application or load the Asset directly from the Project folder if running in the Editor:
+</p>
+<div class='vspace'></div><pre class='codelisting'>using UnityEngine;
+using System.Collections;
+
+public class ExampleLoadingBundle : MonoBehaviour {
+    public string url = "http://www.mygame.com/myBundle.unity3d"; // URL where the AssetBundle is
+    public int version = 1; // The version of the AssetBundle
+
+    public string assetName = "MyPrefab"; // Name of the Asset to be loaded from the AssetBundle
+    public string assetPath; // Path to the Asset in the Project folder
+
+    private Object ObjInstance; // Instance of the object
+    void Start(){
+        StartCoroutine(Download());
+    }
+
+    IEnumerator Download () {
+        AssetBundleLoader assetBundleLoader = new AssetBundleLoader ();
+        yield return StartCoroutine(assetBundleLoader.LoadBundle &lt;GameObject&gt; (url, version, assetName, assetPath));
+        if (assetBundleLoader.Obj != null)
+            ObjInstance = Instantiate (assetBundleLoader.Obj);
+    }
+
+    void OnGUI(){
+        GUILayout.Label (ObjInstance ? ObjInstance.name + " instantiated" : "");
+    }
+}</pre>
+<p class='vspace'>The previous script should be saved to a file named ExampleLoadingBundle.cs inside the Assets folder. After setting the public variables to their correct values and running it, it will use the AssetBundleLoader class to load an Asset. It is then instantiated and this will be shown by using the GUI.
+</p></div><noscript>
+<pre class='codelisting'>
+using UnityEngine;
+using System.Collections;
+
+public class AssetBundleLoader {
+    public Object Obj; // The object retrieved from the AssetBundle
+
+    public IEnumerator LoadBundle&lt;T&gt; (string url, int version, string assetName, string assetPath) where T : Object {
+        Obj = null;
+#if UNITY_EDITOR
+        Obj = Resources.LoadAssetAtPath(assetPath, typeof(T));
+        if (Obj == null)
+            Debug.LogError ("Asset not found at path: " + assetPath);
+        yield break;
+#else
+
+        WWW download;
+        if ( Caching.enabled )  {       
+            while (!Caching.ready)
+                yield return null;
+           download = WWW.LoadFromCacheOrDownload( url, version );
+        }
+        else {
+            download = new WWW (url);
+        }
+
+        yield return download;
+        if ( download.error != null ) {
+            Debug.LogError( download.error );
+            download.Dispose();
+            yield break;
+        }
+
+        AssetBundle assetBundle = download.assetBundle;
+        download.Dispose();
+        download = null;
+
+        if (assetName == "" || assetName == null)
+        Obj = assetBundle.mainAsset;
+        else
+            Obj = assetBundle.Load(assetName, typeof(T));
+
+        assetBundle.Unload(false);
+#endif
+    }
+}</pre>
+<p class='vspace'>We can now use the AssetBundleLoader script to load an Asset from an AssetBundle if we are running the built application or load the Asset directly from the Project folder if running in the Editor:
+</p>
+<div class='vspace'></div><pre class='codelisting'>using UnityEngine;
+using System.Collections;
+
+public class ExampleLoadingBundle : MonoBehaviour {
+    public string url = "http://www.mygame.com/myBundle.unity3d"; // URL where the AssetBundle is
+    public int version = 1; // The version of the AssetBundle
+
+    public string assetName = "MyPrefab"; // Name of the Asset to be loaded from the AssetBundle
+    public string assetPath; // Path to the Asset in the Project folder
+
+    private Object ObjInstance; // Instance of the object
+    void Start(){
+        StartCoroutine(Download());
+    }
+
+    IEnumerator Download () {
+        AssetBundleLoader assetBundleLoader = new AssetBundleLoader ();
+        yield return StartCoroutine(assetBundleLoader.LoadBundle &lt;GameObject&gt; (url, version, assetName, assetPath));
+        if (assetBundleLoader.Obj != null)
+            ObjInstance = Instantiate (assetBundleLoader.Obj);
+    }
+
+    void OnGUI(){
+        GUILayout.Label (ObjInstance ? ObjInstance.name + " instantiated" : "");
+    }
+}</pre>
+<p class='vspace'>The previous script should be saved to a file named ExampleLoadingBundle.cs inside the Assets folder. After setting the public variables to their correct values and running it, it will use the AssetBundleLoader class to load an Asset. It is then instantiated and this will be shown by using the GUI.
+</noscript>
+</p>
+<div class='vspace'></div><ol><li value='6' ><a name='howdoIcache' id='howdoIcache'></a>How do I cache AssetBundles?
+</li></ol><p class='vspace'>You can use <a class='urllink' href='../ScriptReference/WWW.LoadFromCacheOrDownload.html' rel='nofollow'>WWW.LoadFromCacheOrDownload</a> which automatically takes care of saving your AssetBundles to disk. Be aware that on the Webplayer you are limited to 50MB in total (shared between all webplayers). You can buy a separate caching license for your game if you require more space.
+</p>
+<div class='vspace'></div><ol><li value='7' ><a name='crossplatform' id='crossplatform'></a>Are AssetBundles cross-platform?
+</li></ol><p class='vspace'>AssetBundles are compatible between some platforms. Use the following table as a guideline. 
+</p>
+<div class='vspace'></div>
+<table class='bordered' ><tr ><td  align='center' colspan='5'><b>Platform compatibility for AssetBundles</b></td></tr>
+<tr ><td >&nbsp;</td><td  align='left'>Standalone</td><td  align='left'>Webplayer</td><td  align='center'>iOS</td><td  align='left'>Android</td></tr>
+<tr ><td  align='left'>Editor</td><td  align='center'>Y</td><td  align='center'>Y</td><td  align='center'>Y</td><td  align='center'>Y</td></tr>
+<tr ><td  align='left'>Standalone</td><td  align='center'>Y</td><td  align='center'>Y</td><td >&nbsp;</td><td >&nbsp;</td></tr>
+<tr ><td  align='left'>Webplayer</td><td  align='center'>Y</td><td  align='center'>Y</td><td >&nbsp;</td><td  colspan='2'>&nbsp;</td></tr>
+<tr ><td  align='left'>iOS</td><td >&nbsp;</td><td >&nbsp;</td><td  align='center'>Y</td><td  colspan='2'>&nbsp;</td></tr>
+<tr ><td  align='left'>Android</td><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td  align='center' colspan='2'>Y</td></tr>
+</table>
+<p class='vspace'>For example, a bundle created while the Webplayer build target was active would be compatible with the editor and with standalone builds. However, it would not be compatible with apps built for the iOS or Android platforms.
+</p>
+<div class='vspace'></div><ol><li value='8' ><a name='howidentified' id='howidentified'></a>How are assets in AssetBundles identified?
+</li></ol><p class='vspace'>When you build AssetBundles the assets are identified internally by their filename without the extension. For example a Texture located in your Project folder at "Assets/Textures/myTexture.jpg" is identified and loaded using "myTexture" if you use the default method. You can have more control over this by supplying your own array of ids (strings)  for each object when Building your AssetBundle with <a class='urllink' href='../ScriptReference/BuildPipeline.BuildAssetBundleExplicitAssetNames.html' rel='nofollow'>BuildPipeline.BuildAssetBundleExplicitAssetNames</a>.
+</p>
+<div class='vspace'></div><ol><li value='9' ><a name='reusebundles' id='reusebundles'></a>Can I reuse my AssetBundles in another game?
+</li></ol><p class='vspace'>AssetBundles allow you to share content between different games. The requirement is that any Assets which are referenced by GameObjects in your AssetBundle must either be included in the AssetBundle or exist in the application (loaded in the current scene). To make sure the referenced Assets are included in the AssetBundle when they are built you can pass the <a class='urllink' href='../ScriptReference/BuildAssetBundleOptions.CollectDependencies.html' rel='nofollow'>BuildAssetBundleOptions.CollectDependencies</a> option.
+</p>
+<div class='vspace'></div><ol><li value='10' ><a name='futureplayer' id='futureplayer'></a>Will an AssetBundle built now be usable with future versions of Unity?
+</li></ol><p class='vspace'>AssetBundles can contain a structure called a <span class='doc-keyword'>type tree</span> which allows information about asset types to be understood correctly between different versions of Unity. On desktop platforms, the type tree is included by default but can be disabled by passing the <a class='urllink' href='../ScriptReference/BuildAssetBundleOptions.DisableWriteTypeTree.html' rel='nofollow'>BuildAssetBundleOptions.DisableWriteTypeTree</a> to the BuildAssetBundle function. Webplayers intrinsically rely on the type tree and so it is always included (ie, the DisableWriteTypeTree option has no effect). Type trees are never included for mobile and console asset bundles and so you will need to rebuild these bundles whenever the serialization format changes. This can happen in new versions of Unity. (Except for bugfix releases) It also happens if you add or remove serialized fields in monobehaviour's that are included in the asset bundle. When loading an AssetBundle Unity will give you an error message if the AssetBundle must be rebuilt.
+</p>
+<div class='vspace'></div><ol><li value='11' >How can I list the objects in an AssetBundle?
+</li></ol><p class='vspace'>You can use <a class='urllink' href='../ScriptReference/AssetBundle.LoadAll.html' rel='nofollow'>AssetBundle.LoadAll</a> to retrieve an array containing all objects from the AssetBundle. It is not possible to get a list of the identifiers directly. A common workaround is to keep a separate TextAsset to hold the names of the assets in the AssetBundle.
+</p>
+<p class='vspace'><a href="../Manual/AssetBundlesIntro.html">back to AssetBundles Intro</a>
+</p>
+<p><small>Page last updated: 2012-09-13</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AssetBundlesIntro.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/BuildingAssetBundles.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

@@ -1,0 +1,259 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Profiling</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/FAQ.html">FAQ</a><span>&gt;</span><a href="../Manual/MobileDeveloperChecklist.html">Mobile Developer Checklist</a><span>&gt;</span><a href="../Manual/MobileProfiling.html">Profiling</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/MobileCrashes.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/MobileOptimisation.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Profiling</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Ports that the Unity profiler uses:
+</p><pre>	MulticastPort : 54998
+	ListenPorts : 55000 - 55511
+	Multicast(unittests) : 55512 - 56023
+</pre><p>They should be accessible from within the network node. That is, the devices that you’re trying to profile on should be able to see these ports on the machine with the Unity Editor with the Profiler on.
+</p>
+<div class='vspace'></div><h2>First steps</h2>
+<p>Unity relies on the CPU (heavily optimized for the SIMD part of it, like SSE on x86 or NEON on ARM) for skinning, batching, physics, user scripts, particles, etc. 
+</p>
+<p class='vspace'>The GPU is used for shaders, drawcalls, image effects.
+</p>
+<div class='vspace'></div><h3>CPU or GPU bound</h3>
+<ul><li>Use the internal profiler to detect the CPU and GPU ms
+</li></ul><div class='vspace'></div><h3>Pareto analysis </h3>
+<p>A large majority of problems (80%) are produced by a few key causes (20%).
+</p>
+<div class='vspace'></div><ol><li>Use the Editor profiler to get the most problematic function calls and optimize them first.
+</li><li>Make sure the scripts run only when necessary.
+<ol><li>Use <em>OnBecameVisible/OnBecameInvisible</em> to disable inactive objects.
+</li><li>Use coroutines if you don’t need some scripts to run every frame.
+</li></ol></li></ol><pre class='codelisting'>
+// Do some stuff every frame:
+void Update () {
+}
+
+//Do some stuff every 0.2 seconds:
+IEnumerator Start ()_ {
+   while (true) {
+      yield return new WaitForSeconds (0.2f);
+   }
+}
+</pre>
+<dl><dd><ol><li>Use the <em>.NET System.Threading.Thread</em> class to put heavy calculations to the other thread. This allows you to run on multiple cores, but Unity API is not thread-safe. So buffer inputs and results and read and assign them on the main thread.
+</li></ol></dd></dl><div class='vspace'></div><h2>CPU Profiling</h2>
+<h3>Profile user code</h3>
+<p>Not all of the user code is shown in the Profiler. But you can use <em>Profiler.BeginSample</em> and <em>Profiler.EndSample</em> to make the required user code appear in the profiler.
+</p>
+<div class='vspace'></div><h2>GPU Profiling</h2>
+<p>The Unity Editor profiler cannot show GPU data as of now. We’re working with hardware manufacturers to make it happen with the Tegra devices being the first to appear in the Editor profiler.
+</p>
+<div class='vspace'></div>
+
+<div class='vspace'></div><a class='androidRef' id='androidRef' href="javascript:ShowHideDiv('androidRef','specific-android', 'Android');"><h1><img class='figure' src='../Images/PlatformArrowDown.png' /> Android</h1></a>
+<div class='specific-android' style='display: block;' id='specific-android' > 
+<h3>Tools for Android</h3>
+<ul><li>Adreno (Qualcomm)
+</li><li>NVPerfHUD (NVIDIA)
+</li><li>PVRTune, PVRUniSCo (PowerVR)
+</li></ul><p class='vspace'>On Tegra, NVIDIA provides excellent performance tools which does everything you want - GPU time per draw call, Cycles per shader, Force 2x2 texture, Null view rectangle, runs on Windows, OSX, Linux. PerfHUD ES does not easily work with consumer devices, you need the development board from NVIDIA.
+</p>
+<p class='vspace'>Qualcomm provides excellent Adreno Profiler (Windows only) which is Windows only, but works with consumer devices! It features Timeline graphs, frame capture, Frame debug, API calls, Shader analyzer, live editing.
+</p></div>
+<div class='vspace'></div><h3>Graphics related CPU profiling</h3>
+<p>The internal profiler gives a good overview per module:
+</p><ul><li>time spent in OpenGL ES API
+</li><li>batching efficiency
+</li><li>skinning, animations, particles
+</li></ul><div class='vspace'></div><h2>Memory</h2>
+<p>There is Unity memory and mono memory. 
+</p>
+<div class='vspace'></div><h3>Mono memory</h3>
+<p>Mono memory handles script objects, wrappers for Unity objects (game objects, assets, components, etc). Garbage Collector cleans up when the allocation does not fit in the available memory or on a <em>System.GC.Collect()</em> call.
+</p>
+<p class='vspace'>Memory is allocated in heap blocks. More can allocated if it cannot fit the data into the allocated block. Heap blocks will be kept in Mono until the app is closed. In other words, Mono does not release any memory used to the OS (Unity 3.x). Once you allocate a certain amount of memory, it is reserved for mono and not available for the OS. Even when you release it, it will become available internally for Mono only and not for the OS. The heap memory value in the Profiler will only increase, never decrease.
+</p>
+<p class='vspace'>If the system cannot fit new data into the allocated heap block, the Mono calls a "GC" and can allocate a new heap block (for example, due to fragmentation).
+</p>
+<p class='vspace'>“Too many heap sections” means you’ve run out of Mono memory (because of fragmentation or heavy usage). 
+</p>
+<p class='vspace'>Use <em>System.GC.GetTotalMemory</em> to get the total used Mono memory.
+</p>
+<p class='vspace'>The general advice is, use as small an allocation as possible.
+</p>
+<div class='vspace'></div><h3>Unity memory</h3>
+<p>Unity memory handles Asset data (Textures, Meshes, Audio, Animation, etc), Game objects, Engine internals (Rendering, Particles, Physics, etc).
+Use <em>Profiler.usedHeapSize</em> to get the total used Unity memory.
+</p>
+<div class='vspace'></div><h3>Memory map</h3>
+<p>No tools yet but you can use the following.
+</p>
+<div class='vspace'></div><ul><li>Unity Profiler - not perfect, skips stuff, but you can get an overview.  It works on the device!
+</li><li>Internal profiler
+<ul><li>Shows Used heap and allocated heap - see mono memory.
+</li><li>Shows the number of mono allocations per frame.
+</li></ul></li><li>Xcode tools - iOS
+<ul><li>Xcode Instruments Activity Monitor - Real Memory column.
+</li><li>Xcode Instruments Allocations - net allocations for created and living objects.
+</li><li>VM Tracker
+<ul><li>textures usually get allocated with IOKit label.
+</li><li>meshes usually go into VM Allocate.
+</li></ul></li></ul></li><li>Make your own tool
+<ul><li><em>FindObjectsOfTypeAll (type : Type) : Object[]</em>
+</li><li><em>FindObjectsOfType (type : Type): Object[]</em>
+</li><li><em>GetRuntimeMemorySize (o : Object) : int	</em>
+</li><li><em>GetMonoHeapSize</em>
+</li><li><em>GetMonoUsedSize</em>
+</li><li><em>Profiler.BeginSample/EndSample</em> - profile your own code
+</li><li><em>UnloadUnusedAssets () : AsyncOperation</em>
+</li><li><em>System.GC.GetTotalMemory/Profiler.usedHeapSize</em>
+</li></ul></li><li>References to the loaded objects - There is no way to figure this out.  A workaround is to “Find references in scene” for public variables.
+</li></ul><div class='vspace'></div><h3>Memory hiccups</h3>
+<ul><li>Garbage collector
+<ul><li>This fires when the system cannot fit new data into the allocated heap block.
+</li><li>Don’t use <em>OnGUI</em> on mobiles
+<ul><li>It shoots several times per frame
+</li><li>It completely redraws the view.
+</li><li>It creates tons of memory allocation calls that require Garbage Collection to be invoked.
+</li></ul></li><li>Creating/removing too many objects too quickly?
+<ul><li>This may lead to fragmentation.
+</li><li>Use the Editor profiler to track the memory activity.
+</li><li>The internal profiler can be used to track the mono memory activity.
+</li></ul></li><li><em>System.GC.Collect()</em> You can use this <em>.Net</em> function when it’s ok to have a hiccup.
+</li></ul></li><li>New memory allocations
+<ul><li>Allocation hiccups
+<ul><li>Use lists of preallocated, reusable class instances to implement your own memory management scheme.
+</li><li>Don’t make huge allocations per frame, cache, preallocate instead
+</li></ul></li><li>Problems with fragmentation?
+<ul><li>Preallocate the memory pool.
+</li><li>Keep a List of inactive GameObjects and reuse them instead of Instantiating and Destroying them.
+</li></ul></li><li>Out of mono memory
+<ul><li>Profile memory activity - when does the first memory page fill up?
+</li><li>Do you really need so many gameobjects that a single memory page is not enough?
+</li></ul></li><li>Use structs instead of classes for local data. Classes are stored on the heap; structs on the stack.
+</li></ul></li></ul><div class='vspace'></div><pre class='codelisting'>
+class MyClass {
+   public int a, b, c;
+}
+
+struct MyStruct {
+   public int a, b, c;
+}
+
+void Update () {
+   //BAD
+   // allocated on the heap, will be garbage collected later!
+   MyClass c = new MyClass();
+
+   //GOOD
+   //allocated on the stack, no GC going to happen!
+   MyStruct s = new MyStruct();
+}
+</pre>
+<div class='vspace'></div><ul><li>Read the relevant section in the manual Link to <a class='urllink' href='http://docs.unity3d.com/Documentation/Manual/UnderstandingAutomaticMemoryManagement.html' rel='nofollow'>http://docs.unity3d.com/Documentation/Manual/UnderstandingAutomaticMemoryManagement.html</a>
+</li></ul><div class='vspace'></div><h3>Out of memory crashes</h3>
+<p>At some points a game may crash with "out of memory" though it in theory it should fit in fine. When this happens compare your normal game memory footprint and the allocated memory size when the crash happens. If the numbers are not similar, then there is a memory spike. This might be due to:
+</p><ul><li>Two big scenes being loaded at the same time - use an empty scene between two bigger ones to fix this.
+</li><li>Additive scene loading - remove unused parts to maintain the memory size.
+</li><li>Huge asset bundles loaded to the memory
+</li><li>Loading via WWW or instantiating (a huge amount of) big objects like:
+<ul><li>Textures without proper compression (a no go for mobiles).
+</li><li>Textures having Get/Set pixels enabled. This requires an uncompressed copy of the texture in memory.
+</li><li>Textures loaded from JPEG/PNGs at runtime are essentially uncompressed.
+</li><li>Big mp3 files marked as decompress on loading.
+</li></ul></li><li>Keeping unused assets in weird caches like static monobehavior fields, which are not cleared when changing scenes.
+</li></ul>
+<p><small>Page last updated: 2012-12-11</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/MobileCrashes.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/MobileOptimisation.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

@@ -1,0 +1,967 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Practical Guide to Optimization for Mobiles - Optimizing Scripts</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/iphone-PracticalGuide.html">Practical Guide to Optimization for Mobiles</a><span>&gt;</span><a href="../Manual/iphone-PracticalScriptingOptimizations.html">Practical Guide to Optimization for Mobiles - Optimizing Scripts</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/iphone-PracticalRenderingOptimizations.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/OptimizingGraphicsPerformance.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Practical Guide to Optimization for Mobiles - Optimizing Scripts</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>This section demonstrates how you would go about optimizing the actual scripts and methods your game uses, and it also goes into detail about the reasons why the optimizations work, and why applying them will benefit you in certain situations.
+</p>
+<div class='vspace'></div><h2><a href="../Manual/Profiler.html">Profiler</a> is King (Unity Pro)</h2>
+<p>There is no such thing as a list of boxes to check that will ensure your project runs smoothly. To optimize a slow project, you have to profile to find specific offenders that take up a disproportionate amount of time. Trying to optimize without profiling or without thoroughly understanding the results that the profiler gives is like trying to optimize with a blindfold on. 
+</p>
+<p class='vspace'>So, if you want to make a technologically demanding game that runs on mobile platforms, you probably need Unity Pro for the <a href="../Manual/Profiler.html">Profiler</a>. 
+</p>
+<div class='vspace'></div><h3>What About Indie?</h3>
+<p>You can use the <span style='font-size: 110%; font-weight: bold; color: yellow; background-color: red; padding: 2px;'>internal profiler</span> to figure out what kind of process is slowing your game down, be it physics, scripts, or rendering, but you can't drill down into specific scripts and methods to find the actual offenders. However, by building switches into your game which enable and disable certain functionality, you can narrow down the worst offenders significantly. For example, if you remove the enemy characters' AI script and the framerate doubles, you know that the script, or something that it brings into the game, has to be optimized. The only problem is that you may have to try a lot of different things before you find the problem.
+</p>
+<p class='vspace'>For more about profiling on mobile devices, see the <a href="../Manual/iphone-PracticalGuide.html#Profile">profiling section</a>.
+</p>
+<div class='vspace'></div><h2>Optimized by Design</h2>
+<p>Attempting to develop something which is fast from the beginning is risky, because there is a trade-off between wasting time making things that would be just as fast if they weren't optimized and making things which will have to be cut or replaced later because they are too slow. It takes intuition and knowledge of the hardware to make good decisions in this regard, especially because every game is different and what might be a crucial optimization for one game may be a flop in another. 
+</p>
+<p class='vspace'><a name="Object Pooling"></a>
+</p><h3>Object Pooling</h3>
+<p>We gave object pooling as an example of the intersection between good gameplay and good code design in our <a href="../Manual/iphone-OptimizedScriptingMethods.html">introduction to optimized scripting methods</a>. Using object pooling for ephemeral objects is faster than creating and destroying them, because it makes memory allocation simpler and removes dynamic memory allocation overhead and Garbage Collection, or GC.
+</p>
+<div class='vspace'></div><h3>Memory Allocation</h3>
+
+<script type="text/javascript">
+	function showhide(link) {
+		var theDiv = document.getElementById(link.id+"_div");
+		if (theDiv) {
+			var curState = theDiv.style.display != 'none';
+			theDiv.style.display = (curState ? 'none' : 'block');
+			var str = (curState ? "+ Show [" : "- Hide [") + link.title + (curState ?  "] +" : "] -");
+			link.innerHTML = str;
+		}
+	}
+</script>
+<a id="Simple Explanation of what Automatic Memory Management is" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Simple Explanation of what Automatic Memory Management is" title="Simple Explanation of what Automatic Memory Management is" onClick="return showhide(this)">+ Show [Simple Explanation of what Automatic Memory Management is] +</a> <div id="Simple Explanation of what Automatic Memory Management is_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>Scripts you write in Unity use automatic memory management. Just about all scripting languages do this. In contrast, lower level languages such as C and C++ use manual memory allocation, where the programmer is allowed to read and write from memory addresses directly, and as a consequence he is responsible for removing every object he creates. For example, if you create objects in your C++, you have to manually de-allocate the memory that they take up when you are done with them. In a scripting language, it is enough to say <span class='doc-prop'><code>objectReference = null;</code></span>
+</p>
+<p class='vspace'><b>Note:</b> If I have a game object variable like <span class='doc-prop'><code>GameObject myGameObject;</code></span> or <span class='doc-prop'><code>var myGameObject : GameObject;</code></span>, why isn't it destroyed when I say <span class='doc-prop'><code>myGameObject = null;</code></span>?
+</p><ul><li>The game object is still referenced by Unity, because Unity has to maintain a reference to it in order for it to be drawn, updated, etc. Calling <span class='doc-prop'><code>Destroy(myGameObject);</code></span> removes that reference and deletes the object.
+</li></ul><p class='vspace'>But if you create an object that Unity has no idea about, for example, an instance of a class that does not inherit from anything (in contrast, most classes or "script components" inherit from <a class='urllink' href='../ScriptReference/MonoBehaviour.html' rel='nofollow'>MonoBehaviour</a> ) and then set your reference variable to it to null, what actually happens is that the object is lost as far as your script and Unity are concerned; they can't access it and will never see it again, but it stays in memory. Then, some time later, the Garbage Collector runs, and it removes anything in memory that is not referenced anywhere. It is able to do this because, behind the scenes, the number of references to each block of memory is kept track of. This is one reason why scripting languages are slower than C++.
+</p></div><noscript>
+<p>Scripts you write in Unity use automatic memory management. Just about all scripting languages do this. In contrast, lower level languages such as C and C++ use manual memory allocation, where the programmer is allowed to read and write from memory addresses directly, and as a consequence he is responsible for removing every object he creates. For example, if you create objects in your C++, you have to manually de-allocate the memory that they take up when you are done with them. In a scripting language, it is enough to say <span class='doc-prop'><code>objectReference = null;</code></span>
+</p>
+<p class='vspace'><b>Note:</b> If I have a game object variable like <span class='doc-prop'><code>GameObject myGameObject;</code></span> or <span class='doc-prop'><code>var myGameObject : GameObject;</code></span>, why isn't it destroyed when I say <span class='doc-prop'><code>myGameObject = null;</code></span>?
+</p><ul><li>The game object is still referenced by Unity, because Unity has to maintain a reference to it in order for it to be drawn, updated, etc. Calling <span class='doc-prop'><code>Destroy(myGameObject);</code></span> removes that reference and deletes the object.
+</li></ul><p class='vspace'>But if you create an object that Unity has no idea about, for example, an instance of a class that does not inherit from anything (in contrast, most classes or "script components" inherit from <a class='urllink' href='../ScriptReference/MonoBehaviour.html' rel='nofollow'>MonoBehaviour</a> ) and then set your reference variable to it to null, what actually happens is that the object is lost as far as your script and Unity are concerned; they can't access it and will never see it again, but it stays in memory. Then, some time later, the Garbage Collector runs, and it removes anything in memory that is not referenced anywhere. It is able to do this because, behind the scenes, the number of references to each block of memory is kept track of. This is one reason why scripting languages are slower than C++.
+</noscript>
+</p>
+<div class='vspace'></div><ul><li>Read more about <a href="../Manual/UnderstandingAutomaticMemoryManagement.html">Automatic Memory Management and the Garbage Collector</a>.
+</li></ul><div class='vspace'></div><h3>How to Avoid Allocating Memory</h3>
+<p>Every time an object is created, memory is allocated. Very often in code, you are creating objects without even knowing it.
+</p>
+<div class='vspace'></div><ul><li><span class='doc-prop'>Debug.Log("boo" + "hoo");</span> creates an object.
+<ul><li>Use <span class='doc-prop'>System.String.Empty</span> instead of <span class='doc-prop'>""</span> when dealing with lots of strings.
+</li></ul><div class='vspace'></div></li><li>Immediate Mode GUI (UnityGUI) is slow and should not be used at any time when performance is an issue.
+<div class='vspace'></div></li><li>Difference between <span class='doc-prop'>class</span> and <span class='doc-prop'>struct</span>:
+</li></ul><div  style='padding: 0px 0px 0px 50px;' > 
+<a id="Class vs Struct" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Class vs Struct" title="Class vs Struct" onClick="return showhide(this)">+ Show [Class vs Struct] +</a> <div id="Class vs Struct_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>Classes are objects and behave as references. If <span class='doc-prop'>Foo</span> is a class and
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> Foo foo = new Foo();
+ MyFunction(foo); 
+ </div>
+</pre><p>then <span class='doc-prop'>MyFunction</span> will receive a reference to the original Foo object that was allocated on the heap. Any changes to <span class='doc-prop'>foo</span> inside <span class='doc-prop'>MyFunction</span> will be visible anywhere <span class='doc-prop'>foo</span> is referenced.
+</p>
+<p class='vspace'>Classes are data and behave as such. If <span class='doc-prop'>Foo</span> is a struct and
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> Foo foo = new Foo();
+ MyFunction(foo); 
+ </div>
+</pre><p>then <span class='doc-prop'>MyFunction</span> will receive a copy of <span class='doc-prop'>foo</span>. <span class='doc-prop'>foo</span> is never allocated on the heap and never garbage collected. If <span class='doc-prop'>MyFunction</span> modifies it's copy of <span class='doc-prop'>foo</span>, the other <span class='doc-prop'>foo</span> is unaffected.
+</p></div><noscript>
+<p>Classes are objects and behave as references. If <span class='doc-prop'>Foo</span> is a class and
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> Foo foo = new Foo();
+ MyFunction(foo); 
+ </div>
+</pre><p>then <span class='doc-prop'>MyFunction</span> will receive a reference to the original Foo object that was allocated on the heap. Any changes to <span class='doc-prop'>foo</span> inside <span class='doc-prop'>MyFunction</span> will be visible anywhere <span class='doc-prop'>foo</span> is referenced.
+</p>
+<p class='vspace'>Classes are data and behave as such. If <span class='doc-prop'>Foo</span> is a struct and
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> Foo foo = new Foo();
+ MyFunction(foo); 
+ </div>
+</pre><p>then <span class='doc-prop'>MyFunction</span> will receive a copy of <span class='doc-prop'>foo</span>. <span class='doc-prop'>foo</span> is never allocated on the heap and never garbage collected. If <span class='doc-prop'>MyFunction</span> modifies it's copy of <span class='doc-prop'>foo</span>, the other <span class='doc-prop'>foo</span> is unaffected.
+</noscript>
+</p></div>
+<ul><li>Objects which stick around for a long time should be classes, and objects which are ephemeral should be structs.  <a class='urllink' href='../ScriptReference/Vector3.html' rel='nofollow'>Vector3</a> is probably the most famous struct. If it were a class, everything would be a lot slower.
+</li></ul><div class='vspace'></div><h3>Why Object Pooling is Faster</h3>
+<p>The upshot of this is that <b>using Instantiate and Destroy a lot gives the Garbage Collector a lot to do</b>, and this can cause a "hitch" in gameplay. As the <a href="../Manual/UnderstandingAutomaticMemoryManagement.html">Automatic Memory Management page</a> explains, there are other ways to get around the common performance hitches that surround Instantiate and Destroy, such as triggering the Garbage Collector manually when nothing is going on, or triggering it very often so that a large backlog of unused memory never builds up.
+</p>
+<p class='vspace'>Another reason is that, when a specific prefab is instantiated for the first time, sometimes additional things have to be loaded into RAM, or textures and meshes need to be uploaded to the GPU. This can cause a hitch as well, and with object pooling, this happens when the level loads instead of during gameplay.
+</p>
+<p class='vspace'>Imagine a puppeteer who has an infinite box of puppets, where every time the script calls for a character to appear, he gets a new copy of its puppet out of the box, and every time the character exits the stage, he tosses the current copy. Object pooling is the equivalent of getting all the puppets out of the box before the show starts, and leaving them on the table behind the stage whenever they are not supposed to be visible.
+</p>
+<div class='vspace'></div><h3>Why Object Pooling can be Slower</h3>
+<p>One issue is that the creation of a pool reduces the amount of heap memory available for other purposes; so if you keep allocating memory on top of the pools you just created, you might trigger garbage collection even more often. Not only that, every collection will be slower, because the time taken for a collection increases with the number of live objects. With these issues in mind, it should be apparent that performance will suffer if you allocate pools that are too large or keep them active when the objects they contain will not be needed for some time. Furthermore, many types of objects don't lend themselves well to object pooling. For example, the game may include spell effects that persist for a considerable time or enemies that appear in large numbers but which are only killed gradually as the game progresses. In such cases, the performance overhead of an object pool greatly outweighs the benefits and so it should not be used.
+</p>
+<div class='vspace'></div><h3>Implementation</h3>
+<p>Here's a simple side by side comparison of a script for a simple projectile, one using Instantiation, and one using Object Pooling.
+</p>
+<div class='vspace'></div><a id="Object Pooling Example" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Object Pooling Example" title="Object Pooling Example" onClick="return showhide(this)">+ Show [Object Pooling Example] +</a> <div id="Object Pooling Example_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<div  style='font-size: 11px;' > 
+<table border='0' ><tr><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // GunWithInstantiate.js
+ 
+ #pragma strict
+ 
+ var prefab : ProjectileWithInstantiate;
+ 
+ var power = 10.0;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function Update () {
+     if(Input.GetButtonDown("Fire1")) {
+         var instance : ProjectileWithInstantiate = 
+ 	Instantiate(prefab, transform.position, transform.rotation);
+         instance.velocity = transform.forward * power;
+     }
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>
+</pre></td><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // GunWithObjectPooling.js
+ 
+ #pragma strict
+ 
+ var prefab : ProjectileWithObjectPooling;
+ <span class='doc-prop'>var maximumInstanceCount = 10;</span>
+ var power = 10.0;
+ 
+ <span class='doc-prop'>private var instances : ProjectileWithObjectPooling[];</span>
+ 
+ <span class='doc-prop'>static var stackPosition = Vector3(-9999, -9999, -9999);</span>
+ 
+ <span class='doc-prop'>function Start () {</span>
+     <span class='doc-prop'>instances = new ProjectileWithObjectPooling[maximumInstanceCount];</span>
+    <span class='doc-prop'> for(var i = 0; i &lt; maximumInstanceCount; i++) {</span>
+         <span class='doc-prop'>// place the pile of unused objects somewhere far off the map</span>
+         <span class='doc-prop'>instances[i] = Instantiate(prefab, stackPosition, Quaternion.identity);</span>
+         <span class='doc-prop'>// disable by default, these objects are not active yet.</span>
+         <span class='doc-prop'>instances[i].enabled = false;</span>
+     <span class='doc-prop'>}</span>
+ <span class='doc-prop'>}</span>
+ 
+ function Update () {
+     if(Input.GetButtonDown("Fire1")) {
+         var instance : ProjectileWithObjectPooling = <span class='doc-prop'>GetNextAvailiableInstance();</span>
+         <span class='doc-prop'>if(instance != null) {</span>
+             <span class='doc-prop'>instance.Initialize(transform, power);</span>
+         <span class='doc-prop'>}</span>
+     }
+ }
+ 
+ <span class='doc-prop'>function GetNextAvailiableInstance () : ProjectileWithObjectPooling {</span>
+     <span class='doc-prop'>for(var i = 0; i &lt; maximumInstanceCount; i++) {</span>
+         <span class='doc-prop'>if(!instances[i].enabled) return instances[i];</span>
+     <span class='doc-prop'>}</span>
+     <span class='doc-prop'>return null;</span>
+ <span class='doc-prop'>}</span>
+ </div>
+</pre></td></tr><tr><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // ProjectileWithInstantiate.js
+ 
+ #pragma strict
+ 
+ var gravity = 10.0;
+ var drag = 0.01;
+ var lifetime = 10.0;
+ 
+ var velocity : Vector3;
+ 
+ private var timer = 0.0;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function Update () {
+     velocity -= velocity * drag * Time.deltaTime;
+     velocity -= Vector3.up * gravity * Time.deltaTime;
+     transform.position += velocity * Time.deltaTime;
+ 
+     timer += Time.deltaTime;
+     if(timer &gt; lifetime) {
+ 
+         Destroy(gameObject);
+     }
+ }
+ </div>
+</pre></td><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // ProjectileWithObjectPooling.js
+ 
+ #pragma strict
+ 
+ var gravity = 10.0;
+ var drag = 0.01;
+ var lifetime = 10.0;
+ 
+ var velocity : Vector3;
+ 
+ private var timer = 0.0;
+ 
+ <span class='doc-prop'>function Initialize(parent : Transform, speed : float) {</span>
+     <span class='doc-prop'>transform.position = parent.position;</span>
+     <span class='doc-prop'>transform.rotation = parent.rotation;</span>
+     <span class='doc-prop'>velocity = parent.forward * speed;</span>
+     <span class='doc-prop'>timer = 0;</span>
+     <span class='doc-prop'>enabled = true;</span>
+ <span class='doc-prop'>}</span>
+ 
+ function Update () {
+     velocity -= velocity * drag * Time.deltaTime;
+     velocity -= Vector3.up * gravity * Time.deltaTime;
+     transform.position += velocity * Time.deltaTime;
+ 
+     timer += Time.deltaTime;
+     if(timer &gt; lifetime) {
+         <span class='doc-prop'>transform.position = GunWithObjectPooling.stackPosition;</span>
+         <span class='doc-prop'>enabled = false;</span>
+     }
+ }
+ </div>
+</pre></td></tr></table>
+</div>
+</div><noscript>
+<div  style='font-size: 11px;' > 
+<table border='0' ><tr><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // GunWithInstantiate.js
+ 
+ #pragma strict
+ 
+ var prefab : ProjectileWithInstantiate;
+ 
+ var power = 10.0;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function Update () {
+     if(Input.GetButtonDown("Fire1")) {
+         var instance : ProjectileWithInstantiate = 
+ 	Instantiate(prefab, transform.position, transform.rotation);
+         instance.velocity = transform.forward * power;
+     }
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>
+</pre></td><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // GunWithObjectPooling.js
+ 
+ #pragma strict
+ 
+ var prefab : ProjectileWithObjectPooling;
+ <span class='doc-prop'>var maximumInstanceCount = 10;</span>
+ var power = 10.0;
+ 
+ <span class='doc-prop'>private var instances : ProjectileWithObjectPooling[];</span>
+ 
+ <span class='doc-prop'>static var stackPosition = Vector3(-9999, -9999, -9999);</span>
+ 
+ <span class='doc-prop'>function Start () {</span>
+     <span class='doc-prop'>instances = new ProjectileWithObjectPooling[maximumInstanceCount];</span>
+    <span class='doc-prop'> for(var i = 0; i &lt; maximumInstanceCount; i++) {</span>
+         <span class='doc-prop'>// place the pile of unused objects somewhere far off the map</span>
+         <span class='doc-prop'>instances[i] = Instantiate(prefab, stackPosition, Quaternion.identity);</span>
+         <span class='doc-prop'>// disable by default, these objects are not active yet.</span>
+         <span class='doc-prop'>instances[i].enabled = false;</span>
+     <span class='doc-prop'>}</span>
+ <span class='doc-prop'>}</span>
+ 
+ function Update () {
+     if(Input.GetButtonDown("Fire1")) {
+         var instance : ProjectileWithObjectPooling = <span class='doc-prop'>GetNextAvailiableInstance();</span>
+         <span class='doc-prop'>if(instance != null) {</span>
+             <span class='doc-prop'>instance.Initialize(transform, power);</span>
+         <span class='doc-prop'>}</span>
+     }
+ }
+ 
+ <span class='doc-prop'>function GetNextAvailiableInstance () : ProjectileWithObjectPooling {</span>
+     <span class='doc-prop'>for(var i = 0; i &lt; maximumInstanceCount; i++) {</span>
+         <span class='doc-prop'>if(!instances[i].enabled) return instances[i];</span>
+     <span class='doc-prop'>}</span>
+     <span class='doc-prop'>return null;</span>
+ <span class='doc-prop'>}</span>
+ </div>
+</pre></td></tr><tr><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // ProjectileWithInstantiate.js
+ 
+ #pragma strict
+ 
+ var gravity = 10.0;
+ var drag = 0.01;
+ var lifetime = 10.0;
+ 
+ var velocity : Vector3;
+ 
+ private var timer = 0.0;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function Update () {
+     velocity -= velocity * drag * Time.deltaTime;
+     velocity -= Vector3.up * gravity * Time.deltaTime;
+     transform.position += velocity * Time.deltaTime;
+ 
+     timer += Time.deltaTime;
+     if(timer &gt; lifetime) {
+ 
+         Destroy(gameObject);
+     }
+ }
+ </div>
+</pre></td><td  valign='top'>
+<div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // ProjectileWithObjectPooling.js
+ 
+ #pragma strict
+ 
+ var gravity = 10.0;
+ var drag = 0.01;
+ var lifetime = 10.0;
+ 
+ var velocity : Vector3;
+ 
+ private var timer = 0.0;
+ 
+ <span class='doc-prop'>function Initialize(parent : Transform, speed : float) {</span>
+     <span class='doc-prop'>transform.position = parent.position;</span>
+     <span class='doc-prop'>transform.rotation = parent.rotation;</span>
+     <span class='doc-prop'>velocity = parent.forward * speed;</span>
+     <span class='doc-prop'>timer = 0;</span>
+     <span class='doc-prop'>enabled = true;</span>
+ <span class='doc-prop'>}</span>
+ 
+ function Update () {
+     velocity -= velocity * drag * Time.deltaTime;
+     velocity -= Vector3.up * gravity * Time.deltaTime;
+     transform.position += velocity * Time.deltaTime;
+ 
+     timer += Time.deltaTime;
+     if(timer &gt; lifetime) {
+         <span class='doc-prop'>transform.position = GunWithObjectPooling.stackPosition;</span>
+         <span class='doc-prop'>enabled = false;</span>
+     }
+ }
+ </div>
+</pre></td></tr></table>
+</div>
+<p></noscript>
+</p>
+<p class='vspace'>Of course, for a large, complicated game, you will want to make a generic solution that works for all your prefabs.
+</p>
+<div class='vspace'></div><h2>Another Example: Coin Party!</h2>
+<p>The example of "Hundreds of rotating, dynamically lit, collectable coins onscreen at once" which was given in the <a href="../Manual/iphone-OptimizedScriptingMethods.html">Scripting Methods section</a> will be used to demonstrate how script code, Unity components like the Particle System, and custom shaders can be used to create a stunning effect without taxing the weak mobile hardware.
+</p>
+<p class='vspace'>Imagine that this effect lives in the context of a 2D sidescrolling game with tons of coins that fall, bounce, and rotate. The coins are dynamically lit by point lights. We want to capture the light glinting off the coins to make our game more impressive. 
+</p>
+<p class='vspace'>If we had powerful hardware, we could use a standard approach to this problem. Make every coin an object, shade the object with either vertex-lit, forward, or deferred lighting, and then add glow on top as an image effect to get the brightly reflecting coins to bleed light onto the surrounding area.
+</p>
+<p class='vspace'>But mobile hardware would choke on that many objects, and a glow effect is totally out of the question. So what do we do?
+</p>
+<p class='vspace'><a name="Animated_Sprite_Particle_System"></a>
+</p><h3>Animated Sprite Particle System</h3>
+<div><span  style='float: right; padding: 5px;'><img width='300px' src='http://docwiki.hq.unity3d.com/uploads/Main/coinsLighting.jpg' alt='' title='' /></span></div>
+<p class='vspace'>If you want to display a lot of objects which all move in a similar way and can never be carefully inspected by the player, you might be able to render large amounts of them in no time using a particle system. Here are a few stereotypical applications of this technique:
+</p>
+<div class='vspace'></div><ul><li>Collectables or Coins
+</li><li>Flying Debris 
+</li><li><a class='urllink' href='http://www.gamespot.com/ikaruga/images/580047/' rel='nofollow'>Hordes or Flocks of Simple Enemies</a>
+</li><li>Cheering Crowds
+</li><li>Hundreds of Projectiles or Explosions
+</li></ul><p class='vspace'>There is a free editor extension called <a class='urllink' href='http://u3d.as/content/forest-johnson/sprite-packer-with-legacy-particle-emitter-to-shuriken-converter-/34E' rel='nofollow'>Sprite Packer</a> that facilitates the creation of animated sprite particle systems. It renders frames of your object to a texture, which can then be used as an animated sprite sheet on a particle system. For our use case, we would use it on our rotating coin. 
+</p>
+<div class='vspace'></div><h3>Reference Implementation </h3>
+<div><span  style='float: right; padding: 5px;'><img width='250px' src='http://docwiki.hq.unity3d.com/uploads/Main/coinsParts.jpg' alt='' title='' /></span></div>
+<p class='vspace'>Included in the <a class='urllink' href='http://u3d.as/content/forest-johnson/sprite-packer-with-legacy-particle-emitter-to-shuriken-converter-/34E' rel='nofollow'>Sprite Packer project</a> is an example that demonstrates a solution to this exact problem. 
+</p>
+<p class='vspace'>It uses a family of assets of all different kinds to achieve a dazzling effect on a low computing budget:
+</p>
+<div class='vspace'></div><ul><li>A control script
+</li><li>Specialized textures created from the output of the SpritePacker
+</li><li>A specialized shader which is intimately connected with both the control script and the texture.
+</li></ul><p class='vspace'>A readme file is included with the example which attempts to explain why and how the system works, outlining the process that was used to determine what features were needed and how they were implemented. This is that file:
+</p>
+<div class='vspace'></div><a id="Coin Party README" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Coin Party README" title="Coin Party README" onClick="return showhide(this)">+ Show [Coin Party README] +</a> <div id="Coin Party README_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>The problem was defined as "Hundreds of rotating, dynamically lit, collectable coins onscreen at once." 
+</p>
+<p class='vspace'>The naive approach is to Instantiate a bunch of copies of a coin prefab, but instead we are going to use particles to render our coins. However, this introduces a number of challenges that we have to overcome.
+</p>
+<div class='vspace'></div><ul><li>Viewing angles are a problem because particles don't have them.
+<ul><li>We assume that the camera stays right-side up and the coins rotate around the Y-axis.
+</li><li>We create the illusion of coin rotation with an animated texture that we packed using the SpritePacker.
+<ul><li>This introduces a new problem: Monotony of rotating coins all rotating at the same speed and in the same direction
+</li><li>We keep track of rotation and lifetime ourselves and "render" rotation to the particle lifetimes in script to fix this.
+</li></ul></li></ul><div class='vspace'></div></li><li>Normals are a problem because particles don't have them, and we need real time lighting.
+<ul><li>Generate a single normal vector for the face of the coin in each animation frame generated by the Sprite Packer.
+</li><li>Do Blinn-Phong lighting for each particle in script, based on the normal vector grabbed from the above list.
+</li><li>Apply the result to the particle as a color.
+</li><li>Handle the face of the coin and the rim of the coin separately in the shader.
+<ul><li>Introduces a new problem: How does the shader know where the rim is, and what part of the rim it's on?
+<ul><li>Can't use UV's, they are already used for the animation.
+</li><li>Use a texture map.
+<ul><li>Need Y-position relative to coin.
+</li><li>Need binary "on face" vs "on rim".
+</li></ul></li><li>We don't want to introduce another texture, more texture reads, more texture memory.
+</li><li>Combine needed information into one channel and replace one of the texture's color channels with it.
+<ul><li>Now our coin is the wrong color! What do we do?
+</li><li>Use the shader to reconstruct missing channel as a combination of the two remaining channels.
+</li></ul></li></ul></li></ul></li></ul><div class='vspace'></div></li><li>Say we want glow from light glinting off our coins. Post process is too expensive for mobile devices.
+<ul><li>Create another particle system and give it a softened, glowy version of the coin animation.
+</li><li>Color a glow only when the corresponding coin's color is super bright.
+</li><li>Can't have glow rendered on every coin every frame - fill rate killer.
+<ul><li>Reset glows every frame, only position ones with brightness &gt; 0.
+</li></ul></li></ul><div class='vspace'></div></li><li>Physics is a problem, collecting coins is a problem - particles don't collide very well.
+<ul><li>Could use built-in particle collision?
+</li><li>Instead, just wrote collision into the script.
+</li></ul><div class='vspace'></div></li><li>Finally, we have one more problem - this script does a lot, and its getting slow!
+<ul><li>Perfomance scales linearly with number of active coins.
+<ul><li>Limit maximum coins. This works well enough to acheive our goal: 100 coins, 2 lights, runs really fast on mobile devices.
+</li></ul></li></ul><div class='vspace'></div></li><li>Things to try to optimize further:
+<ul><li>Instead of calculating lighting for every coin individually, cut the world into chunks and calculate lighting conditions for every rotation frame in every chunk.
+<ul><li>Use as a lookup table with coin position and coin rotation as indices.
+</li><li>Increase fidelity by using bilinear interpolation with position.
+</li><li>Sparse updates on the lookup table, or, entirely static lookup table.
+</li><li>Use Light Probes for this?
+</li></ul><div class='vspace'></div></li><li>Instead of calculating lighting in script, use normal-mapped particles?
+<ul><li>Use "Display Normals" shader to bake frame animation of normals.
+</li><li>Limits number of lights.
+</li><li>Fixes slow script problem.
+</li></ul></li></ul></li></ul></div><noscript>
+<p>The problem was defined as "Hundreds of rotating, dynamically lit, collectable coins onscreen at once." 
+</p>
+<p class='vspace'>The naive approach is to Instantiate a bunch of copies of a coin prefab, but instead we are going to use particles to render our coins. However, this introduces a number of challenges that we have to overcome.
+</p>
+<div class='vspace'></div><ul><li>Viewing angles are a problem because particles don't have them.
+<ul><li>We assume that the camera stays right-side up and the coins rotate around the Y-axis.
+</li><li>We create the illusion of coin rotation with an animated texture that we packed using the SpritePacker.
+<ul><li>This introduces a new problem: Monotony of rotating coins all rotating at the same speed and in the same direction
+</li><li>We keep track of rotation and lifetime ourselves and "render" rotation to the particle lifetimes in script to fix this.
+</li></ul></li></ul><div class='vspace'></div></li><li>Normals are a problem because particles don't have them, and we need real time lighting.
+<ul><li>Generate a single normal vector for the face of the coin in each animation frame generated by the Sprite Packer.
+</li><li>Do Blinn-Phong lighting for each particle in script, based on the normal vector grabbed from the above list.
+</li><li>Apply the result to the particle as a color.
+</li><li>Handle the face of the coin and the rim of the coin separately in the shader.
+<ul><li>Introduces a new problem: How does the shader know where the rim is, and what part of the rim it's on?
+<ul><li>Can't use UV's, they are already used for the animation.
+</li><li>Use a texture map.
+<ul><li>Need Y-position relative to coin.
+</li><li>Need binary "on face" vs "on rim".
+</li></ul></li><li>We don't want to introduce another texture, more texture reads, more texture memory.
+</li><li>Combine needed information into one channel and replace one of the texture's color channels with it.
+<ul><li>Now our coin is the wrong color! What do we do?
+</li><li>Use the shader to reconstruct missing channel as a combination of the two remaining channels.
+</li></ul></li></ul></li></ul></li></ul><div class='vspace'></div></li><li>Say we want glow from light glinting off our coins. Post process is too expensive for mobile devices.
+<ul><li>Create another particle system and give it a softened, glowy version of the coin animation.
+</li><li>Color a glow only when the corresponding coin's color is super bright.
+</li><li>Can't have glow rendered on every coin every frame - fill rate killer.
+<ul><li>Reset glows every frame, only position ones with brightness &gt; 0.
+</li></ul></li></ul><div class='vspace'></div></li><li>Physics is a problem, collecting coins is a problem - particles don't collide very well.
+<ul><li>Could use built-in particle collision?
+</li><li>Instead, just wrote collision into the script.
+</li></ul><div class='vspace'></div></li><li>Finally, we have one more problem - this script does a lot, and its getting slow!
+<ul><li>Perfomance scales linearly with number of active coins.
+<ul><li>Limit maximum coins. This works well enough to acheive our goal: 100 coins, 2 lights, runs really fast on mobile devices.
+</li></ul></li></ul><div class='vspace'></div></li><li>Things to try to optimize further:
+<ul><li>Instead of calculating lighting for every coin individually, cut the world into chunks and calculate lighting conditions for every rotation frame in every chunk.
+<ul><li>Use as a lookup table with coin position and coin rotation as indices.
+</li><li>Increase fidelity by using bilinear interpolation with position.
+</li><li>Sparse updates on the lookup table, or, entirely static lookup table.
+</li><li>Use Light Probes for this?
+</li></ul><div class='vspace'></div></li><li>Instead of calculating lighting in script, use normal-mapped particles?
+<ul><li>Use "Display Normals" shader to bake frame animation of normals.
+</li><li>Limits number of lights.
+</li><li>Fixes slow script problem.
+</li></ul></li></ul></li></ul><p></noscript>
+</p>
+<p class='vspace'>The end goal of this example or "moral of the story" is that if there is something which your game really needs, and it causes lag when you try to achieve it through conventional means, that doesn't mean that it is impossible, it just means that you have to put in some work on a system of your own that runs much faster.
+</p>
+<div class='vspace'></div><h3>Techniques for Managing Thousands of Objects</h3>
+<p>These are specific scripting optimizations which are applicable in situations where hundreds or thousands of dynamic objects are involved. Applying these techniques to every script in your game is a terrible idea; they should be reserved as tools and design guidelines for large scripts which handle tons of objects or data at run time.
+</p>
+<div class='vspace'></div><ul><li>Avoid or minimize O(n<sup>2</sup>) operations on large data sets
+</li></ul><div  style='padding: 0px 0px 0px 50px;' > 
+<a id="Order N Squared" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Order N Squared" title="Order N Squared" onClick="return showhide(this)">+ Show [Order N Squared] +</a> <div id="Order N Squared_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>In computer science, the <span class='doc-prop'>Order</span> of an operation, denoted by <span class='doc-prop'>O(n)</span>, refers to the way that the number of times that the operation has to be evaluated increases as the number of objects it is applied to (<span class='doc-prop'>n</span>) increases.
+</p>
+<p class='vspace'>For example, consider a basic sorting algorithm. I have n numbers and I want to sort them from smallest to largest.
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> void sort(int[] arr) {
+ 	int i, j, newValue;
+ 	for (i = 1; i &lt; arr.Length; i++) {
+ 		// record
+ 		newValue = arr[i];
+ 		//shift everything that is larger to the right
+ 		j = i;
+ 		while (j &gt; 0 &amp;&amp; arr[j - 1] &gt; newValue) {
+ 			arr[j] = arr[j - 1];
+ 			j--;
+ 		}
+ 		// place recorded value to the left of large values
+ 		arr[j] = newValue;
+ 	}
+ }</div>
+</pre><p class='vspace'>The important part is that there are two loops here, one inside the other.
+</p>
+<div class='vspace'></div><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> for (i = 1; i &lt; arr.Length; i++) {
+ 	...
+ 	j = i;
+ 	while (j &gt; 0 &amp;&amp; arr[j - 1] &gt; newValue) {
+ 		...
+ 		j--;
+ 	}
+ }
+ </div>
+</pre><p class='vspace'>Let's assume that we give the algorithm the worst possible case: the input numbers are sorted, but in reverse order. In that case, the innermost loop will run <span class='doc-prop'>j</span> times. On average, as <span class='doc-prop'>i</span> goes from <span class='doc-prop'>1</span> to <span class='doc-prop'>arr.Length-1</span>, <span class='doc-prop'>j</span> will be <span class='doc-prop'>arr.Length/2</span>. In terms of <span class='doc-prop'>O(n)</span>, <span class='doc-prop'>arr.Length</span> is our <span class='doc-prop'>n</span>, so, in total, the innermost loop runs <span class='doc-prop'>n*n/2</span> times, or <span class='doc-prop'>n<sup>2</sup>/2</span> times. But in <span class='doc-prop'>O(n)</span> terms, we chuck all constants like <span class='doc-prop'>1/2</span>, because we want to talk about the way that the number of operations increases, not the actual number of operations. So the algorithm is <span class='doc-prop'>O(n<sup>2</sup>)</span>. The order of an operation matters a lot if the data set is large, because the number of operations can explode exponentially.
+</p>
+<p class='vspace'>An in-game example of an <span class='doc-prop'>O(n<sup>2</sup>)</span> operation is 100 enemies, where the AI of each enemy takes the movements of every other enemy into account. It might be faster to divide the map into cells, record the movement of each enemy into the nearest cell, and then have each enemy sample the nearest few cells. That would be an <span class='doc-prop'>O(n)</span> operation.
+</p></div><noscript>
+<p>In computer science, the <span class='doc-prop'>Order</span> of an operation, denoted by <span class='doc-prop'>O(n)</span>, refers to the way that the number of times that the operation has to be evaluated increases as the number of objects it is applied to (<span class='doc-prop'>n</span>) increases.
+</p>
+<p class='vspace'>For example, consider a basic sorting algorithm. I have n numbers and I want to sort them from smallest to largest.
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> void sort(int[] arr) {
+ 	int i, j, newValue;
+ 	for (i = 1; i &lt; arr.Length; i++) {
+ 		// record
+ 		newValue = arr[i];
+ 		//shift everything that is larger to the right
+ 		j = i;
+ 		while (j &gt; 0 &amp;&amp; arr[j - 1] &gt; newValue) {
+ 			arr[j] = arr[j - 1];
+ 			j--;
+ 		}
+ 		// place recorded value to the left of large values
+ 		arr[j] = newValue;
+ 	}
+ }</div>
+</pre><p class='vspace'>The important part is that there are two loops here, one inside the other.
+</p>
+<div class='vspace'></div><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> for (i = 1; i &lt; arr.Length; i++) {
+ 	...
+ 	j = i;
+ 	while (j &gt; 0 &amp;&amp; arr[j - 1] &gt; newValue) {
+ 		...
+ 		j--;
+ 	}
+ }
+ </div>
+</pre><p class='vspace'>Let's assume that we give the algorithm the worst possible case: the input numbers are sorted, but in reverse order. In that case, the innermost loop will run <span class='doc-prop'>j</span> times. On average, as <span class='doc-prop'>i</span> goes from <span class='doc-prop'>1</span> to <span class='doc-prop'>arr.Length-1</span>, <span class='doc-prop'>j</span> will be <span class='doc-prop'>arr.Length/2</span>. In terms of <span class='doc-prop'>O(n)</span>, <span class='doc-prop'>arr.Length</span> is our <span class='doc-prop'>n</span>, so, in total, the innermost loop runs <span class='doc-prop'>n*n/2</span> times, or <span class='doc-prop'>n<sup>2</sup>/2</span> times. But in <span class='doc-prop'>O(n)</span> terms, we chuck all constants like <span class='doc-prop'>1/2</span>, because we want to talk about the way that the number of operations increases, not the actual number of operations. So the algorithm is <span class='doc-prop'>O(n<sup>2</sup>)</span>. The order of an operation matters a lot if the data set is large, because the number of operations can explode exponentially.
+</p>
+<p class='vspace'>An in-game example of an <span class='doc-prop'>O(n<sup>2</sup>)</span> operation is 100 enemies, where the AI of each enemy takes the movements of every other enemy into account. It might be faster to divide the map into cells, record the movement of each enemy into the nearest cell, and then have each enemy sample the nearest few cells. That would be an <span class='doc-prop'>O(n)</span> operation.
+</noscript>
+</p></div>
+<div class='vspace'></div><ul><li>Cache references instead of performing unnecessary searches
+</li></ul><div  style='padding: 0px 0px 0px 50px;' > 
+<a id="Reference Caching" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Reference Caching" title="Reference Caching" onClick="return showhide(this)">+ Show [Reference Caching] +</a> <div id="Reference Caching_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>Say you have 100 enemies in your game, and they all move towards the player.
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // EnemyAI.js
+ var speed = 5.0;
+ 
+ function Update () {
+ 	transform.LookAt(GameObject.FindWithTag("Player").transform);
+ 	// this would be even worse:
+ 	//transform.LookAt(FindObjectOfType(Player).transform);
+ 
+ 	transform.position += transform.forward * speed * Time.deltaTime;
+ }</div>
+</pre><p class='vspace'>That could be slow, if there are enough of them running at the same time. Little known fact: all of the component accessors in <span class='doc-prop'><a class='urllink' href='../ScriptReference/MonoBehaviour.html' rel='nofollow'>MonoBehaviour</a></span>, things like <span class='doc-prop'>transform</span>, <span class='doc-prop'>renderer</span>, and <span class='doc-prop'>audio</span>, are equivalent to their <span class='doc-prop'>GetComponent(Transform)</span> counterparts, and they are actually a bit slow. <span class='doc-prop'><a class='urllink' href='../ScriptReference/GameObject.html' rel='nofollow'>GameObject</a>.FindWithTag</span> has been optimized, but in some cases, for example, in inner loops, or on scripts that run on a lot of instances, this script might be a bit slow.
+</p>
+<p class='vspace'>This is a better version of the script.
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // EnemyAI.js
+ var speed = 5.0;
+ 
+ private var myTransform : Transform;
+ private var playerTransform : Transform;
+ 
+ function Start () {
+ 	myTransform = transform;
+ 	playerTransform = GameObject.FindWithTag("Player").transform;
+ }
+ 
+ function Update () {
+ 	myTransform.LookAt(playerTransform);
+ 
+ 	myTransform.position += myTransform.forward * speed * Time.deltaTime;
+ }
+ </div>
+</pre></div><noscript>
+<p>Say you have 100 enemies in your game, and they all move towards the player.
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // EnemyAI.js
+ var speed = 5.0;
+ 
+ function Update () {
+ 	transform.LookAt(GameObject.FindWithTag("Player").transform);
+ 	// this would be even worse:
+ 	//transform.LookAt(FindObjectOfType(Player).transform);
+ 
+ 	transform.position += transform.forward * speed * Time.deltaTime;
+ }</div>
+</pre><p class='vspace'>That could be slow, if there are enough of them running at the same time. Little known fact: all of the component accessors in <span class='doc-prop'><a class='urllink' href='../ScriptReference/MonoBehaviour.html' rel='nofollow'>MonoBehaviour</a></span>, things like <span class='doc-prop'>transform</span>, <span class='doc-prop'>renderer</span>, and <span class='doc-prop'>audio</span>, are equivalent to their <span class='doc-prop'>GetComponent(Transform)</span> counterparts, and they are actually a bit slow. <span class='doc-prop'><a class='urllink' href='../ScriptReference/GameObject.html' rel='nofollow'>GameObject</a>.FindWithTag</span> has been optimized, but in some cases, for example, in inner loops, or on scripts that run on a lot of instances, this script might be a bit slow.
+</p>
+<p class='vspace'>This is a better version of the script.
+</p><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // EnemyAI.js
+ var speed = 5.0;
+ 
+ private var myTransform : Transform;
+ private var playerTransform : Transform;
+ 
+ function Start () {
+ 	myTransform = transform;
+ 	playerTransform = GameObject.FindWithTag("Player").transform;
+ }
+ 
+ function Update () {
+ 	myTransform.LookAt(playerTransform);
+ 
+ 	myTransform.position += myTransform.forward * speed * Time.deltaTime;
+ }
+ </div>
+</pre><p></noscript>
+</p></div>
+<div class='vspace'></div><ul><li>Minimize expensive math functions
+</li></ul><div  style='padding: 0px 0px 0px 50px;' > 
+<a id="Expensive Math Functions" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Expensive Math Functions" title="Expensive Math Functions" onClick="return showhide(this)">+ Show [Expensive Math Functions] +</a> <div id="Expensive Math Functions_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>Transcendental functions (<span class='doc-prop'>Mathf.Sin</span>, <span class='doc-prop'>Mathf.Pow</span>, etc), Division, and Square Root all take about 100x the time of a multiplication. (In the grand scheme of things, no time at all, but if you are calling them thousands of times per frame it can add up).
+</p>
+<p class='vspace'>The most common case of this is vector normalization. If you are normalizing the same vector over and over, consider normalizing it once instead and caching the result for use later.
+</p>
+<p class='vspace'>If you are both using the length of a vector and normalizing it, it would be faster to obtain the normalized vector by multiplying the vector by the reciprocal of the length rather than by using the <span class='doc-prop'>.normalized</span> property.
+</p>
+<p class='vspace'>If you are comparing distances, you don't have to compare the actual distances. You can compare the squares of the distances instead by using the <span class='doc-prop'>.sqrMagnitude</span> property and save a square root or two.
+</p>
+<p class='vspace'>Another one, if you are dividing over and over by a constant <span class='doc-prop'>c</span>, you can multiply by the reciprocal instead. Calculate the reciprocal first by doing <span class='doc-prop'>1.0/c</span>.
+</p></div><noscript>
+<p>Transcendental functions (<span class='doc-prop'>Mathf.Sin</span>, <span class='doc-prop'>Mathf.Pow</span>, etc), Division, and Square Root all take about 100x the time of a multiplication. (In the grand scheme of things, no time at all, but if you are calling them thousands of times per frame it can add up).
+</p>
+<p class='vspace'>The most common case of this is vector normalization. If you are normalizing the same vector over and over, consider normalizing it once instead and caching the result for use later.
+</p>
+<p class='vspace'>If you are both using the length of a vector and normalizing it, it would be faster to obtain the normalized vector by multiplying the vector by the reciprocal of the length rather than by using the <span class='doc-prop'>.normalized</span> property.
+</p>
+<p class='vspace'>If you are comparing distances, you don't have to compare the actual distances. You can compare the squares of the distances instead by using the <span class='doc-prop'>.sqrMagnitude</span> property and save a square root or two.
+</p>
+<p class='vspace'>Another one, if you are dividing over and over by a constant <span class='doc-prop'>c</span>, you can multiply by the reciprocal instead. Calculate the reciprocal first by doing <span class='doc-prop'>1.0/c</span>.
+</noscript>
+</p></div>
+<div class='vspace'></div><ul><li>Only execute expensive operations occasionally, e.g. Physics.Raycast()
+</li></ul><div  style='padding: 0px 0px 0px 50px;' > 
+<a id="Infrequent Calling" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Infrequent Calling" title="Infrequent Calling" onClick="return showhide(this)">+ Show [Infrequent Calling] +</a> <div id="Infrequent Calling_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>If you have to do something expensive, you might be able to optimize it by doing it less often and caching the result. For example, consider a projectile script that uses Raycast:
+</p>
+<div class='vspace'></div><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // Bullet.js
+ var speed = 5.0;
+ 
+ function FixedUpdate () {
+ 	var distanceThisFrame = speed * Time.fixedDeltaTime;
+ 	var hit : RaycastHit;
+ 
+ 	// every frame, we cast a ray forward from where we are to where we will be next frame
+ 	if(Physics.Raycast(transform.position, transform.forward, hit, distanceThisFrame)) {
+ 		// Do hit
+ 	} else {
+ 		transform.position += transform.forward * distanceThisFrame;
+ 	}
+ }
+ </div>
+</pre><p class='vspace'>Right away, we could improve the script by replacing FixedUpdate with Update and fixedDeltaTime with deltaTime. FixedUpdate refers to the Physics update, which happens more often than the frame update. But let's go even further by only raycasting every n seconds. A smaller n gives greater temporal resolution, and a bigger n gives better performance. The bigger and slower your targets are, the bigger n can be before temporal aliasing occurs. (Appearance of latency, where the player hit the target, but the explosion appears where the target used to be n seconds ago, or the player hit the target, but the projectile goes right through).
+</p>
+<div class='vspace'></div><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // BulletOptimized.js
+ var speed = 5.0;
+ var interval = 0.4; // this is 'n', in seconds.
+ 
+ private var begin : Vector3;
+ private var timer = 0.0;
+ private var hasHit = false;
+ private var timeTillImpact = 0.0;
+ private var hit : RaycastHit;
+ 
+ // set up initial interval
+ function Start () {
+ 	begin = transform.position;
+ 	timer = interval+1;
+ }
+ 
+ function Update () {
+ 	// don't allow an interval smaller than the frame.
+ 	var usedInterval = interval;
+ 	if(Time.deltaTime &gt; usedInterval) usedInterval = Time.deltaTime;
+ 
+ 	// every interval, we cast a ray forward from where we were at the start of this interval
+ 	// to where we will be at the start of the next interval
+ 	if(!hasHit &amp;&amp; timer &gt;= usedInterval) {
+ 		timer = 0;
+ 		var distanceThisInterval = speed * usedInterval;
+ 
+ 		if(Physics.Raycast(begin, transform.forward, hit, distanceThisInterval)) {
+ 			hasHit = true;
+ 			if(speed != 0) timeTillImpact = hit.distance / speed;
+ 		}
+ 
+ 		begin += transform.forward * distanceThisInterval;
+ 	}
+ 
+ 	timer += Time.deltaTime;
+ 
+ 	// after the Raycast hit something, wait until the bullet has traveled
+ 	// about as far as the ray traveled to do the actual hit
+ 	if(hasHit &amp;&amp; timer &gt; timeTillImpact) {
+ 		// Do hit
+ 	} else {
+ 		transform.position += transform.forward * speed * Time.deltaTime;
+ 	}
+ }
+ </div>
+</pre><div class='vspace'></div></div><noscript>
+<p>If you have to do something expensive, you might be able to optimize it by doing it less often and caching the result. For example, consider a projectile script that uses Raycast:
+</p>
+<div class='vspace'></div><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // Bullet.js
+ var speed = 5.0;
+ 
+ function FixedUpdate () {
+ 	var distanceThisFrame = speed * Time.fixedDeltaTime;
+ 	var hit : RaycastHit;
+ 
+ 	// every frame, we cast a ray forward from where we are to where we will be next frame
+ 	if(Physics.Raycast(transform.position, transform.forward, hit, distanceThisFrame)) {
+ 		// Do hit
+ 	} else {
+ 		transform.position += transform.forward * distanceThisFrame;
+ 	}
+ }
+ </div>
+</pre><p class='vspace'>Right away, we could improve the script by replacing FixedUpdate with Update and fixedDeltaTime with deltaTime. FixedUpdate refers to the Physics update, which happens more often than the frame update. But let's go even further by only raycasting every n seconds. A smaller n gives greater temporal resolution, and a bigger n gives better performance. The bigger and slower your targets are, the bigger n can be before temporal aliasing occurs. (Appearance of latency, where the player hit the target, but the explosion appears where the target used to be n seconds ago, or the player hit the target, but the projectile goes right through).
+</p>
+<div class='vspace'></div><div style="background:#f9f9f9; padding:5px; border:1px solid #d0d0d0;">
+<pre> // BulletOptimized.js
+ var speed = 5.0;
+ var interval = 0.4; // this is 'n', in seconds.
+ 
+ private var begin : Vector3;
+ private var timer = 0.0;
+ private var hasHit = false;
+ private var timeTillImpact = 0.0;
+ private var hit : RaycastHit;
+ 
+ // set up initial interval
+ function Start () {
+ 	begin = transform.position;
+ 	timer = interval+1;
+ }
+ 
+ function Update () {
+ 	// don't allow an interval smaller than the frame.
+ 	var usedInterval = interval;
+ 	if(Time.deltaTime &gt; usedInterval) usedInterval = Time.deltaTime;
+ 
+ 	// every interval, we cast a ray forward from where we were at the start of this interval
+ 	// to where we will be at the start of the next interval
+ 	if(!hasHit &amp;&amp; timer &gt;= usedInterval) {
+ 		timer = 0;
+ 		var distanceThisInterval = speed * usedInterval;
+ 
+ 		if(Physics.Raycast(begin, transform.forward, hit, distanceThisInterval)) {
+ 			hasHit = true;
+ 			if(speed != 0) timeTillImpact = hit.distance / speed;
+ 		}
+ 
+ 		begin += transform.forward * distanceThisInterval;
+ 	}
+ 
+ 	timer += Time.deltaTime;
+ 
+ 	// after the Raycast hit something, wait until the bullet has traveled
+ 	// about as far as the ray traveled to do the actual hit
+ 	if(hasHit &amp;&amp; timer &gt; timeTillImpact) {
+ 		// Do hit
+ 	} else {
+ 		transform.position += transform.forward * speed * Time.deltaTime;
+ 	}
+ }
+ </div>
+</pre><p class='vspace'></noscript>
+</p></div>
+<div class='vspace'></div><ul><li>Minimize callstack overhead in inner loops
+</li></ul><div  style='padding: 0px 0px 0px 50px;' > 
+<a id="Callstack Overhead" style="text-decoration:none;font-family:monospace;color:#606060;" href="#Callstack Overhead" title="Callstack Overhead" onClick="return showhide(this)">+ Show [Callstack Overhead] +</a> <div id="Callstack Overhead_div" style="background:#EBEFF2; padding:5px; border:1px solid #808080; display:none;">
+<p>Just calling a function has a little bit of overhead in itself. If you are calling things like <span class='doc-prop'>x = Mathf.Abs(x)</span> thousands of times per frame, it might be better to just do <span class='doc-prop'>x = (x &gt; 0 ? x : -x);</span> instead.
+</p></div><noscript>
+<p>Just calling a function has a little bit of overhead in itself. If you are calling things like <span class='doc-prop'>x = Mathf.Abs(x)</span> thousands of times per frame, it might be better to just do <span class='doc-prop'>x = (x &gt; 0 ? x : -x);</span> instead.
+</noscript>
+</p></div>
+<div class='vspace'></div><h3>Optimizing Physics Performance</h3>
+<p>The NVIDIA PhysX physics engine used by Unity is available on mobiles, but the performance limits of the hardware will be reached more easily on mobile platforms than desktops.
+</p>
+<p class='vspace'>Here are some tips for tuning physics to get better performance on mobiles:-
+</p><ul><li>You can adjust the <span class='doc-prop'>Fixed Timestep</span> setting (in the <a href="../Components/class-TimeManager.html">Time manager</a>) to reduce the time spent on physics updates. Increasing the timestep will reduce the CPU overhead at the expense of the accuracy of the physics. Often, lower accuracy is an acceptable tradeoff for increased speed.
+</li><li>Set the <span class='doc-prop'>Maximum Allowed Timestep</span> in the <a href="../Components/class-TimeManager.html">Time manager</a> in the 8-10fps range to cap the time spent on physics in the worst case scenario.
+</li><li>Mesh colliders have a much higher performance overhead than primitive colliders, so use them sparingly. It is often possible to approximate the shape of a mesh by using child objects with primitive colliders. The child colliders will be controlled collectively as a single compound collider by the rigidbody on the parent.
+</li><li>While wheel colliders are not strictly colliders in the sense of solid objects, they nonetheless have a high CPU overhead.
+</li></ul><div class='vspace'></div>
+<p><small>Page last updated: 2012-08-24</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/iphone-PracticalRenderingOptimizations.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/OptimizingGraphicsPerformance.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

@@ -1,0 +1,200 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Keeping track of loaded AssetBundles</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/AssetBundlesIntro.html">AssetBundles (Pro only)</a><span>&gt;</span><a href="../Manual/keepingtrackofloadedassetbundles.html">Keeping track of loaded AssetBundles</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/LoadingAssetBundles.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/binarydata.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Keeping track of loaded AssetBundles</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    <h2>Keeping Track of loaded AssetBundles</h2>
+<p>Unity will only allow you to have a single instance of a particular AssetBundle loaded at one time in your application. What this means is that you can’t retrieve an AssetBundle from a WWW object if the same one has been loaded previously and has not been unloaded. In practical terms it means that when you try to access a previously loaded AssetBundle like this:
+</p>
+<p class='vspace'><code class='escaped'>AssetBundle bundle = www.assetBundle;</code>
+</p>
+<p class='vspace'>the following error will be thrown
+</p>
+<p class='vspace'><code class='escaped'>Cannot load cached AssetBundle. A file of the same name is already loaded from another AssetBundle</code>
+</p>
+<p class='vspace'>and the assetBundle property will return null. Since you can’t retrieve the AssetBundle during the second download if the first one is still loaded, what you need to do is to either <em>unload</em> the AssetBundle when you are no longer using it, or maintain a reference to it and avoid downloading it if it is already in memory. You can decide the right course of action based on your needs, but our recommendation is that you <em>unload</em> the AssetBundle as soon as you are done loading objects. This will free the memory and you will no longer get an error about loading cached AssetBundles. 
+</p>
+<p class='vspace'>If you do want to keep track of which AssetBundles you have downloaded, you could use a wrapper class to help you manage your downloads like the following:
+</p>
+<div class='vspace'></div><pre class='codelisting'>using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+static public class AssetBundleManager {
+   // A dictionary to hold the AssetBundle references
+   static private Dictionary&lt;string, AssetBundleRef&gt; dictAssetBundleRefs;
+   static AssetBundleManager (){
+       dictAssetBundleRefs = new Dictionary&lt;string, AssetBundleRef&gt;();
+   }
+   // Class with the AssetBundle reference, url and version
+   private class AssetBundleRef {
+       public AssetBundle assetBundle = null;
+       public int version;
+       public string url;
+       public AssetBundleRef(string strUrlIn, int intVersionIn) {
+           url = strUrlIn;
+           version = intVersionIn;
+       }
+   };
+   // Get an AssetBundle
+   public static AssetBundle getAssetBundle (string url, int version){
+       string keyName = url + version.ToString();
+       AssetBundleRef abRef;
+       if (dictAssetBundleRefs.TryGetValue(keyName, out abRef))
+           return abRef.assetBundle;
+       else
+           return null;
+   }
+   // Download an AssetBundle
+   public static IEnumerator downloadAssetBundle (string url, int version){
+       string keyName = url + version.ToString();
+       if (dictAssetBundleRefs.ContainsKey(keyName))
+           yield return null;
+       else {
+           using(WWW www = WWW.LoadFromCacheOrDownload (url, version)){
+               yield return www;
+               if (www.error != null)
+                   throw new Exception("WWW download:" + www.error);
+               AssetBundleRef abRef = new AssetBundleRef (url, version);
+               abRef.assetBundle = www.assetBundle;
+               dictAssetBundleRefs.Add (keyName, abRef);
+           }
+       }
+   }
+   // Unload an AssetBundle
+   public static void Unload (string url, int version, bool allObjects){
+       string keyName = url + version.ToString();
+       AssetBundleRef abRef;
+       if (dictAssetBundleRefs.TryGetValue(keyName, out abRef)){
+           abRef.assetBundle.Unload (allObjects);
+           abRef.assetBundle = null;
+           dictAssetBundleRefs.Remove(keyName);
+       }
+   }
+}</pre>
+<p class='vspace'>An example usage of the class would be:
+</p>
+<div class='vspace'></div><pre class='codelisting'>using UnityEditor;
+
+class ManagedAssetBundleExample : MonoBehaviour {
+   public string url;
+   public int version;
+   AssetBundle bundle;
+   void OnGUI (){
+       if (GUILayout.Label ("Download bundle"){
+           bundle = AssetBundleManager.getAssetBundle (url, version);
+           if(!bundle)
+               StartCoroutine (DownloadAB());
+       }
+   }
+   IEnumerator DownloadAB (){
+       yield return StartCoroutine(AssetBundleManager.downloadAssetBundle (url, version));
+       bundle = AssetBundleManager.getAssetBundle (url, version);
+   }
+   void OnDisable (){
+       AssetBundleManager.Unload (url, version);
+   }
+}</pre>
+<p class='vspace'>Please bear in mind, that the AssetBundleManager class in this example is static, and any AssetBundles that you are referencing will not be destroyed when loading a new scene. Use this class as a guide but as recommended initially it is best if you <em>unload</em> AssetBundles right after they have been used. You can always clone a previously Instantiated object, removing the need to load the AssetBundles again.
+</p>
+<p class='vspace'><a href="../Manual/AssetBundlesIntro.html">back to AssetBundles Intro</a>
+</p>
+<p><small>Page last updated: 2012-05-11</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/LoadingAssetBundles.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/binarydata.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

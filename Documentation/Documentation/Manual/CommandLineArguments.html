@@ -1,0 +1,194 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Command line arguments</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/CommandLineArguments.html">Command line arguments</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/StreamingAssets.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/RunningEditorCodeOnLaunch.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Command line arguments</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Typically, Unity will be launched by double-clicking its icon from the desktop but it is also possible to run it from the command line (ie, the MacOS Terminal or the Windows Command Prompt). When launched in this way, Unity can receive commands and information on startup, which can be very useful for test suites, automated builds and other production tasks.
+</p>
+<p class='vspace'>Under MacOS, you can launch Unity from the Terminal by typing:-
+</p>
+<p class='vspace'><code class='escaped'>/Applications/Unity/Unity.app/Contents/MacOS/Unity</code>
+</p>
+<p class='vspace'>...while under Windows, you should type
+</p>
+<p class='vspace'><code class='escaped'>"C:\Program Files (x86)\Unity\Editor\Unity.exe"</code>
+</p>
+<p class='vspace'>...at the command prompt.
+</p>
+<p class='vspace'>Standalone Unity games can be launched in a similar way.
+</p>
+<div class='vspace'></div><h2>Command Line Arguments</h2>
+<p>As mentioned above, the editor and also built games can optionally be supplied with additional commands and information on startup. This is done using the following command line arguments:-
+</p>
+<div class='vspace'></div><dl><dt><span class='doc-prop'>-batchmode</span></dt><dd>Run Unity in batch mode. This should always be used in conjunction with the other command line arguments as it ensures no pop up windows appear and eliminates the need for any human intervention. When an exception occurs during execution of script code, asset server updates fail or other operations fail Unity will immediately exit with return code 1. Note that in batch mode, Unity will send a minimal version of its log output to the console. However, the <a href="../Manual/LogFiles.html">Log Files</a> still contain the full log information.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-quit</span></dt><dd>Quit the Unity editor after other commands have finished executing.  Note that this can cause error messages to be hidden (but they will show up in the Editor.log file).
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-buildWindowsPlayer &lt;pathname&gt;</span></dt><dd>Build a standalone Windows player (eg, -buildWindowsPlayer path/to/your/build.exe).
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-buildOSXPlayer &lt;pathname&gt;</span></dt><dd>Build a standalone Mac OSX player (eg, -buildOSXPlayer path/to/your/build.app).
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-buildLinux32Player &lt;pathname&gt;</span></dt><dd>Build a 32-bit standalone Linux player (eg, -buildLinux32Player path/to/your/build).
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-buildLinux64Player &lt;pathname&gt;</span></dt><dd>Build a 64-bit standalone Linux player (eg, -buildLinux64Player path/to/your/build).
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-importPackage &lt;pathname&gt;</span></dt><dd>Import the given <a href="../Manual/HOWTO-exportpackage.html">package</a>. No import dialog is shown.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-createProject &lt;pathname&gt;</span></dt><dd>Create an empty project at the given path.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-projectPath &lt;pathname&gt;</span></dt><dd>Open the project at the given path.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-logFile &lt;pathname&gt;</span></dt><dd>Specify where the Editor or Windows standalone log file will be written.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-assetServerUpdate &lt;IP[:port] projectName username password [r &lt;revision&gt;]&gt;</span></dt><dd>Force an update of the project in the <a href="../Manual/AssetServer.html">Asset Server</a> given by <em>IP:port</em>. The port is optional and if not given it is assumed to be the standard one (10733). It is advisable to use this command in conjunction with the <em>-projectPath</em> argument to ensure you are working with the correct project. If no project name is given then the last project opened by Unity is used. If no project exists at the path given by <em>-projectPath</em> then one is created automatically.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-exportPackage &lt;exportAssetPath1 exportAssetPath2 ExportAssetPath3 exportFileName&gt;</span></dt><dd>Exports a package given a path (or set of given paths).  <span class='doc-prop'>exportAssetPath</span> is a folder (relative to to the Unity project root) to export from the Unity project and <span class='doc-prop'>exportFileName</span> is the package name. Currently, this option can only export whole folders at a time.  This command normally needs to be used with the <span class='doc-prop'>-projectPath</span> argument.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-nographics (Windows only)</span></dt><dd>When running in batch mode, do not initialize graphics device at all. This makes it possible to run your automated workflows on machines that don't even have a GPU (automated workflows only work, when you have a window in focus, otherwise you can't send simulated input commands). A standalone player generated with this option will not feature any graphics.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-executeMethod &lt;ClassName.MethodName&gt;</span></dt><dd>Execute the static method as soon as Unity is started, the project is open and after the optional asset server update has been performed. This can be used to do continous integration, perform Unit Tests, make builds, prepare some data, etc. If you want to return an error from the commandline process you can either throw an exception which will cause Unity to exit with 1 or else call <a class='urllink' href='../ScriptReference/EditorApplication.Exit.html' rel='nofollow'>EditorApplication.Exit</a> with a non-zero code. If you want to pass parameters you can add them to the command line and retrieve them inside the method using System.Environment.GetCommandLineArgs. 
+</dd></dl><p class='vspace'>To use <code>-executeMethod</code> <b>you need to have a script in an Editor folder and a static function in the class</b>. 
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+// C# example
+using UnityEditor;
+class MyEditorScript
+{
+     static void PerformBuild ()
+     {
+         string[] scenes = { "Assets/MyScene.unity" };
+         BuildPipeline.BuildPlayer(scenes, ...);
+     }
+}
+</pre>
+<div class='vspace'></div><pre class='codelisting'>
+// JavaScript example
+static void PerformBuild ()
+{
+    string[] scenes = { "Assets/MyScene.unity" };
+    BuildPipeline.BuildPlayer(scenes, ...);
+}
+</pre>
+<div class='vspace'></div><h3>Example usage</h3>
+<p>Execute Unity in batch mode, execute <code>MyEditorScript.MyMethod</code> method, and quit upon completion.
+</p>
+<p class='vspace'><b>Windows:</b><br /><code>C:\program files\Unity\Editor&gt;Unity.exe -quit -batchmode -executeMethod MyEditorScript.MyMethod</code>
+</p>
+<p class='vspace'><b>Mac OS:</b><br /><code>/Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -executeMethod MyEditorScript.MyMethod</code>
+</p>
+<p class='vspace'>Execute Unity in batch mode. Use the project path given and update from the asset server. Execute the given method after all assets have been downloaded and imported from the asset server. After the method has finished execution, automatically quit Unity.
+</p>
+<p class='vspace'><code>/Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -projectPath ~/UnityProjects/AutobuildProject -assetServerUpdate 192.168.1.1 MyGame AutobuildUser l33tpa33 -executeMethod MyEditorScript.PerformBuild -quit</code>
+</p>
+<p class='vspace'><a name='player' id='player'></a>
+</p><h2>Unity Standalone Player command line arguments</h2>
+<p>Standalone players built with Unity also understand some command line arguments:
+</p>
+<div class='vspace'></div><dl><dt><span class='doc-prop'>-batchmode</span></dt><dd>Run the game in "headless" mode. The game will not display anything or accept user input. This is mostly useful for running servers for <a href="../Components/NetworkReferenceGuide.html">networked games</a>.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-force-opengl (Windows only)</span></dt><dd> Make the game use OpenGL for rendering, even if Direct3D is available. Normally Direct3D is used but OpenGL is used if Direct3D 9.0c is not available.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-force-d3d9 (Windows only)</span></dt><dd> Make the game use Direct3D 9 for rendering. This is the default, so normally there's no reason to pass it.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-force-d3d11 (Windows only)</span></dt><dd> Make the game use Direct3D 11 for rendering. 
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-single-instance (Linux &amp; Windows only)</span></dt><dd>Allow only one instance of the game to run at the time. If another instance is already running then launching it again with <code>-single-instance</code> will just focus the existing one.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-nolog (Windows only)</span></dt><dd>Do not produce output log. Normally <code>output_log.txt</code> is written in the <code>*_Data</code> folder next to the game executable, where <a class='urllink' href='../ScriptReference/Debug.Log.html' rel='nofollow'>Debug.Log</a> output is printed.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-force-d3d9-ref (Windows only)</span></dt><dd>Make the game run using Direct3D's "Reference" software renderer. The <a class='urllink' href='http://msdn.microsoft.com/en-us/directx/default.aspx' rel='nofollow'>DirectX SDK</a> has to be installed for this to work. This is mostly useful for building automated test suites, where you want to ensure rendering is exactly the same no matter what graphics card is being used.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-adapter N (Windows only)</span></dt><dd>Allows the game to run full-screen on another display, where N denotes the display number.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-popupwindow (Windows only)</span></dt><dd>The window will be created as a a pop-up window (without a frame).
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-screen-width (Linux &amp; Windows only)</span></dt><dd>Overrides the default screen width.  This must be an integer from a supported resolution.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-screen-height (Linux &amp; Windows only)</span></dt><dd> Overrides the default screen height.  This must be an integer from a supported resolution.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>-screen-quality (Linux only)</span></dt><dd> Overrides the default screen quality.  Example usage would be: <code>/path/to/myGame -screen-quality Beautiful</code>
+</dd></dl><div class='vspace'></div><h2>Editor Installer</h2>
+<p>The following options can be used when installing the Unity Editor from command line:
+</p>
+<div class='vspace'></div><dl><dt><span class='doc-prop'>/S (Windows only)</span></dt><dd>Performs a silent (no questions asked) install.
+<div class='vspace'></div></dd><dt><span class='doc-prop'>/D=PATH (Windows only)</span></dt><dd>Sets the default install directory. Useful when combined with the silent install option.
+</dd></dl><div class='vspace'></div><h3>Example usage</h3>
+<p>Install Unity silently to E:\Development\Unity.
+</p>
+<p class='vspace'><b>Windows:</b><br /><code>UnitySetup.exe /S /D=E:\Development\Unity</code>
+</p>
+<p><small>Page last updated: 2012-11-28</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/StreamingAssets.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/RunningEditorCodeOnLaunch.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

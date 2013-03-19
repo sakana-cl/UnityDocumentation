@@ -1,0 +1,136 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Cache Server FAQ</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/AssetImportandCreation.html">Asset Import and Creation</a><span>&gt;</span><a href="../Manual/AssetServer.html">Asset Server (Pro Only)</a><span>&gt;</span><a href="../Manual/CacheServerFAQ.html">Cache Server FAQ</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AssetCacheServer.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/BehindtheScenes.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Cache Server FAQ</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<h3>Will the size of my Cache Server database grow indefinitely as more and more resources get imported and stored?</h3>
+<p>The Cache Server removes assets that have not been used for a period of time automatically (of course if those assets are needed again, they will be re-created during next usage). 
+</p>
+<div class='vspace'></div><h3>Does the cache server work only with the asset server?</h3>
+<p>The cache server is designed to be transparent to source/version control systems and so you are not restricted to using Unity's asset server.
+</p>
+<div class='vspace'></div><h3>What changes will cause the imported file to get regenerated?</h3>
+<p>When Unity is about to import an asset, it generates an MD5 hash of all source data.
+</p>
+<p class='vspace'>For a texture this consists of:
+</p><ul><li>The source asset:  "myTexture.psd" file
+</li><li>The meta file: "myTexture.psd.meta" (Stores all importer settings)
+</li><li>The internal version number of the texture importer
+</li><li>A hash of version numbers of all <a class='urllink' href='../ScriptReference/AssetPostprocessor.html' rel='nofollow'>AssetPostprocessors</a>
+</li></ul><p class='vspace'>If that hash is different from what is stored on the Cache Server, the asset will be reimported, otherwise the cached version will be downloaded. The client Unity editor will only pull assets from the server as they are needed - assets don't get pushed to each project as they change.
+</p>
+<div class='vspace'></div><h3>How do I work with Asset dependencies?</h3>
+<p>The Cache Server does not handle dependencies. Unity's asset pipeline does not deal with the concept of dependencies. It is built in such a way as to avoid dependencies between assets. <span class='doc-prop'>AssetPostprocessors</span> are a common technique used to customize the Asset importer to fit your needs. For example, you might want to add MeshColliders to some GameObjects in an fbx file based on their name or tag.
+</p>
+<p class='vspace'>It is also easy to use <span class='doc-prop'>AssetPostprocessors</span> to introduce dependencies. For example you might use data from a text file next to the asset to add additional components to the imported game objects. This is not supported in the Cache Server. If you want to use the Cache Server, you will have to remove dependency on other assets in the project folder. Since the Cache Server doesn't know anything about the dependency in your postprocessor, it will not know that anything has changed thus use an old cached version of the asset.
+</p>
+<p class='vspace'>In practice there are plenty of ways you can do asset postprocessing to work well with the cache server.
+You can use:
+</p><ul><li>The Path of the imported asset
+</li><li>Any import settings of the asset
+</li><li>The source asset itself or any data generated from it passed to you in the asset postprocessor.
+</li></ul><div class='vspace'></div><h3>Are there any issues when working with materials?</h3>
+<p>Modifying materials that already exist might cause trouble. When using the Cache Server, Unity validates that the references to materials are maintained. But since no postprocessing calls will be invoked, the contents of the material can not be changed when a model is imported through the Cache Server. Thus you might get different results when importing with or without Cache Server. It is best to never modify materials that already exist on disk.
+</p>
+<div class='vspace'></div><h3>Are there any asset types which will not be cached by the server?</h3>
+<p>There are a few kinds of asset data which the server doesn't cache. There isn't really anything to be gained by caching script files and so the server will ignore them. Also, native files used by 3D modelling software (Maya, 3D Max, etc) are converted to FBX using the application itself. Currently, the asset server caches neither the native file nor the intermediate FBX file generated in the import process. However, it is possible to benefit from the server by exporting files as FBX from the modelling software and adding those to the Unity project.
+</p>
+<p><small>Page last updated: 2012-09-04</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AssetCacheServer.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/BehindtheScenes.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

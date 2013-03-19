@@ -1,0 +1,190 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Flash: Building &amp; Running</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/flash-gettingstarted.html">Getting Started with Flash Development</a><span>&gt;</span><a href="../Manual/flash-building.html">Flash: Building &amp; Running</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flash-setup.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flash-debugging.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Flash: Building &amp; Running</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>The following is a step-by-step guide to build and run a new project exported to Flash.
+</p>
+<div class='vspace'></div><ol><li>Create your Unity content.
+</li><li>Choose File-&gt;Build Settings to bring up the Build Settings dialog and add your scene(s).
+</li><li>Change the Platform to Flash Player
+</li><li>Target Player can be left as the default. This option enables you to change the target Flash Player based on the features you require (see <a class='urllink' href='http://www.adobe.com/support/documentation/en/flashplayer/releasenotes.html' rel='nofollow'>http://www.adobe.com/support/documentation/en/flashplayer/releasenotes.html</a> for details).
+</li><li>Tick Development Build.  (This causes Unity to <b>not</b> compress the final SWF file.  Not compressing will make the build faster, and also, the SWF file will not have to be decompressed before being run in the Flash Player.  Note that an empty scene built using the Development Build option will be around 16M in size, compared to around 2M compressed.)
+</li><li>Press the Build button.
+</li></ol><div class='vspace'></div><div class='indent'><img class='figure' src='../Images/manual/flash-building-0.jpg' />
+</div><p class='vspace'>Unity will build a SWF file at the location you choose.  Additionally it will create the following files:
+</p><ul><li>an html file - Use this to view your Flash-built content.
+</li><li>a swfobject.js file - Handles checking for the Flash Player and browser integration.
+</li><li>an embeddingapi.swc file.
+</li></ul><p class='vspace'>To view your Flash-built content open the html file. Do not open the SWF file directly.
+</p>
+<p class='vspace'>Build-and-run will create the same files, launch your default browser and load the generated html file.
+</p>
+<p class='vspace'>The embeddingapi.swc file created in the build allows you to load the SWF in your own project. Embedding the Unity content in a standard flash project allows you to do GUI in Flash. This type of Flash integration will of course not work in any of the other build targets.
+</p>
+<p class='vspace'>As with the other build targets, there are Player settings that you can specify. Most of the Flash settings are shared with other platforms. Note that the resolution for the content is taken from the Standalone player settings.
+</p>
+<p class='vspace'>We allow for a Flash API that gives you texture handles, which in combination with the swc embedding will give you means to do webcam, video, vector graphics from flash as textures.
+</p>
+<p class='vspace'><br />
+</p><h2>The Build Process</h2>
+<p>The Unity Flash Publisher attempts to convert scripts from C#/UnityScript into ActionScript. In this process, there can be two kinds of conversion errors:
+</p><ul><li>errors during conversion of unity code to ActionScript
+</li><li>errors while compiling the converted code. 
+</li></ul><p class='vspace'>Errors during conversion will point to the original files and will have the familiar UnityScript error messages with file names and line numbers. 
+</p>
+<p class='vspace'>Errors during the compilation of the converted ActionScript will take you to the message in the generated ActionScript code (with filenames ending with <code>.as</code>).
+</p>
+<p class='vspace'><br />
+</p><h2>Debugging Converted ActionScript Code</h2>
+<p>During a build, the converted ActionScript (<code>.as</code>) files are stored within your project folder in:
+</p><ul><li>/Temp/StagingArea/Data/ConvertedDotNetCode/
+</li></ul><p class='vspace'>If you encounter errors with your SWF (at runtime or during a build), it can be useful to look at this converted code.
+</p>
+<p class='vspace'>It is possible that any ActionScript errors at compilation time will not be easily understood. Just remember that the ActionScript is generated from your game script code, so any changes you need to make will be in your original code and not the converted ActionScript files.
+</p>
+<p class='vspace'><br />
+</p><h2>Building for a specific Flash Player version</h2>
+<p>The dropdown box in the build settings window will enable you to choose which Flash Player version you wish to target. This will always default to the lowest supported Flash Player version (currently 11.2) upon creating/reopening your Unity project.
+</p>
+<p class='vspace'>If you wish to build for a specific Flash Player version you can do so by creating an editor script to perform the build for you. In order to do this, you can specify a <a class='urllink' href='http://docs.unity3d.com/Documentation/ScriptReference/FlashBuildSubtarget.html' rel='nofollow'>FlashBuildSubtarget</a> in your <a class='urllink' href='http://docs.unity3d.com/Documentation/ScriptReference/EditorUserBuildSettings.html' rel='nofollow'>EditorUserBuildSettings</a> when building to Flash from an editor script. For example:
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+EditorUserBuildSettings.flashBuildSubtarget = FlashBuildSubtarget.Flash11dot2;
+BuildPipeline.BuildPlayer(..., ..., BuildTarget.FlashPlayer, BuildOptions.Development);
+</pre>
+<p class='vspace'><br />
+</p><h2>Example Build Errors and Warnings</h2>
+<p>Below are some common errors/warnings you may encounter when using the Flash export. We also have sections on the <a class='urllink' href='http://forum.unity3d.com/forums/36-Flash-Development' rel='nofollow'>Forums</a> and <a class='urllink' href='http://answers.unity3d.com/questions/topics/flash.html' rel='nofollow'>Answers</a> dedicated to Flash export which may be of help if your error is not listed below.
+</p>
+<div class='vspace'></div><h3>Unable to find Java</h3>
+<pre class='codelisting'>
+Error building Player: Exception: Compiling SWF Failed: Unable to launch Java - is the Java Runtime Environment (JRE) installed?
+</pre>
+<p>If you encounter the above error at build time, please <a class='urllink' href='http://www.oracle.com/technetwork/java/javase/install-windows-141940.html' rel='nofollow'>install the 32-bit JRE</a> and try again. 
+</p>
+<p class='vspace'><br />
+</p><h3>'TerrainCollider' is not supported</h3>
+<pre class='codelisting'>
+'TerrainCollider' is not supported when building for FlashPlayer. 
+'TerrainData' is not supported when building for FlashPlayer. 
+Asset: 'Assets/New Terrain.asset'
+</pre>
+<p>The terrain feature is not supported when building for the FlashPlayer target.  All <a href="../Manual/flash-whatssupported.html">un-supported features</a> will generate a similar warning.  Note that the build will continue, however, the unsupported feature will be missing from the final SWF.
+</p>
+<p class='vspace'><br />
+</p><h3>Unboxing</h3>
+<pre class='codelisting'>
+Error: Call to a possibly undefined method RuntimeServices_UnboxSingle_Object through a reference with static type Class.
+</pre>
+<p>This is likely because the conversion between types that is defined on the UnityScript side is not defined for our Flash Publisher.  Any time you see an error that refers to <code>Unbox</code> it means a type conversion is required but cannot be found. In order to resolve these issues:
+</p><ul><li>Do not forget to use <code>#pragma strict</code>, and take care of all "implicit downcast" warning messages. 
+</li><li>The rule of thumb is to avoid runtime casts from Object to primitive types (int, float, etc.). Also prefer containers with explicit types to generic ones, for example:
+<ul><li>System.Collections.Generic.List.&lt;float&gt; instead of Array
+</li><li>Dictionary&lt;string, float&gt; instead of Hashtable
+</li></ul></li></ul><p class='vspace'><br />
+</p><h3>UnauthorizedAccessException</h3>
+<pre class='codelisting'>
+Error building Player: UnauthorizedAccessException: Access to the path "Temp/StagingArea/Data/ConvertedDotNetCode/global" is denied.
+</pre>
+<p>If Unity-generated ActionScript files are open in a text editor, Unity may refuse to build issuing this error. To fix this, please close the ActionScript files and allow Unity to overwrite them.
+</p>
+<p><small>Page last updated: 2012-11-06</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flash-setup.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flash-debugging.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

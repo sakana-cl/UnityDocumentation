@@ -1,0 +1,166 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - 项目视图-Project Browser</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">主页</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">手册</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">参考</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">脚本</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity 手册</a><span>&gt;</span><a href="../Manual/UserGuide.html">用户指南</a><span>&gt;</span><a href="../Manual/UnityBasics.html">Unity 基础</a><span>&gt;</span><a href="../Manual/LearningtheInterface.html">界面学习-Learning the Interface</a><span>&gt;</span><a href="../Manual/ProjectView40.html">项目视图-Project Browser</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/LearningtheInterface.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/Hierarchy.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Project Browser</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>In this view, you can access and manage the assets that belong to your project.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-0.jpg' /></div>
+<p class='vspace'>The left panel of the browser shows the folder structure of the project as a hierarchical list. When a folder is selected from the list by clicking, its contents will be shown in the panel to the right. The individual assets are shown as icons that indicate their type (script, material, sub-folder, etc). The icons can be resized using the slider at the bottom of the panel; they will be replaced by a hierarchical list view if the slider is moved to the extreme left. The space to the left of the slider shows the currently selected item, including a full path to the item if a search is being performed. 
+</p>
+<p class='vspace'>Above the project structure list is a <b>Favorites</b> section where you can keep frequently-used items for easy access. You can drag items from the project structure list to the Favourites and also save search queries there (see <b>Searching</b> below).
+</p>
+<p class='vspace'>Just above the panel is a "breadcrumb trail" that shows the path to the folder currently being viewed. The separate elements of the trail can be clicked for easy navigation around the folder hierarchy. When searching, this bar changes to show the area being searched (the root Assets folder, the selected folder or the Asset Store) along with a count of free and paid assets available in the store, separated by a slash. There is an option in the <em>General</em> section of Unity's Preferences window to disable the display of Asset Store hit counts if they are not required.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-1.jpg' /></div>
+<p class='vspace'>Along the top edge of the window is the browser's toolbar.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-2.jpg' /></div>
+<p class='vspace'>Located at the left side of the toolbar, the <span class='doc-menu'>Create</span> menu lets you add new assets and sub-folders to the current folder. To its right are a set of tools to allow you to search the assets in your project.
+</p>
+<p class='vspace'>The Window menu provides the option of switching to a one-column version of the project view, essentially just the hierarchical structure list without the icon view. The lock icon next to the menu enables you to "freeze" the current contents of the view (ie, stop them being changed by events elsewhere) in a similar manner to the inspector lock.
+</p>
+<div class='vspace'></div><h2>Searching</h2>
+<p>The browser has a powerful search facility that is especially useful for locating assets in large or unfamiliar projects. The basic search will filter assets according to the text typed in the search box
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-3.jpg' /></div>
+<p class='vspace'>If you type more than one search term then the search is narrowed, so if you type <em>coastal scene</em> it will only find assets with both "coastal" and "scene" in the name (ie, terms are ANDed together).
+</p>
+<p class='vspace'>To the right of the search bar are three buttons. The first allows you to further filter the assets found by the search according to their type.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-4.jpg' /></div>
+<p class='vspace'>Continuing to the right, the next button filters assets according to their Label (labels can be set for an asset in the <a href="../Manual/Inspector.html">Inspector</a>). Since the number of labels can potentially be very large, the label menu has its own mini-search filter box.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-5.jpg' /></div>
+<p class='vspace'>Note that the filters work by adding an extra term in the search text. A term beginning with "t:" filters by the specified asset type, while "l:" filters by label. You can type these terms directly into the search box rather than use the menu if you know what you are looking for. You can search for more than one type or label at once. Adding several types will expand the search to include all specified types (ie, types will be ORed together). Adding multiple labels will narrow the search to items that have all the specified labels (ie, labels are ANDed).
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-6.jpg' /></div>
+<p class='vspace'>The rightmost button saves the search by adding an item to the Favourites section of the asset list.
+</p>
+<div class='vspace'></div><h3>Searching the Asset Store</h3>
+<p>The Project Browser's search can also be applied to assets available from the Unity <span class='doc-keyword'>Asset Store</span>. If you choose <span class='doc-menu'>Asset Store</span> from the menu in the breadcrumb bar, all free and paid items from the store that match your query will be displayed. Searching by type and label works the same as for a Unity project. The search query words will be checked against the asset name first and then the package name, package label and package description in that order (so an item whose name contains the search terms will be ranked higher than one with the same terms in its package description).
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/ProjectView40-7.jpg' /></div>
+<p class='vspace'>If you select an item from the list, its details will be displayed in the inspector along with the option to purchase and/or download it. Some asset types have previews available in this section so you can, for example, play an audio clip or rotate a 3D model before buying. The inspector also gives the option of viewing the asset in the usual Asset Store window to see additional details.
+</p>
+<div class='vspace'></div><h2>Shortcuts</h2>
+<p>The following keyboard shortcuts are available when the browser view has focus. Note that some of them only work when the view is using the two-column layout (you can switch between the one- and two-column layouts using the panel menu in the very top right corner).
+</p>
+<div class='vspace'></div><table width='100%'><tr ><td  align='left'><b>F</b></td><td  align='left'>Frame selection</td></tr>
+<tr ><td  align='left'><b>Tab</b></td><td >Shift focus between first column and second column  (Two columns)</td></tr>
+<tr ><td  align='left'><b>Ctrl/Cmd + F</b></td><td >Focus search field</td></tr>
+<tr ><td  align='left'><b>Ctrl/Cmd + A</b></td><td >Select all visible items in list</td></tr>
+<tr ><td  align='left'><b>Ctrl/Cmd + D</b></td><td >Duplicate selected assets</td></tr>
+<tr ><td  align='left'><b>Delete</b></td><td >Delete with dialog</td></tr>
+<tr ><td  align='left'><b>Delete + Shift</b></td><td >Delete without dialog</td></tr>
+<tr ><td  align='left'><b>Backspace + Cmd</b></td><td >Delete without dialogs (OSX)</td></tr>
+<tr ><td  align='left'><b>Enter</b></td><td >Begin rename selected (OSX)</td></tr>
+<tr ><td  align='left'><b>Cmd + down arrow</b></td><td >Open selected assets (OSX)</td></tr>
+<tr ><td  align='left'><b>Cmd + up arrow</b></td><td >Jump to parent folder (OSX, Two columns)</td></tr>
+<tr ><td  align='left'><b>F2</b></td><td >Begin rename selected (Win)</td></tr>
+<tr ><td  align='left'><b>Enter</b></td><td >Open selected assets (Win)</td></tr>
+<tr ><td  align='left'><b>Backspace</b></td><td >Jump to parent folder (Win, Two columns)</td></tr>
+<tr ><td  align='left'><b>Right arrow</b></td><td  align='left'>Expand selected item (tree views and search results). If the item is already expanded, this will select its first child item.</td></tr>
+<tr ><td  align='left'><b>Left arrow</b></td><td  align='left'>Collapse selected item (tree views and search results). If the item is already collapsed, this will select its parent item.</td></tr>
+<tr ><td  align='left'><b>Alt + right arrow</b></td><td  align='left'>Expand item when showing assets as previews</td></tr>
+<tr ><td  align='left'><b>Alt + left arrow</b></td><td  align='left'>Collapse item when showing assets as previews</td></tr>
+</table>
+<p><small>Page last updated: 2012-11-15</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/LearningtheInterface.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/Hierarchy.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

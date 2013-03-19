@@ -1,0 +1,156 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Practical Guide to Optimization for Mobiles - Scripting and Gameplay Methods</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/iphone-PracticalGuide.html">Practical Guide to Optimization for Mobiles</a><span>&gt;</span><a href="../Manual/iphone-OptimizedScriptingMethods.html">Practical Guide to Optimization for Mobiles - Scripting and Gameplay Methods</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/iphone-OptimizedGraphicsMethods.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/iphone-PracticalRenderingOptimizations.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Practical Guide to Optimization for Mobiles - Scripting and Gameplay Methods</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>This section demonstrates ways that mobile developers write code and structure their games so that they run fast. The core idea here is that game design and optimization aren't really separate processes; decisions you make when you are designing your game can make it both fun and fast.
+</p>
+<div class='vspace'></div><h2>A historical example</h2>
+<div style="float:right; padding:5px" >
+<div><img class='figure' src='../Images/manual/iphone-OptimizedScriptingMethods-0.jpg' /></div>
+</div>
+<p class='vspace'>You may remember old games where the player was only allowed one shot on the screen at a time, and reload speed was controlled by whether the bullet missed or not, instead of a timer. This technique is called <span class='doc-keyword'>object pooling</span>, and it simplifies memory management, making programs run smoother. 
+</p>
+<p class='vspace'>The creators of space invaders only had a small amount of RAM, and they had to ensure that their program would never need to allocate more than was available. If they let the player fire once every second, and they offered a powerup that decreased the reload time to a half a second, they would have to ensure that there was enough memory space to allocate a lot of projectiles in the case where the player fires as fast as possible and all of the shots live for the longest possible time. That would probably pose a problem for them, so instead, they just allocated one projectile and left it at that. As soon as the projectile dies, it is simply deactivated, and repositioned and activated when it is fired again. But it always lives in the same space in memory and doesn't have to move around or be constantly deleted and recreated. 
+</p>
+<div class='vspace'></div><h3>An optimization, or a gameplay gem?</h3>
+<p>This is hardly realistic, but it happens to be <b>fun</b>. Tension is released in a climactic moment when the alien invaders approach the ground, similar to a climax in film or literature. The invaders' close proximity gives the adept player near-instantaneous reload time, allowing them to miraculously defend earth by mashing the fire key in perfect time. Good game designs live in a bizarre space between the interactive narrative and the background technology that powers it all. It's hard to plan out awesome, fun, efficient stuff like this, because code logistics and user interaction are two wildly different and deeply finicky things, and using them together to synthesize something fresh and fun takes a lot of thought and experimentation. 
+</p>
+<p class='vspace'>You probably can't plan out every aspect of your game in terms of interaction and playing nice with mobile hardware simultaneously. It's more likely that these "gems" where the two meet in harmony will pop up as accidents while you're experimenting. But having a solid understanding of the way your code runs on the hardware you intend to deploy on will help. If you want to see the detailed technical explanation of why object pooling is better, and learn about memory allocation, see our <a href="../Manual/iphone-PracticalScriptingOptimizations.html">Scripting Optimizations</a> page.
+</p>
+<div class='vspace'></div><h2>Will X run fast on Mobiles?</h2>
+<p>Say you are beginning to work on a game, and you want to impress your players with lots of action and flashy stuff happening at once. How do you plan those things out? How do you know where the limits are, in game terms like how many coins, how many zombies, how many opponent cars, etc? It all depends on how you code your game.
+</p>
+<p class='vspace'>Generally, if you write your game code the easy way, or the most general and versatile way, you will run into performance issues a lot sooner. The more you rely on specific structures and tricks to run your game, the more horizons will expand, and you will be able to cram more stuff on screen.
+</p>
+<div class='vspace'></div><h3>Easy and versatile, but slow</h3>
+<ul><li>Rigidbodies limited to 2 dimensions in a 2D game.
+</li><li>Rigidbodies on projectiles.
+</li><li>Using Instantiate and Destroy a lot.
+</li><li>Lots of individual 3D objects for collectables or characters.
+</li><li>Performing calculations every frame.
+</li><li>Using OnGUI for your GUI or HUD.
+</li></ul><div class='vspace'></div><h3>Complicated and limited, but faster</h3>
+<ul><li>Writing your own physics code for a 2D game.
+</li><li>Handling collision detection for projectiles yourself.
+</li><li>Using Object Pooling instead of Instantiate and Destroy.
+</li><li>Using animated sprites on particles to represent simple objects.
+</li><li>Performing expensive calculations every few frames and caching the results.
+</li><li>A custom GUI solution.
+</li></ul><div class='vspace'></div><h2>Examples</h2>
+<div style="float:right; padding:5px" >
+<div><img class='figure' src='../Images/manual/iphone-OptimizedScriptingMethods-1.jpg' /></div>
+</div>
+<div class='vspace'></div><h3>Hundreds of rotating, dynamically lit, collectable coins onscreen at once</h3>
+<ul><li>NO: Each coin is a separate object with a rigidbody and a script that rotates it and allows it to be picked up. 
+<div class='vspace'></div></li><li>YES: The coins are a particle system with an animated texture, one script does the collision testing for all the coins and sets their color according to distance from a light.
+<ul><li>This example is implemented in the <a href="../Manual/iphone-PracticalScriptingOptimizations.html#Animated_Sprite_Particle_System">Scripting Optimization</a> page. 
+</li></ul></li></ul><div class='vspace'></div><h3>Your custom-built soft-body simulation</h3>
+<ul><li>NO: The world has pillows lying around everywhere, which you can throw around and make piles of.
+<div class='vspace'></div></li><li>YES: Your character is a pillow, there is only one of them, and the situations it will be in are somewhat predictable (It only collides with spheres and axis-aligned cubes). You can probably code something which isn't a full-featured softbody simulation, but looks really impressive and runs fast.
+</li></ul><div class='vspace'></div><h3>30 enemy characters shooting at the player at once</h3>
+<ul><li>NO: Each enemy has his own skinned mesh, a separate object for his weapon, and instantiates a rigidbody-based projectile every time he fires. Each enemy takes the state of all of his compatriots into account in a complicated AI script that runs every frame.
+<div class='vspace'></div></li><li>YES: Most of the enemies are far away, and are represented by single sprites, or, the enemies are 2D and are just a couple sprites anyway. Every enemy bullet is drawn by the same particle system and simulated by a script which does only rudimentary physics. Each enemy updates his AI state twice per second according to the state of the other enemies in his sector.
+</li></ul><div class='vspace'></div><h2>The how and why of script optimization</h2>
+<p>See our page on <a href="../Manual/iphone-PracticalScriptingOptimizations.html">Optimizing Scripts</a>.
+</p>
+<div class='vspace'></div>
+<p><small>Page last updated: 2012-11-06</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/iphone-OptimizedGraphicsMethods.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/iphone-PracticalRenderingOptimizations.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

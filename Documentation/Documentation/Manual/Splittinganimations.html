@@ -1,0 +1,152 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Splitting Animations</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/CreatingGameplay.html">Creating Gameplay</a><span>&gt;</span><a href="../Manual/MecanimAnimationSystem.html">Mecanim Animation System</a><span>&gt;</span><a href="../Manual/AssetPreparationandImport.html">Asset Preparation and Import</a><span>&gt;</span><a href="../Manual/Splittinganimations.html">Splitting Animations</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AnimationsImport.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/AvatarCreationandSetup.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Splitting Animations</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>An animated character typically has a number of different movements that are activated in the game in different circumstances. These movements are called <a href="../Components/class-AnimationClip.html"><span class='doc-keyword'>Animation Clips</span></a>. For example, we might have separate animation clips for walking, running, jumping, throwing, dying, etc. Depending on the way the model was animated, these separate movements might be imported as distinct animation clips or as one single clip where each movement simply follows on from the previous one. In cases where there is only a single clip, the clip must be <b>split</b> into its component animation clips within Unity, which will involve some extra steps in your workflow.
+</p>
+<div class='vspace'></div><h2>Working with models that have pre-split animations</h2>
+<p>The simplest types of models to work with are those that contain pre-split animations. If you have an animation like that, the <span class='doc-inspector'>Animations</span> tab in the <span class='doc-inspector'>Animation Importer Inspector</span> will look like this:
+</p><div><img class='figure' src='../Images/manual/Splittinganimations-0.jpg' /></div>
+<p class='vspace'>You will see a list available clips which you can preview by pressing Play in the <span class='doc-inspector'>Preview Window</span> (lower down in the inspector). The frame ranges of the clips can be edited, if needed. 
+</p>
+<div class='vspace'></div><h2>Working with models that have unsplit animations</h2>
+<p>For models where the clips are supplied as one continuous animation, the <span class='doc-inspector'>Animation</span> tab in the <span class='doc-inspector'>Animation Importer Inspector</span> will look like this:
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/Splittinganimations-1.jpg' /></div>
+<p class='vspace'>4In cases like this, you can define the frame ranges that correspond to each of the separate animation sequences (walking, jumping, etc). You can create a new animation clip by pressing (+) and selecting the range of frames that are included in it. 
+</p>
+<p class='vspace'>For example:
+</p><ul><li>walk animation during frames 1 - 33
+</li><li>run animation during frames 41 - 57
+</li><li>kick animation during frames 81 - 97
+</li></ul><div class='vspace'></div><div><img class='figure' src='../Images/manual/Splittinganimations-2.jpg' /><br /><em>The Import Settings Options for Animation</em></div>
+<p class='vspace'>In the Import Settings, the <span class='doc-prop'>Split Animations</span> table is where you tell Unity which frames in your asset file make up which Animation Clip. The names you specify here are used to activate them in your game.
+</p>
+<p class='vspace'>For further information about the animation inspector, see the <a href="../Components/class-AnimationClip.html">Animation Clip component reference page</a>.
+</p>
+<p class='vspace'><a name='ImportModelNoAnims' id='ImportModelNoAnims'></a>
+</p>
+<div class='vspace'></div><h2>Adding animations to models that do not contain them</h2>
+<p>You can add animation clips to an <span class='doc-prop'>Animation</span> component even for models without muscle definitions (ie, non-Mecanim). You need to specify the default animation clip in the <span class='doc-prop'>Animation</span> property, and the available animation clips in the <span class='doc-prop'>Animations</span> property. The animation clips you add to such a non-Mecanim model should also be setup in a non-Mecanim way (ie, the <span class='doc-prop'>Muscle Definition</span> property should be set to <span class='doc-prop'>None</span>)
+</p>
+<p class='vspace'>For models that have muscle definitions (Mecanim), the process is different:-
+</p>
+<div class='vspace'></div><ul><li>Create a <span class='doc-prop'>New Animator Controller</span>
+</li><li>Open the <span class='doc-inspector'>Animator Controller Window</span> 
+</li><li>Drag the desired animation clip into the <span class='doc-inspector'>Animator Controller Window</span>
+</li><li>Drag the model asset into the Hierarchy. 
+</li><li>Add the animator controller to the <span class='doc-prop'>Animator component</span> of the asset. 
+</li></ul><p class='vspace'><a name='ImportFile' id='ImportFile'></a>
+</p>
+<div class='vspace'></div><h3>Importing Animations using multiple model files</h3>
+<p>Another way to import animations is to follow a naming scheme that Unity allows for the animation files. You create separate model files and name them with the convention 'modelName@animationName.fbx'. For example, for a model called "goober", you could import separate idle, walk, jump and walljump animations using files named "goober@idle.fbx", "goober@walk.fbx", "goober@jump.fbx" and "goober@walljump.fbx". Only the animation data from these files will be used, even if the original files are exported with mesh data.
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/Splittinganimations-3.jpg' /></div>
+<p class='vspace'><em>An example of four animation files for an animated character (note that the .fbx suffix is not shown within Unity)</em>
+</p>
+<p class='vspace'>Unity automatically imports all four files and collects all animations to the file without the @ sign in. In the example above, the goober.mb file will be set up to reference idle, jump, walk and wallJump automatically.
+</p>
+<p class='vspace'>For FBX files, simply export a model file with no animation ticked (eg, goober.fbx) and the 4 clips as goober@<em>animname</em>.fbx by exporting the desired keyframes for each (enable animation in the FBX dialog).
+</p>
+<p class='vspace'>(back to <a href="../Manual/MecanimAnimationSystem.html">Mecanim introduction</a>)
+</p>
+<p><small>Page last updated: 2012-11-12</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/AnimationsImport.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/AvatarCreationandSetup.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

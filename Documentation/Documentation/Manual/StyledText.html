@@ -1,0 +1,201 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Rich Text</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a><span>&gt;</span><a href="../Manual/StyledText.html">Rich Text</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/Example-CreatingaBillboardPlane.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/UsingDLL.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Rich Text</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>The text for GUI elements and text meshes can incorporate multiple font styles and sizes. The GUIStyle, GUIText and TextMesh classes have a <span class='doc-keyword'>Rich Text</span> setting which instructs Unity to look for markup tags within the text. These tags are not displayed but indicate style changes to be applied to the text.
+</p>
+<div class='vspace'></div><h2>Markup format</h2>
+<p>The markup system is inspired by HTML but isn't intended to be strictly compatible with standard HTML. The basic idea is that a section of text can be enclosed inside a pair of matching tags:-
+</p>
+<div class='vspace'></div><pre>	We are &lt;b&gt;not&lt;/b&gt; amused
+</pre><p class='vspace'>As the example shows, the tags are just pieces of text inside the "angle bracket" characters, &lt; and &gt;. The text inside the tag denotes its name (which in this case is just <b>b</b>). Note that the tag at the end of the section has the same name as the one at the start but with the slash / character added. The tags are not displayed to the user directly but are interpreted as instructions for styling the text they enclose. The b tag used in the example above applies boldface to the word "not", so the text will appear onscreen as:-
+</p>
+<div class='vspace'></div><pre>	We are <b>not</b> amused
+</pre><p class='vspace'>A marked up section of text (including the tags that enclose it) is referred to as an <b>element</b>.
+</p>
+<div class='vspace'></div><h3>Nested elements</h3>
+<p>It is possible to apply more than one style to a section of text by "nesting" one element inside another
+</p>
+<div class='vspace'></div><pre>	We are &lt;b&gt;&lt;i&gt;definitely not&lt;/i&gt;&lt;/b&gt; amused
+</pre><p class='vspace'>The i tag applies italic style, so this would be presented onscreen as
+</p>
+<div class='vspace'></div><pre>	We are <b><em>definitely not</em></b> amused
+</pre><p class='vspace'>Note the ordering of the ending tags, which is in reverse to that of the starting tags. The reason for this is perhaps clearer when you consider that the inner tags need not span the whole text of the outermost element
+</p>
+<div class='vspace'></div><pre>	We are &lt;b&gt;absolutely &lt;i&gt;definitely&lt;/i&gt; not&lt;/b&gt; amused
+</pre><p class='vspace'>which gives
+</p>
+<div class='vspace'></div><pre>	We are <b>absolutely <em>definitely</em> not</b> amused
+</pre><div class='vspace'></div><h3>Tag parameters</h3>
+<p>Some tags have a simple all-or-nothing effect on the text but others might allow for variations. For example, the <b>color</b> tag needs to know which colour to apply. Information like this is added to tags by the use of <b>parameters</b>:-
+</p>
+<div class='vspace'></div><pre>	We are &lt;color=green&gt;green&lt;/color&gt; with envy
+</pre><p class='vspace'>Note that the ending tag doesn't include the parameter value. Optionally, the value can be surrounded by quotation marks but this isn't required.
+</p>
+<div class='vspace'></div><h2>Supported tags</h2>
+<p>The following list describes all the styling tags supported by Unity.
+</p>
+<p class='vspace'><b>b</b>
+</p>
+<p class='vspace'>Renders the text in boldface.
+</p>
+<div class='vspace'></div><pre>	We are &lt;b&gt;not&lt;/b&gt; amused
+</pre><p class='vspace'><b>i</b>
+</p>
+<p class='vspace'>Renders the text in italics.
+</p>
+<div class='vspace'></div><pre>	We are &lt;i&gt;usually&lt;/i&gt; not amused
+</pre><p class='vspace'><b>size</b>
+</p>
+<p class='vspace'>Sets the size of the text according to the parameter value, given in pixels.
+</p>
+<div class='vspace'></div><pre>	We are &lt;size=50&gt;largely&lt;/size&gt; unaffected
+</pre><p class='vspace'><b>color</b>
+</p>
+<p class='vspace'>Sets the colour of the text according to the parameter value. The colour can be specified in the traditional HTML format
+</p>
+<div class='vspace'></div><pre>	#rrggbbaa
+</pre><p class='vspace'>...where the letters correspond to pairs of hexadecimal digits denoting the red, green, blue and alpha (transparency) values for the colour. For example, cyan at full opacity would be specified by
+</p>
+<div class='vspace'></div><pre>	&lt;color=#00ffffff&gt;...
+</pre><p class='vspace'>Another option is to use the name of the colour. This is easier to understand but naturally, the range of colours is limited and full opacity is always assumed.
+</p>
+<div class='vspace'></div><pre>	&lt;color=cyan&gt;...
+</pre><p class='vspace'>The available colour names are given in the table below.
+</p>
+<table width='50%' ><tr ><th >Colour name</th><th >Hex value</th><th >Swatch</th></tr>
+<tr ><td >aqua (same as cyan)</td><td ><code>#00ffffff</code></td><td ><img class='figure' src='../Images/manual/StyledText-0.jpg' /></td></tr>
+<tr ><td >black</td><td ><code>#000000ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-1.jpg' /></td></tr>
+<tr ><td >blue</td><td ><code>#0000ffff</code></td><td ><img class='figure' src='../Images/manual/StyledText-2.jpg' /></td></tr>
+<tr ><td >brown</td><td ><code>#a52a2aff</code></td><td ><img class='figure' src='../Images/manual/StyledText-3.jpg' /></td></tr>
+<tr ><td >cyan (same as aqua)</td><td ><code>#00ffffff</code></td><td ><img class='figure' src='../Images/manual/StyledText-4.jpg' /></td></tr>
+<tr ><td >darkblue</td><td ><code>#0000a0ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-5.jpg' /></td></tr>
+<tr ><td >fuchsia (same as magenta)</td><td ><code>#ff00ffff</code></td><td ><img class='figure' src='../Images/manual/StyledText-6.jpg' /></td></tr>
+<tr ><td >green</td><td ><code>#008000ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-7.jpg' /></td></tr>
+<tr ><td >grey</td><td ><code>#808080ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-8.jpg' /></td></tr>
+<tr ><td >lightblue</td><td ><code>#add8e6ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-9.jpg' /></td></tr>
+<tr ><td >lime</td><td ><code>#00ff00ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-10.jpg' /></td></tr>
+<tr ><td >magenta (same as fuchsia)</td><td ><code>#ff00ffff</code></td><td ><img class='figure' src='../Images/manual/StyledText-11.jpg' /></td></tr>
+<tr ><td >maroon</td><td ><code>#800000ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-12.jpg' /></td></tr>
+<tr ><td >navy</td><td ><code>#000080ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-13.jpg' /></td></tr>
+<tr ><td >olive</td><td ><code>#808000ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-14.jpg' /></td></tr>
+<tr ><td >orange</td><td ><code>#ffa500ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-15.jpg' /></td></tr>
+<tr ><td >purple</td><td ><code>#800080ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-16.jpg' /></td></tr>
+<tr ><td >red</td><td ><code>#ff0000ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-17.jpg' /></td></tr>
+<tr ><td >silver</td><td ><code>#c0c0c0ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-18.jpg' /></td></tr>
+<tr ><td >teal</td><td ><code>#008080ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-19.jpg' /></td></tr>
+<tr ><td >white</td><td ><code>#ffffffff</code></td><td ><img class='figure' src='../Images/manual/StyledText-20.jpg' /></td></tr>
+<tr ><td >yellow</td><td ><code>#ffff00ff</code></td><td ><img class='figure' src='../Images/manual/StyledText-21.jpg' /></td></tr>
+</table>
+<p class='vspace'><b>material</b>
+</p>
+<p class='vspace'>This is only useful for text meshes and renders a section of text with a material specified by the parameter. The value is an index into the text mesh's array of materials as shown by the inspector.
+</p>
+<div class='vspace'></div><pre>	We are &lt;material=2&gt;texturally&lt;/material&gt; amused
+</pre><p class='vspace'><b>quad</b>
+</p>
+<p class='vspace'>This is only useful for text meshes and renders an image inline with the text. It takes parameters that specify the material to use for the image, the image height in pixels, and a further four that denote a rectangular area of the image to display. Unlike the other tags, quad does not surround a piece of text and so there is no ending tag - the slash character is placed at the end of the initial tag to indicate that it is "self-closing".
+</p>
+<div class='vspace'></div><pre>	&lt;quad material=1 size=20 x=0.1 y=0.1 width=0.5 height=0.5 /&gt;
+</pre><p class='vspace'>This selects the material at position in the renderer's material array and sets the height of the image to 20 pixels. The rectangular area of image starts at given by the x, y, width and height values, which are all given as a fraction of the unscaled width and height of the texture.
+</p>
+<p><small>Page last updated: 2012-07-01</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/Example-CreatingaBillboardPlane.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/UsingDLL.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

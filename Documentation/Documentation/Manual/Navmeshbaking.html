@@ -1,0 +1,128 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Navmesh Baking</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/UserGuide.html">User Guide</a><span>&gt;</span><a href="../Manual/CreatingGameplay.html">Creating Gameplay</a><span>&gt;</span><a href="../Manual/NavmeshandPathfinding.html">Navmesh and Pathfinding (Pro only)</a><span>&gt;</span><a href="../Manual/Navmeshbaking.html">Navmesh Baking</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/NavmeshandPathfinding.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/Sound.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Navmesh Baking</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Once the Navmesh geometry and layers are marked up, it's time to bake the Navmesh geometry. 
+</p>
+<p class='vspace'>Inside the Navigation window (<span class='doc-menu'>Window-&gt;Navigation</span>), go to the <span class='doc-menu'>Bake</span> tab (the upper-right corner), and click on the <span class='doc-menu'>Bake</span> button (the lower-right corner).
+</p><div><img class='figure' src='../Images/manual/Navmeshbaking-0.jpg' /></div>
+<p><em>Navigation Bake Window</em>
+</p>
+<p class='vspace'>Here are the properties that affect Navmesh baking: 
+</p><table width='100%'><tr class='tableheader'><td  class='prop'></td><td class='function'></td></tr>
+<tr ><td ><span class='doc-prop'>Radius</span></td><td >radius of the "typical" agent (preferrably the smallest).</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Height</span></td><td >height of the "typical" agent (the "clearance" needed to get a character through).</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Max Slope</span></td><td >all surfaces with higher slope than this, will be discarded.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Step height</span></td><td >the height difference below which navmesh regions are considered connected.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Drop height</span></td><td >If the value of this property is positive, off-mesh links will be placed for adjacent navmesh surfaces where the height difference is below this value.</td></tr>
+<tr ><td  align='left'><span class='doc-prop'>Jump distance</span></td><td >If the value of this property is positive, off-mesh links will be placed for adjacent navmesh surfaces where the horizontal distance is below this value.</td></tr>
+<tr ><td ><span class='doc-prop'>Advanced</span></td></tr>
+<tr ><td  align='left'><span  style='padding-left: 1.5em;'><span class='doc-prop'>Min region area</span></span></td><td  align='left'>Regions with areas below this threshold will be discarded.</td></tr>
+<tr ><td ><span  style='padding-left: 1.5em;'><span class='doc-prop'>Width inaccuracy %</span></span></td><td >Allowable width inaccuracy</td></tr>
+<tr ><td ><span  style='padding-left: 1.5em;'><span class='doc-prop'>Height inaccuracy %</span></span></td><td >Allowable height inaccuracy</td></tr>
+<tr ><td ><span  style='padding-left: 1.5em;'><span class='doc-prop'>Height mesh</span></span></td><td  align='left'>If this options is on, original height information is stored. This has performance implications for speed and memory usage.</td></tr>
+</table>
+<p class='vspace'>Note that the baked navmesh is part of the scene and agents will be able to traverse it. To remove the navmesh, click on <span class='doc-menu'>Clear</span> when you're in the <span class='doc-menu'>Bake</span> tab.
+</p>
+<p class='vspace'>(back to <a href="../Manual/NavmeshandPathfinding.html">Navigation and Pathfinding</a>)
+</p>
+<p><small>Page last updated: 2012-04-24</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/NavmeshandPathfinding.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/Sound.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

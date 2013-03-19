@@ -1,0 +1,211 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Advanced</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/Advanced.html">Advanced</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/MobileOptimisation.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/VectorCookbook.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Advanced</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    <ul><li class='toclink'><a href="../Manual/VectorCookbook.html">Vector Cookbook</a>
+<ul><li class='toclink'><a href="../Manual/UnderstandingVectorArithmetic.html">Understanding Vector Arithmetic</a>
+</li><li class='toclink'><a href="../Manual/DirectionDistanceFromOneObjectToAnother.html">Direction and Distance from One Object to Another</a>
+</li><li class='toclink'><a href="../Manual/ComputingNormalPerpendicularVector.html">Computing a Normal/Perpendicular vector</a>
+</li><li class='toclink'><a href="../Manual/AmountVectorMagnitudeInAnotherDirection.html">The Amount of One Vector's Magnitude that Lies in Another Vector's Direction</a>
+</li></ul></li><li class='toclink'><a href="../Manual/AssetBundlesIntro.html">AssetBundles (Pro only)</a>
+<ul><li class='toclink'><a href="../Manual/abfaq.html">AssetBundles FAQ</a>
+</li><li class='toclink'><a href="../Manual/BuildingAssetBundles.html">Building AssetBundles</a>
+</li><li class='toclink'><a href="../Manual/DownloadingAssetBundles.html">Downloading AssetBundles</a>
+</li><li class='toclink'><a href="../Manual/LoadingAssetBundles.html">Loading resources from AssetBundles</a>
+</li><li class='toclink'><a href="../Manual/keepingtrackofloadedassetbundles.html">Keeping track of loaded AssetBundles</a>
+</li><li class='toclink'><a href="../Manual/binarydata.html">Storing and loading binary data in an AssetBundle</a>
+</li><li class='toclink'><a href="../Manual/protectingcontent.html">Protecting Content</a>
+</li><li class='toclink'><a href="../Manual/managingassetdependencies.html">Managing asset dependencies</a>
+</li><li class='toclink'><a href="../Manual/scriptsinassetbundles.html">Including scripts in AssetBundles</a>
+</li></ul></li><li class='toclink'><a href="../Manual/GraphicsFeatures.html">Graphics Features</a>
+<ul><li class='toclink'><a href="../Manual/HDR.html">HDR (High Dynamic Range) Rendering in Unity</a>
+</li><li class='toclink'><a href="../Manual/RenderingPaths.html">Rendering Paths</a>
+</li><li class='toclink'><a href="../Manual/LinearLighting.html">Linear Lighting (Pro Only)</a>
+</li><li class='toclink'><a href="../Manual/LevelOfDetail.html">Level of Detail (Pro Only)</a>
+</li><li class='toclink'><a href="../Manual/Shaders.html">Shaders</a>
+<ul><li class='toclink'><a href="../Manual/ShaderTut1.html">Shaders: ShaderLab &amp; Fixed Function shaders</a>
+</li><li class='toclink'><a href="../Manual/ShaderTut2.html">Shaders: Vertex and Fragment Programs</a>
+</li></ul></li><li class='toclink'><a href="../Manual/DirectX11.html">Using DirectX 11 in Unity 4</a>
+</li><li class='toclink'><a href="../Manual/ComputeShaders.html">Compute Shaders</a>
+</li><li class='toclink'><a href="../Manual/GraphicsEmulation.html">Graphics Emulation</a>
+</li></ul></li><li class='toclink'><a href="../Manual/AssetDatabase.html">AssetDatabase</a>
+</li><li class='toclink'><a href="../Manual/BuildPlayerPipeline.html">Build Player Pipeline</a>
+</li><li class='toclink'><a href="../Manual/Profiler.html">Profiler (Pro only)</a>
+</li><li class='toclink'><a href="../Manual/Lightmapping.html">Lightmapping Quickstart</a>
+<ul><li class='toclink'><a href="../Manual/LightmappingInDepth.html">Lightmapping In-Depth</a>
+</li><li class='toclink'><a href="../Manual/LightmappingCustomSettings.html">Custom Beast Settings</a>
+</li><li class='toclink'><a href="../Manual/LightmappingUV.html">Lightmapping UVs</a>
+</li><li class='toclink'><a href="../Manual/LightProbes.html">Light Probes</a>
+</li></ul></li><li class='toclink'><a href="../Manual/OcclusionCulling.html">Occlusion Culling (Pro only)</a>
+</li><li class='toclink'><a href="../Manual/CameraTricks.html">Camera Tricks</a>
+<ul><li class='toclink'><a href="../Manual/UnderstandingFrustum.html">UnderstandingFrustum</a>
+</li><li class='toclink'><a href="../Manual/FrustumSizeAtDistance.html">The Size of the Frustum at a Given Distance from the Camera</a>
+</li><li class='toclink'><a href="../Manual/DollyZoom.html">Dolly Zoom (AKA the "Trombone" Effect)</a>
+</li><li class='toclink'><a href="../Manual/CameraRays.html">Rays from the Camera</a>
+</li><li class='toclink'><a href="../Manual/ObliqueFrustum.html">Using an Oblique Frustum</a>
+</li><li class='toclink'><a href="../Manual/ImpressionOfSize.html">Creating an Impression of Large or Small Size</a>
+</li></ul></li><li class='toclink'><a href="../Manual/LoadingResourcesatRuntime.html">Loading Resources at Runtime</a>
+</li><li class='toclink'><a href="../Manual/ModifyingSourceAssetsThroughScripting.html">Modifying Source Assets Through Scripting</a>
+</li><li class='toclink'><a href="../Manual/GeneratingMeshGeometryProcedurally.html">Generating Mesh Geometry Procedurally</a>
+<ul><li class='toclink'><a href="../Manual/AnatomyofaMesh.html">Anatomy of a Mesh</a>
+</li><li class='toclink'><a href="../Manual/UsingtheMeshClass.html">Using the Mesh Class</a>
+</li><li class='toclink'><a href="../Manual/Example-CreatingaBillboardPlane.html">Example - Creating a Billboard Plane</a>
+</li></ul></li><li class='toclink'><a href="../Manual/StyledText.html">Rich Text</a>
+</li><li class='toclink'><a href="../Manual/UsingDLL.html">Using Mono DLLs in a Unity Project</a>
+</li><li class='toclink'><a href="../Manual/ExecutionOrder.html">Execution Order of Event Functions</a>
+</li><li class='toclink'><a href="../Manual/iphone-PracticalGuide.html">Practical Guide to Optimization for Mobiles</a>
+<ul><li class='toclink'><a href="../Manual/iphone-FutureDevices.html">Practical Guide to Optimization for Mobiles - Future &amp; High End Devices</a>
+</li><li class='toclink'><a href="../Manual/iphone-OptimizedGraphicsMethods.html">Practical Guide to Optimization for Mobiles - Graphics Methods</a>
+</li><li class='toclink'><a href="../Manual/iphone-OptimizedScriptingMethods.html">Practical Guide to Optimization for Mobiles - Scripting and Gameplay Methods</a>
+</li><li class='toclink'><a href="../Manual/iphone-PracticalRenderingOptimizations.html">Practical Guide to Optimization for Mobiles - Rendering Optimizations</a>
+</li><li class='toclink'><a href="../Manual/iphone-PracticalScriptingOptimizations.html">Practical Guide to Optimization for Mobiles - Optimizing Scripts</a>
+</li></ul></li><li class='toclink'><a href="../Manual/OptimizingGraphicsPerformance.html">Optimizing Graphics Performance</a>
+<ul><li class='toclink'><a href="../Manual/DrawCallBatching.html">Draw Call Batching</a>
+</li><li class='toclink'><a href="../Manual/ModelingOptimizedCharacters.html">Modeling Characters for Optimal Performance</a>
+</li><li class='toclink'><a href="../Manual/RenderingStatistics.html">Rendering Statistics Window</a>
+</li></ul></li><li class='toclink'><a href="../Manual/ReducingFilesize.html">Reducing File Size</a>
+</li><li class='toclink'><a href="../Manual/UnderstandingAutomaticMemoryManagement.html">Understanding Automatic Memory Management</a>
+</li><li class='toclink'><a href="../Manual/PlatformDependentCompilation.html">Platform Dependent Compilation</a>
+</li><li class='toclink'><a href="../Manual/GenericFunctions.html">Generic Functions</a>
+</li><li class='toclink'><a href="../Manual/Debugging.html">Debugging</a>
+<ul><li class='toclink'><a href="../Manual/Console.html">Console</a>
+</li><li class='toclink'><a href="../Manual/Debugger.html">Debugger</a>
+</li><li class='toclink'><a href="../Manual/LogFiles.html">Log Files</a>
+<ul><li class='toclink'><a href="../Manual/AccessingHiddenFolders.html">Accessing hidden folders</a>
+</li></ul></li></ul></li><li class='toclink'><a href="../Manual/Plugins.html">Plugins (Pro/Mobile-Only Feature)</a>
+<ul><li class='toclink'><a href="../Manual/PluginsForDesktop.html">Building Plugins for Desktop Platforms</a>
+</li><li class='toclink'><a href="../Manual/PluginsForIOS.html">Building Plugins for iOS</a>
+</li><li class='toclink'><a href="../Manual/PluginsForAndroid.html">Building Plugins for Android</a>
+</li><li class='toclink'><a href="../Manual/NativePluginInterface.html">Low-level Native Plugin Interface</a>
+</li></ul></li><li class='toclink'><a href="../Manual/TextualSceneFormat.html">Textual Scene File Format (Pro-only Feature)</a>
+<ul><li class='toclink'><a href="../Manual/FormatDescription.html">Description of the Format</a>
+</li><li class='toclink'><a href="../Manual/YAMLSceneExample.html">YAMLSceneExample</a>
+</li><li class='toclink'><a href="../Manual/ClassIDReference.html">YAML Class ID Reference</a>
+</li></ul></li><li class='toclink'><a href="../Manual/StreamingAssets.html">Streaming Assets</a>
+</li><li class='toclink'><a href="../Manual/CommandLineArguments.html">Command line arguments</a>
+</li><li class='toclink'><a href="../Manual/RunningEditorCodeOnLaunch.html">Running Editor Script Code on Launch</a>
+</li><li class='toclink'><a href="../Manual/NetworkEmulation.html">Network Emulation</a>
+</li><li class='toclink'><a href="../Manual/SecuritySandbox.html">Security Sandbox of the Webplayer</a>
+</li><li class='toclink'><a class='urllink' href='../ScriptReference/MonoCompatibility.html' rel='nofollow'>Overview of available .NET Class Libraries</a> 
+</li><li class='toclink'><a href="../Manual/VisualStudioIntegration.html">Visual Studio C# Integration</a>
+</li><li class='toclink'><a href="../Manual/ExternalVersionControlSystemSupport.html">Using External Version Control Systems with Unity</a>
+</li><li class='toclink'><a href="../Manual/Analytics.html">Analytics</a>
+</li><li class='toclink'><a href="../Manual/VersionCheck.html">Check For Updates</a>
+</li><li class='toclink'><a href="../Manual/InstallingMultipleVersionsofUnity.html">Installing Multiple Versions of Unity</a>
+</li><li class='toclink'><a href="../Manual/TroubleShooting.html">Trouble Shooting</a>
+</li><li class='toclink'><a href="../Manual/Shadows.html">Shadows in Unity</a>
+<ul><li class='toclink'><a href="../Manual/DirectionalShadowDetails.html">Directional Shadow Details</a>
+</li><li class='toclink'><a href="../Manual/ShadowTroubleshooting.html">Troubleshooting Shadows</a>
+</li><li class='toclink'><a href="../Manual/ShadowSizeDetails.html">Shadow Size Computation</a>
+</li></ul></li></ul><div class='specific-desktop' style='display: block;' id='specific-desktop' > 
+<ul><li class='toclink'><a href="../Manual/IMEInput.html">IME in Unity</a>
+</li><li class='toclink'><a href="../Manual/OptimizeForIntegratedCards.html">Optimizing for integrated graphics cards</a>
+</li><li class='toclink'><a href="../Manual/WebPlayerDeployment.html">Web Player Deployment</a>
+<ul><li class='toclink'><a href="../Manual/HTMLcodetoloadUnityWebPlayercontent.html">HTML code to load Unity content</a>
+</li><li class='toclink'><a href="../Manual/WorkingwithUnityObject.html">Working with UnityObject2</a>
+</li><li class='toclink'><a href="../Manual/CustomizingtheUnityWebPlayerloadingscreen.html">Customizing the Unity Web Player loading screen</a>
+</li><li class='toclink'><a href="../Manual/WebPlayerBehaviorTags.html">Customizing the Unity Web Player's Behavior</a>
+</li><li class='toclink'><a href="../Manual/UnityWebPlayerandbrowsercommunication.html">Unity Web Player and browser communication</a>
+</li><li class='toclink'><a href="../Manual/UsingWebPlayertemplates.html">Using web player templates</a>
+</li><li class='toclink'><a href="../Manual/WebPlayerStreaming.html">Web Player Streaming</a>
+</li><li class='toclink'><a href="../Manual/WebPlayerChannels.html">Webplayer Release Channels</a>
+</li></ul></li></ul></div>
+<p><small>Page last updated: 2007-11-16</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/MobileOptimisation.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/VectorCookbook.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

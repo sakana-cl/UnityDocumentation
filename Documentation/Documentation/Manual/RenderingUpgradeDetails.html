@@ -1,0 +1,146 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Rendering upgrade details</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/FAQ.html">FAQ</a><span>&gt;</span><a href="../Manual/HowToUpgradeFrom2xTo3x.html">Upgrading your Unity Projects from 2.x to 3.x</a><span>&gt;</span><a href="../Manual/RenderingUpgradeDetails.html">Rendering upgrade details</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/MonoUpgradeDetails.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/SL-V3Conversion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Rendering upgrade details</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Unity 3 brings a lot of graphics related changes, and some things might need to be tweaked when you upgrade existing Unity 2.x projects. For changes related to shaders, see <a href="../Manual/SL-V3Conversion.html">Shader Upgrade Guide</a>.
+</p>
+<div class='vspace'></div><h2>Forward Rendering Path changes</h2>
+<p>Unity 2.x had one rendering path, which is called <a href="../Components/RenderTech-ForwardRendering.html">Forward</a> in Unity 3. Major changes in it compared to Unity 2.x:
+</p><ul><li>Most common case (one directional per-pixel light) is drawn in one pass now! (used to be two passes)
+</li><li>Point &amp; Spot light shadows are not supported. Only one Directional light can cast shadows. Use <a href="../Components/RenderTech-DeferredLighting.html">Deferred Lighting</a> path if you need more shadows.
+</li><li>Most "Vertex" lights replaced with Spherical Harmonics lighting.
+</li><li>Forward rendering path is purely shader based now, so it works on OpenGL ES 2.0, Xbox 360, PS3 (i.e. platforms that don't support fixed function rendering).
+</li></ul><div class='vspace'></div><h2>Shader changes</h2>
+<p>See <a href="../Manual/SL-V3Conversion.html">Shader Upgrade Guide</a> for more details. Largest change is: if you want to write shaders that interact with lighting, you should use <a href="../Components/SL-SurfaceShaders.html">Surface Shaders</a>.
+</p>
+<div class='vspace'></div><h2>Obscure Graphics Changes That No One Will Probably Notice <sup>TM</sup></h2>
+<ul><li>Removed Mac Radeon 9200 pixel shader support (<code>!!ATIfs</code> assembly shaders).
+</li><li>Removed support for per-pixel lighting on pre-ShaderModel2.0 hardware. As a result, Diffuse Fast shader is just VertexLit now.
+</li><li>Removed non-attenuated lights. All point and spot lights are attenuated now.
+</li><li>Removed script callbacks: <code>OnPreCullObject</code> and <code>RenderBeforeQueues</code> attribute.
+</li><li>Removed p-buffer based RenderTextures. RenderTextures on OpenGL require FBO support now.
+</li><li>Most <a href="../Components/SL-PassTags.html">Pass LightMode tags</a> are gone, and replaced with new tags. You should generally be using <a href="../Components/SL-SurfaceShaders.html">Surface Shaders</a> for that stuff anyway.
+</li><li>Texture instanceIDs are not OpenGL texture names anymore. Might affect C++ Plugins that were relying on that; use <code>texture.GetNativeTextureID()</code> instead.
+</li><li>Rename shader keywords SHADOWS_NATIVE to SHADOWS_DEPTH; SHADOWS_PCF4 to SHADOWS_SOFT.
+</li><li>Removed ambient boost on objects that were affected by more than 8 vertex lights.
+</li><li>Removed <code>_ObjectSpaceCameraPos</code> and <code>_ObjectSpaceLightPos0</code> (added <code>_WorldSpaceCameraPos</code> and <code>_WorldSpaceLightPos0</code>).
+</li><li><code>LightmapMode</code> tag in shader texture property does nothing now.
+</li><li>Skybox shaders do not write into depth buffer.
+</li><li><code>GrabPass</code> (i.e. refractive glass shader) now always grabs texture of the size of the screen.
+</li><li><code>#pragma multi_compile_vertex</code> and <code>#pragma multi_compile_fragment</code> are gone.
+</li><li>Polygon offset in ShaderLab can't reference variables anymore (like <code>Offset [_Var1], [_Var2]</code>).
+</li><li>Renamed <code>TRANSFER_EYEDEPTH/OUTPUT_EYEDEPTH</code> to <code>UNITY_TRANSFER_DEPTH/UNITY_OUTPUT_DEPTH</code>. They also work on a float2 in Unity 3.
+</li><li>Removed special shader pass types: R2TPass, OffscreenPass.
+</li><li>Removed <code>_Light2World0</code>, <code>_World2Light0</code> built-in shader matrices.
+</li><li>Removed _SceneAmbient, _MultiModelAmbient, _MultiAmbient, _ModelAmbient, _MultiplyFog, _LightHackedDiffuse0, _ObjectCenterModelLightColor0 built-in shader vectors.
+</li><li>Removed <code>_FirstPass</code> built-in shader float.
+</li><li>Fog mode in shader files can't come from variable (like <code>Fog { Mode [_MyFogMode] }</code>). To use global fog mode, write <code>Fog { Mode Global }</code>.
+</li><li>Removed <code>BlendColor</code> color from ShaderLab.
+</li><li>Removed support for declaring texture matrix by-value in shader property.
+</li><li>Removed support for "static" shader properties.
+</li><li>Removed support for texture border color (<code>RenderTexture.SetBorderColor</code>).
+</li><li>Removed <code>ColorMaterial Ambient, Diffuse, Specular</code> support (ColorMaterial AmbientAndDiffuse &amp; Emission left). Support for the removed ones varied a lot depending on the platform causing confusion; and they didn't seem to be very useful anyway.
+</li><li>Built-in <code>_CameraToWorld</code> and <code>_WorldToCamera</code> matrices now do what you'd expect them to do. Previously they only contained the rotation part, and camera-to-world was flipped on Y axis. Yeah, we don't know how that happened either :)
+</li><li>Removed <code>Shader.ClearAll()</code>. Was deprecated since 2007, time to let it go.
+</li><li>Vertex shaders are compiled to Shader Model 2.0 now (before was 1.1). If you want to compile to SM1.1, add <code>#pragma target 1.1</code> in the shader.
+</li></ul>
+<p><small>Page last updated: 2010-09-25</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/MonoUpgradeDetails.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/SL-V3Conversion.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

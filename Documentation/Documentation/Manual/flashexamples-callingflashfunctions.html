@@ -1,0 +1,222 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Example: Calling ActionScript Functions from Unity</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/flash-gettingstarted.html">Getting Started with Flash Development</a><span>&gt;</span><a href="../Manual/flashexamples-callingflashfunctions.html">Example: Calling ActionScript Functions from Unity</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flashexamples-supplyingdata.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flashexamples-browserjavascriptcommunication.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Example: Calling ActionScript Functions from Unity</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>This example shows how you can call different AS3 functions from Unity. You will encounter three scripts:
+</p><ul><li>An AS3 class (ExampleClass.as) containing different function examples. Any AS3 classes you create must be placed within an "ActionScript" folder in your project.
+</li><li>A C#/JavaScript class (ExampleClass.cs/js) which mimics the AS3 implementation. You only need one of these.
+</li><li>An example of how to call the functions from Unity.
+</li></ul><p class='vspace'>When built to Flash, the AS3 implementation of ExampleClass is used. When run in-editor or built to any platform other than Flash the C#/JavaScript implementation will be used.
+</p>
+<p class='vspace'>By creating an ActionScript version of your classes, this will enable you to use native AS3 libraries when building for Flash Player. This is particularly useful when you need to work around a .net library which isn't yet supported for Flash export.
+</p>
+<p class='vspace'><br />
+</p><h2>ExampleClass.as</h2>
+<pre class='codelisting'>
+public class ExampleClass
+{
+  public static function aStaticFunction() : void
+  {
+    trace("aStaticFunction - AS3 Implementation");
+  }
+
+  public static function aStaticFunctionWithParams(a : int) : void
+  {
+    trace("aStaticFunctionWithParams - AS3 Implementation");
+  }
+
+  public static function aStaticFunctionWithReturnType() : int
+  {
+    trace("aStaticFunctionWithReturnType - AS3 Implementation");
+    return 1;
+  }
+
+  public function aFunction() : void
+  {
+    trace("aFunction - AS3 Implementation");
+  }
+}
+</pre>
+<p class='vspace'><br />
+</p><h2>ExampleClass - C#/JavaScript Implementation </h2>
+<p>You can create the class to mimic the AS3 implementation in either C# or JavaScript. The implementations are very similar. Both examples are provided below.
+</p>
+<div class='vspace'></div><h3>C# Implementation (ExampleClass.cs)</h3>
+<pre class='codelisting'>
+using UnityEngine;
+
+[NotRenamed]
+[NotConverted]
+public class ExampleClass
+{
+    [NotRenamed]
+    public static void aStaticFunction()
+    {
+        Debug.Log("aStaticFunction - C# Implementation");
+    }
+
+    [NotRenamed]
+    public static void aStaticFunctionWithParams(int a)
+    {
+        Debug.Log("aStaticFunctionWithParams - C# Implementation");
+    }
+
+    [NotRenamed]
+    public static int aStaticFunctionWithReturnType()
+    {
+        Debug.Log("aStaticFunctionWithReturnType - C# Implementation");
+        return 1;
+    }
+
+    [NotRenamed]
+    public void aFunction()
+    {
+        Debug.Log("aFunction - C# Implementation");
+    }
+}
+</pre>
+<div class='vspace'></div><h3>JavaScript Implementation (ExampleClass.js)</h3>
+<pre class='codelisting'>
+@NotConverted
+@NotRenamed
+class ExampleClass
+{
+    @NotRenamed
+    static function aStaticFunction()
+    {
+        Debug.Log("aStaticFunction - JS Implementation");
+    }
+
+    @NotRenamed
+    static function aStaticFunctionWithParams(a : int)
+    {
+        Debug.Log("aStaticFunctionWithParams - JS Implementation");
+    }
+
+    @NotRenamed
+    static function aStaticFunctionWithReturnType() : int
+    {
+      Debug.Log("aStaticFunctionWithReturnType - JS Implementation");
+      return 1;
+    }
+
+    @NotRenamed
+    function aFunction()
+    {
+        Debug.Log("aFunction - JS Implementation");
+    }
+}
+
+</pre>
+<p><br />
+</p><h2>How to Call the Functions</h2>
+<p>The below code will call the methods in the ActionScript (.as) implementation when building for Flash. This will allow you to use native AS3 libraries in your flash export projects. When building to a non-Flash platform or running in editor, the C#/JS implementation of the class will be used.
+</p>
+<div class='vspace'></div><pre class='codelisting'>
+ExampleClass.aStaticFunction();
+ExampleClass.aStaticFunctionWithParams(1);
+int returnedValue = ExampleClass.aStaticFunctionWithReturnType();
+
+ExampleClass exampleClass = new ExampleClass();
+exampleClass.aFunction();
+</pre>
+<p><small>Page last updated: 2012-11-06</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/flashexamples-supplyingdata.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Manual/flashexamples-browserjavascriptcommunication.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->

@@ -1,0 +1,120 @@
+<!-- #BeginTemplate "/Templates/manual-page.dwt" --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations &ndash; publish to the web, Windows, OS X, Wii, Xbox 360, and iPhone with many more platforms to come." />
+  <meta name="author" content="Unity Technologies" />
+  <link rel="shortcut icon" href="http://unity3d.com/resources/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="http://unity3d.com/resources/favicons/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/resources/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/resources/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/resources/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/resources/favicons/apple-touch-icon.png">
+	<!-- #TemplateBeginEditable name="doctitle" -->
+		<title>Unity - Webplayer Release Channels</title>
+	<!-- #TemplateEndEditable -->
+	
+	<link rel="StyleSheet"  href="../Images/docs.css" type="text/css" />
+</head>
+<body onLoad="DocLoaded();">
+
+<div id="master-header" class="master-header" role="main-header">
+  <div class="header-wrapper">
+    <div class="top-nav">
+      <ul>
+        <li class="tn-icon"><a href="../../Documentation.html">Home</a></li>
+        <!-- #TemplateBeginEditable name="sections-nav" -->
+        <li class="Manual"><a href="../Manual/index.html" title="Go to Unity manual" class="scripting-anchor manual">Manual</a></li>
+        <li class="Manual"><a href="../Components/index.html" title="Go to Reference" class="scripting-anchor reference">Reference</a></li>
+        <li class="Manual"><a href="../ScriptReference/index.html" title="Go to Scripting Reference" class="scripting-anchor scripting">Scripting</a></li>
+        <!-- #TemplateEndEditable --> 
+      </ul>
+    </div>
+    <div class="sub-nav">
+      <div class="content">
+        <div class="path">
+        <!-- #TemplateBeginEditable name="path" -->
+			<a href="../Manual/index.html">Unity Manual</a><span>&gt;</span><a href="../Manual/WebPlayerDeployment.html">Web Player Deployment</a><span>&gt;</span><a href="../Manual/WebPlayerChannels.html">Webplayer Release Channels</a>
+        <!-- #TemplateEndEditable -->
+        </div>
+        <div class="switch">
+        <!-- #TemplateBeginEditable name="switchLink" -->
+        <!--BeginSwitchLink--><!--EndSwitchLink-->
+        <!-- #TemplateEndEditable --> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manual">
+	<div class="main">
+
+		<!-- #TemplateBeginEditable name="navigation" -->
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/WebPlayerStreaming.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/index.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="title" -->
+			<h1>Webplayer Release Channels</h1>
+		<!-- #TemplateEndEditable -->	
+		<!-- #TemplateBeginEditable name="body" -->
+			
+    <script src="../Images/showhide.js" type="text/javascript"></script>
+    
+<p>Whenever a new major version of Unity is released, the webplayer plugin for the browser is also updated to take advantage of the latest features. The plugin checks for new releases as it starts up and will automatically upgrade itself when necessary.
+</p>
+<p class='vspace'>Although Unity does take backward compatibility very seriously, it is still possible that a new release could introduce bugs that cause problems with existing webplayers. Since the plugin updates automatically, such bugs could leave a user unable to play a web game until they are fixed and in the meantime, there may be no way to get the working version of the runtime back.
+</p>
+<p class='vspace'>To avoid problems like this, the plugin is designed to keep a number of different versions of the Unity runtime, which are called <span class='doc-keyword'>Release Channels</span>. When an update to the runtime is released, the plugin automatically retrieves it but also retains a copy of the previous version. The latest channel is named <b>Release</b> while the previous one is named <b>Stable</b>. By default, the plugin will use the oldest channel that supports all the features needed by a given webplayer. This enables new games to make use of new features but avoids the risk that new bugs will take down existing games.
+</p>
+<p class='vspace'>Some time after a release, when the Release channel has been thoroughly tested for stability, it will be migrated to Stable status and it will be used as the default for all players from then on.
+</p>
+<div class='vspace'></div><h2>Selecting a channel</h2>
+<p>Although the channel system avoids problems with upgrading, it is still useful to be able to test your game with the latest runtime. The Unity browser plugin lets you select the desired channel from the context menu (right-click on the content area in the web page).
+</p>
+<div class='vspace'></div><div><img class='figure' src='../Images/manual/WebPlayerChannels-0.jpg' /></div>
+<p class='vspace'>The channels are listed in order with the most recent at the top. When you select an item from the menu, it will be used as the minimum version for running webplayer content (so if you select the Release channel, the older Stable channel will not be used). You can simply select the oldest version to restore the default channel selection. Normally, just the Release and Stable channels will be available but the system is open-ended so other channels (say for Beta testing) may appear from time to time.
+</p>
+<p class='vspace'>Additionally, the menu gives you the option to switch to Development mode, which enables <a href="../Manual/Debugging.html">debugging</a> and <a href="../Manual/Profiler.html">profiling</a> in the webplayer and also offers an error console will appear whenever the player's code throws exceptions.
+</p>
+<p><small>Page last updated: 2012-11-30</small></p>
+		<!-- #TemplateEndEditable -->	
+
+		<div class="nav">
+		<div class="nav-prev">
+			<a href='../Manual/WebPlayerStreaming.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Previous</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	
+		<div class="nav-next">
+			<a href='../Components/index.html'>
+				<div class="nav-left"></div>
+				<div class="nav-main">Next</div>
+				<div class="nav-right"></div>
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+</body></html>
+<!-- #EndTemplate -->
